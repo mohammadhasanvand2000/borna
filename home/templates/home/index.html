@@ -1,0 +1,300 @@
+{% extends "base.html" %}
+{% load static %}
+{% load jalali_tags %}
+{% block main_content %}
+<div role="main" class="main">
+	<div class="owl-carousel owl-carousel-light owl-carousel-light-init-fadeIn  dots-inside dots-horizontal-center show-dots-hover dots-light owl-theme manual nav-style-1 nav-inside nav-inside-plus nav-dark nav-lg nav-font-size-lg show-nav-hover mb-0"
+		data-plugin-options="{'autoplayTimeout': 7000}" style="height: calc(100vh - 155px);">
+		<div class="owl-stage-outer">
+			<div class="owl-stage">
+
+				{% for slider in sliders %}
+				<div class="owl-item position-relative overlay overlay-show overlay-op-7"
+					style="background-image: url({{slider.image.url}}); background-size: cover; background-position: center;">
+					<div class="container position-relative z-index-3 h-100">
+						<div class="row justify-content-center align-items-center h-100">
+							<div class="col-lg-7 text-center">
+								<div class="d-flex flex-column align-items-center justify-content-center h-100">
+									<h3 class="position-relative text-color-light text-5 line-height-5 font-weight-medium ls-0 px-4 mb-2 appear-animation text-rtl"
+										data-appear-animation="fadeInDownShorterPlus"
+										data-plugin-options="{'minWindowWidth': 0}">
+										<span
+											class="position-absolute right-100pct top-50pct transform3dy-n50 opacity-7">
+											<img src="{% static 'img/slides/slide-title-border-light.png' %}"
+												class="w-auto appear-animation"
+												data-appear-animation="fadeInRightShorter"
+												data-appear-animation-delay="250"
+												data-plugin-options="{'minWindowWidth': 0}" alt="" />
+										</span>
+										{{slider.small_title}}
+										<span
+											class="position-absolute left-100pct top-50pct transform3dy-n50 opacity-7">
+											<img src="{% static 'img/slides/slide-title-border-light.png' %}"
+												class="w-auto appear-animation"
+												data-appear-animation="fadeInLeftShorter"
+												data-appear-animation-delay="250"
+												data-plugin-options="{'minWindowWidth': 0}" alt="" />
+										</span>
+									</h3>
+									<h1 class="text-color-light font-weight-extra-bold text-12-5 line-height-3 mb-2 appear-animation text-justify"
+										data-appear-animation="blurIn" data-appear-animation-delay="500"
+										data-plugin-options="{'minWindowWidth': 0}">{{slider.big_title}}
+									</h1>
+									<p class="text-4-5 text-color-light font-weight-light opacity-7 text-center mb-5 px-lg-5 text-rtl"
+										data-plugin-animated-letters
+										data-plugin-options="{'startDelay': 1000, 'minWindowWidth': 0, 'animationSpeed': 30}">{{slider.description}}</p>
+									<a href="{{slider.cta_link}}"
+										class="btn btn-light btn-outline btn-rounded text-color-light text-color-hover-dark font-weight-bold text-3 btn-px-5 py-3 appear-animation text-justify"
+										data-appear-animation="fadeInUpShorter" data-appear-animation-delay="2500"
+										data-plugin-options="{'minWindowWidth': 0}">{{slider.cta_title}}</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+		<div class="owl-dots mb-5">
+			<button role="button" class="owl-dot active"><span></span></button>
+			<button role="button" class="owl-dot"><span></span></button>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="row">
+			<div class="col pb-4">
+				<div class="row mt-5 pb-4">
+					<div class="col">
+						<h4>محصولات و خدمات ما</h4>
+						<div>
+						
+						</div>
+						
+						
+						<div class="owl-carousel owl-theme show-nav-title top-border mb-0"
+							data-plugin-options="{'responsive': {'0': {'items': 1}, '479': {'items': 1}, '768': {'items': 2}, '979': {'items': 3}, '1199': {'items': 4}}, 'items': 4, 'margin': 10, 'loop': true, 'nav': true, 'dots': false, 'autoplay':true, 'autoplayTimeout': 2500}">
+							{% for cat in categories %}
+							<div class="product mb-0">
+								<div class="product-thumb-info border-0 mb-3">
+									<a href="{% url 'shop:prod-cat-list' cat_id=cat.pk %}">
+										<div class="product-thumb-info-image">
+											{% if cat.prod_products.first.image_cover %}
+											<img alt="" class="img-fluid" src="{{cat.prod_products.first.image_cover.url}}">
+											{% else %}
+											<img alt="" class="img-fluid"
+												src="{% static 'img/products/placeholder.jpg' %}">
+											{% endif %}
+
+										</div>
+									</a>
+								</div>
+								<div class="d-flex justify-content-between dir-rtl">
+									<div>
+										<h3
+											class="text-3-5 font-weight-medium font-alternative text-transform-none line-height-3 mb-0">
+											<a href="{% url 'shop:prod-cat-list' cat_id=cat.pk %}"
+												class="text-color-dark text-color-hover-primary">{{cat.title}}</a>
+										</h3>
+									</div>
+								</div>
+								<p class="text-justify mt-2 mb-2 ps-2">{{cat.description|striptags|safe|slice:":60"}} ...</p>
+
+								<p class="price text-4 mb-3 shop-list-price">
+									<a href="{% url 'shop:prod-cat-list' cat_id=cat.pk %}">
+										بررسی جزییات بیشتر
+									</a>
+								</p>
+							</div>
+							{% endfor %}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col pb-4">
+				<div class="row mt-5 pb-4">
+					<div class="col">
+						<h4>محصولات و خدمات ما</h4>
+						<div>
+							{% for cat in categories %}
+								<h5 style="display: inline-block; margin-right: 10px;">
+									
+									<a href="?category_id={{ cat.id }}">{{ cat.title }}</a>
+								</h5>
+							{% endfor %}
+						</div>
+						
+						
+						<div class="owl-carousel owl-theme show-nav-title top-border mb-0"
+							data-plugin-options="{'responsive': {'0': {'items': 1}, '479': {'items': 1}, '768': {'items': 2}, '979': {'items': 3}, '1199': {'items': 4}}, 'items': 4, 'margin': 10, 'loop': true, 'nav': true, 'dots': false, 'autoplay':true, 'autoplayTimeout': 2500}">
+							{% for cat in categories %}
+							{% for p in procat  %}
+							<div class="product mb-0">
+								<div class="product-thumb-info border-0 mb-3">
+									<a href="{% url 'shop:prod-cat-list' cat_id=cat.pk %}">
+										<div class="product-thumb-info-image">
+											{% if p.image_cover.url %}
+											<img alt="" class="img-fluid" src="{{p.image_cover.url}}">
+											{% else %}
+											<img alt="" class="img-fluid"
+												src="{% static 'img/products/placeholder.jpg' %}">
+											{% endif %}
+
+										</div>
+									</a>
+								</div>
+								<div class="d-flex justify-content-between dir-rtl">
+									<div>
+										<h3
+											class="text-3-5 font-weight-medium font-alternative text-transform-none line-height-3 mb-0">
+											<a href="{% url 'shop:prod-cat-list' cat_id=cat.pk %}"
+												class="text-color-dark text-color-hover-primary">{{ p.title }}</a>
+										</h3>
+									</div>
+								</div>
+								<p class="text-justify mt-2 mb-2 ps-2">{{cat.description|striptags|safe|slice:":60"}} ...</p>
+
+								<p class="price text-4 mb-3 shop-list-price">
+									<a href="{% url 'shop:prod-cat-list' cat_id=cat.pk %}">
+										بررسی جزییات بیشتر
+									</a>
+								</p>
+							</div>
+							{% endfor %}
+							{% endfor %}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<section class="parallax section section-text-light section-parallax section-center my-0" data-plugin-parallax
+		data-plugin-options="{'speed': 1.5, 'parallaxHeight': '200%'}"
+		data-image-src="{% static 'img/parallax/parallax-00.png' %}">
+		<div class="container position-relative">
+			<div class="row counters counters-text-light">
+				<div class="col-sm-6 col-lg-3 mb-4 mb-lg-0">
+					<div class="counter">
+						<i class="fas fa-user"></i>
+						<strong data-to="165" data-append="+">0</strong>
+						<label>مشتریان خرسند</label>
+					</div>
+				</div>
+				<div class="col-sm-6 col-lg-3 mb-4 mb-lg-0">
+					<div class="counter">
+						<i class="fas fa-star"></i>
+						<strong data-to="25">0</strong>
+						<label>سالهای تجربه و دانش</label>
+					</div>
+				</div>
+				<div class="col-sm-6 col-lg-3 mb-4 mb-sm-0">
+					<div class="counter">
+						<i class="fas fa-coffee"></i>
+						<strong data-to="125">0</strong>
+						<label>قرارداد ثبت‌شده</label>
+					</div>
+				</div>
+				<div class="col-sm-6 col-lg-3">
+					<div class="counter">
+						<i class="far fa-chart-bar"></i>
+						<strong data-to="65">0</strong>
+						<label>کاتالوگ و مستندات</label>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<div class="container">
+		<div class="row">
+			<div class="col pb-4">
+				<div class="row mt-5 pb-4">
+					<div class="col">
+						<h4>مقالات اخیر</h4>
+						<div class="owl-carousel owl-theme show-nav-title top-border mb-0"
+							data-plugin-options="{'responsive': {'0': {'items': 1}, '479': {'items': 1}, '768': {'items': 2}, '979': {'items': 3}, '1199': {'items': 3}}, 'items': 3, 'margin': 10, 'loop': true, 'nav': true, 'dots': false, 'autoplay':true, 'autoplayTimeout': 2500}">
+							{% for post in posts %}
+							<div>
+								<article class="post post-large pb-5">
+									<div class="post-image">
+										<a href="{% url 'blog:blog-detail' blog_id=post.pk  %}">
+											{% if post.image_cover %}
+											<img src="{{post.image_cover.url}}"
+												class="img-fluid img-thumbnail img-thumbnail-no-borders rounded-0"
+												alt="" />
+												{% else %}
+												<img src="{% static 'img/blog/medium/placeholder.jpg' %}"
+													class="img-fluid img-thumbnail img-thumbnail-no-borders rounded-0"
+													alt="" />
+											{% endif %}
+										</a>
+									</div>
+
+									<div class="post-date">
+										<span class="day">{{post.date_created|to_jalali:'%d'}}</span>
+										<span class="month">{{post.date_created|to_jalali:'%m-%Y'}}</span>
+									</div>
+
+									<div class="post-content">
+
+										<h4><a href="{% url 'blog:blog-detail' blog_id=post.pk  %}" class="text-decoration-none">{{post.title}}</a></h4>
+										<div class="mb-1 text-justify">{{post.content|striptags|safe|slice:":120"}}...</div>
+										<a href="{% url 'blog:blog-detail' blog_id=post.pk  %}"
+											class="read-more text-color-dark font-weight-bold text-2 text-read-more">مشاهده
+											مقاله<i class="fas fa-chevron-left text-1 me-1"></i></a>
+
+									</div>
+								</article>
+							</div>
+							{% endfor %}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container pb-4">
+		<div class="row">
+			<div class="col">
+				<h4>برخی مشتریان ما</h4>
+				<hr class="solid my-3">
+				<div class="owl-carousel owl-theme carousel-center-active-item"
+					data-plugin-options="{'responsive': {'0': {'items': 1}, '476': {'items': 1}, '768': {'items': 5}, '992': {'items': 7}, '1200': {'items': 7}}, 'autoplay': true, 'autoplayTimeout': 3000, 'dots': false}">
+					<div>
+						<img class="img-fluid" src="{% static 'img/logos/lg01.png' %}" alt="">
+					</div>
+					<div>
+						<img class="img-fluid" src="{% static 'img/logos/lg02.png' %}" alt="">
+					</div>
+					<div>
+						<img class="img-fluid" src="{% static 'img/logos/lg03.png' %}" alt="">
+					</div>
+					<div>
+						<img class="img-fluid" src="{% static 'img/logos/lg04.png' %}" alt="">
+					</div>
+					<div>
+						<img class="img-fluid" src="{% static 'img/logos/lg05.png' %}" alt="">
+					</div>
+					<div>
+						<img class="img-fluid" src="{% static 'img/logos/lg06.png' %}" alt="">
+					</div>
+					<div>
+						<img class="img-fluid" src="{% static 'img/logos/lg07.png' %}" alt="">
+					</div>
+					<div>
+						<img class="img-fluid" src="{% static 'img/logos/lg08.png' %}" alt="">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+{% endblock main_content %}
+

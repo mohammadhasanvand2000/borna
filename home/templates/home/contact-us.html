@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+{% block header %}
+<link rel="stylesheet" href="{% static 'vendor/animate/animate.compat.css' %}">
+{% endblock header %}
+{% block main_content %}
+<div role="main" class="main">
+
+	<div class="container">
+
+		<div class="row py-4">
+			<div class="col-lg-6">
+
+				<h2 class="font-weight-bold text-8 mt-2 mb-0">تماس با ما</h2>
+				<p class="mb-4">در هر زمان از شبانه روز در کنار شما هستیم!</p>
+
+				<form class="needs-validation" method="POST">
+					{% csrf_token %}
+					<div class="contact-form-success alert alert-success d-none mt-4">
+						<strong>تایید!</strong> پیام شما با موفقیت ارسال شد.
+					</div>
+
+					<div class="contact-form-error alert alert-danger d-none mt-4">
+						<strong>خطا!</strong> مشکلی در ارسال پیام وجود دارد. لطفا مجددا تلاش نمایید.
+						<span class="mail-error-message text-1 d-block"></span>
+					</div>
+
+					<div class="row">
+						<div class="form-group col-lg-6">
+							<label class="form-label mb-1 text-2">نام کامل</label>
+							{% render_field form.name class="form-control text-3 h-auto py-2" data-msg-required="لطفا نام خود را وارد نمایید." %}
+						</div>
+						<div class="form-group col-lg-6">
+							<label class="form-label mb-1 text-2">شماره تماس</label>
+							{% render_field form.phone class="form-control text-3 h-auto py-2" required=required data-msg-digits="شماره تماس فقط می‌تواند شامل اعداد باشد." data-rule-digits="true" data-rule-minlength="11" data-rule-maxlength="11" data-msg-minlength="شماره تماس تنها می‌تواند شامل 11 رقم و شروع با 09 باشد." data-msg-maxlength="شماره تماس تنها می‌تواند شامل 11 رقم و شروع با 09 باشد." data-msg-required="لطفا شماره تماس خود را وارد نمایید..." %}
+						</div>
+						<div class="form-group col-lg-6">
+							<label class="form-label mb-1 text-2">آدرس ایمیل (اختیاری)</label>
+							{% render_field form.email class="form-control text-3 h-auto py-2" data-msg-required="لطفا آدرس ایمیل خود را وارد نمایید." data-msg-email="لطفا یک آدرس معتبر وارد نمایید." %}
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col">
+							<label class="form-label mb-1 text-2">موضوع</label>
+							{% render_field form.subject class="form-control text-3 h-auto py-2" data-msg-required="لطفا موضوع پیام را وارد نمایید." %}
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col">
+							<label class="form-label mb-1 text-2">پیام</label>
+							{% render_field form.message class="form-control text-3 h-auto py-2" data-msg-required="لطفا متن پیام خود را وارد نمایید." %}
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col">
+							<input type="submit" value="ارسال پیام" class="btn btn-primary btn-modern"
+								data-loading-text="در حال بارگذاری...">
+						</div>
+					</div>
+				</form>
+
+			</div>
+			<div class="col-lg-6">
+
+				<div class="appear-animation" data-appear-animation="fadeIn" data-appear-animation-delay="800">
+					<h4 class="mt-2 mb-1">دفتر مرکزی</h4>
+					<ul class="list list-icons list-icons-style-2 mt-2">
+						<li><i class="fas fa-map-marker-alt top-6"></i> <strong class="text-dark">آدرس: </strong>تهران،
+							ستارخان روبه‌روی باقرخان، نبش کوچه ستایش، پلاک 1، واحد2</li>
+						<li><i class="fas fa-phone top-6"></i> <strong class="text-dark">شماره تماس: </strong>
+							02166509882
+						</li>
+						<li><i class="fas fa-mobile-alt top-6"></i> <strong class="text-dark">شماره موبایل1: </strong>
+							09128347068
+						</li>
+						<li><i class="fas fa-mobile-alt top-6"></i> <strong class="text-dark">شماره موبایل2: </strong>
+							09125387195
+						</li>
+						<li><i class="fas fa-envelope top-6"></i> <strong class="text-dark">ایمیل پشتیبانی: </strong> <a
+								href="mailto:info@bornaabzarcnc.ir">info@bornaabzarcnc.ir</a></li>
+					</ul>
+					<h4 class="mt-2 mb-1">کارخانه</h4>
+					<ul class="list list-icons list-icons-style-2 mt-2">
+						<li><i class="fas fa-map-marker-alt top-6"></i> <strong class="text-dark">آدرس: </strong>خرسان رضوی، مشهد، کیلومتر 20 جاده قوچان، خیابان رب زشک، نبش کوچه اول</li>
+					</ul>
+				</div>
+
+				<div class="appear-animation" data-appear-animation="fadeIn" data-appear-animation-delay="950">
+					<h4 class="pt-5">ساعات کاری: </h4>
+					<ul class="list list-icons list-dark mt-2">
+						<li><i class="far fa-clock top-6"></i> شنبه تا چهارشنبه از ساعت 8 صبح تا 16 عصر</li>
+						<li><i class="far fa-clock top-6"></i> پنج‌شنبه از ساعت 8 صبح تا 13 عصر</li>
+						<li><i class="far fa-clock top-6"></i> جمعه و روزهای تعطیل دفتر فعال نمی‌باشد.</li>
+					</ul>
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+
+	<iframe src="https://map.ir/lat/35.709740/lng/51.371866/z/16/p/دفتر مرکزی برنا ابزار" class="map-ir"
+		title="محل دفتر مرکزی برنا البرز"></iframe>
+
+</div>
+{% endblock main_content %}
+{% block end_body %}
+<script src="{% static 'js/views/view.contact.js' %}"></script>
+{% endblock end_body %}

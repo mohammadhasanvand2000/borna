@@ -1,0 +1,125 @@
+{% extends "base-dashboard.html" %}
+{% load static %}
+{% load widget_tweaks %}
+{% block header %}
+{{ form.media }}
+{% endblock header %}
+{% block main_content %}
+<div role="main" class="main">
+	<section id="elements" class="section section-height-2 border-0 mt-5 mb-0 pt-5">
+
+		<div class="container py-2">
+			<div class="row appear-animation" data-appear-animation="fadeInUpShorter" data-appear-animation-delay="400">
+				<div class="col-lg-12">
+					<h4 class="mb-3">افزودن/ویرایش مقالات</h4>
+					<div class="card mb-4">
+						<div class="card-body">
+							<div class="row">
+								<div class="col">
+									<form class="contact-form form-with-icons needs-validation" method="POST" enctype="multipart/form-data">
+										{% csrf_token %}
+										<div class="contact-form-success alert alert-success d-none mt-4">
+											<strong>تایید!</strong> مقاله مورد نظر با موفقیت ثبت شد.
+										</div>
+
+										<div class="contact-form-error alert alert-danger d-none mt-4">
+											<strong>خطا!</strong>مشکلی در ثبت مقاله وجود دارد. لطفا مجددا تلاش نمایید.
+											<span class="mail-error-message text-1 d-block"></span>
+										</div>
+
+										<div class="row">
+											<div class="form-group col-lg-6">
+												<label class="form-label mb-1 text-2">عنوان مقاله</label>
+												<div class="position-relative">
+													<i
+														class="icons icon-emotsmile text-color-primary text-3 position-absolute left-15 top-50pct transform3dy-n50"></i>
+													{% render_field form.title type="text" class="form-control text-3 h-auto py-2" data-msg-required="لطفا عنوان مقاله را وارد نمایید."%}
+												</div>
+											</div>
+											<div class="form-group col-lg-6">
+												<label class="form-label mb-1 text-2">توضیحات</label>
+												<div class="position-relative">
+													<i
+														class="icons icon-notebook text-color-primary text-3 position-absolute left-15 top-50pct transform3dy-n50"></i>
+													{% render_field form.description class="form-control text-3 h-auto py-2" data-msg-required="لطفا توضیحات مقاله را وارد نمایید." %}
+												</div>
+											</div>
+											<div class="form-group col-lg-6">
+												<label class="form-label mb-1 text-2">دسته‌بندی</label>
+												<div class="position-relative">
+													<i
+														class="icons icon-organization text-color-primary text-3 position-absolute left-15 top-50pct transform3dy-n50 z-index-1"></i>
+													<div class="custom-select-1">
+														{% render_field form.category class="form-select form-control h-auto" data-msg-required="لطفا دسته‌بندی مقاله را وارد نمایید." %}
+													</div>
+												</div>
+											</div>
+											<div class="form-group col-lg-6">
+												<label class="form-label mb-1 text-2">تگ‌ها (با خط تیره تگ‌ها جدا شوند)</label>
+												<div class="position-relative">
+													<i
+														class="icons icon-tag text-color-primary text-3 position-absolute left-15 top-50pct transform3dy-n50"></i>
+													{% render_field form.tags class="form-control text-3 h-auto py-2" data-msg-required="لطفا تگ‌ها را وارد و با خط تیره(-) جدا نمایید." %}
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="form-group col-lg-12">
+												<label class="form-label mb-1 text-2">محتوای مقاله</label>
+												<div class="position-relative">
+													<i
+														class="icons icon-pencil text-color-primary text-3 position-absolute left-15 top-50pct transform3dy-n50 z-index-1"></i>
+														{% render_field form.content class+="form-control text-3 h-auto py-2" data-msg-required="لطفا محتوای مقاله را وارد نمایید." %}
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="form-group col-lg-6">
+												<label class="form-label mb-1 text-2">تصویر آیکون</label>
+												<div class="position-relative">
+													<i
+														class="icons icon-picture text-color-primary text-3 position-absolute left-15 top-50pct transform3dy-n50"></i>
+														{% render_field form.image_icon class="d-block" %}
+												</div>
+											</div>
+											<div class="form-group col-lg-6">
+												<label class="form-label mb-1 text-2">تصویر کاور</label>
+												<div class="position-relative">
+													<i
+														class="icons icon-picture text-color-primary text-3 position-absolute left-15 top-50pct transform3dy-n50"></i>
+														{% render_field form.image_cover class="d-block" %}
+												</div>
+											</div>
+											<div class="form-group col-lg-6">
+												<label class="form-label mb-1 text-2">تصویر عریض</label>
+												<div class="position-relative">
+													<i
+														class="icons icon-picture text-color-primary text-3 position-absolute left-15 top-50pct transform3dy-n50 z-index-1"></i>
+													<div class="custom-select-1">
+														{% render_field form.image_wide class="d-block" %}
+													</div>
+												</div>
+											</div>
+											
+										</div>
+										<div class="row">
+											<div class="form-group col">
+												<input type="submit" value="اعمال تغییرات" class="btn btn-primary float-start"
+													data-loading-text="در حال بارگذاری...">
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</section>
+</div>
+{% endblock main_content %}
+{% block end_body %}
+
+{% endblock end_body %}

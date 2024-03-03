@@ -1,0 +1,70 @@
+{% extends "base-dashboard.html" %}
+{% load static %}
+{% block header %}
+{% endblock header %}
+{% block main_content %}
+<div role="main" class="main">
+	<section id="elements" class="section section-height-2 border-0 mt-5 mb-0 pt-5">
+
+		<div class="container py-2">
+			<div class="row appear-animation" data-appear-animation="fadeInUpShorter" data-appear-animation-delay="400">
+				<div class="col-lg-12">
+					<h4>محتوای اسلایدر</h4>
+
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>
+									ردیف
+								</th>
+								<th>
+									عنوان کوچک
+								</th>
+								<th>
+									عنوان بزرگ
+								</th>
+								<th>
+									ویرایش
+								</th>
+								<th>
+									حذف
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for slider in sliders %}
+							<tr>
+								<td>
+									{{slider.row_num}}
+								</td>
+								<td>
+									{{slider.small_title|slice:":35"}}
+								</td>
+								<td>
+									{{slider.big_title|slice:":45"}}
+								</td>
+								<td>
+									<a href="?edit={{slider.pk}}"><i
+											class="far fa-pen-to-square text-6"></i></a>
+								</td>
+								<td>
+									<a href="?delete={{slider.pk}}"><i
+											class="far fa-window-close text-danger text-6"></i></a>
+								</td>
+							</tr>
+							{% empty %}
+							<h3>لیست اسلایدر خالی می‌باشد.</h3>
+							{% endfor %}
+
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+		</div>
+	</section>
+</div>
+{% endblock main_content %}
+{% block end_body %}
+
+{% endblock end_body %}

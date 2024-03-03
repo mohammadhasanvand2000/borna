@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load jalali_tags %}
+
+{% block main_content %}
+<div role="main" class="main shop pb-4">
+
+    <div class="container">
+
+
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="d-flex flex-column flex-md-row justify-content-between py-3 px-4 my-4">
+                    <div class="text-center">
+                        <span>
+                        نام کاربر<br>
+                            <strong class="text-color-dark">{{message.name}}</strong>
+                        </span>
+                    </div>
+                    <div class="text-center mt-4 mt-md-0">
+                        <span>
+                            شماره تماس<br>
+                            <strong class="text-color-dark">{{message.phone|default_if_none:"-"}}</strong>
+                        </span>
+                    </div>
+                    <div class="text-center mt-4 mt-md-0">
+                        <span>
+                            ایمیل کاربر<br>
+                            <strong class="text-color-dark">{{message.email|default_if_none:"-"}}</strong>
+                        </span>
+                    </div>
+                    <div class="text-center mt-4 mt-md-0">
+                        <span>
+                        تاریخ ارسال پیام<br>
+                            <strong class="text-color-dark">{{message.date_created|to_jalali:"%Y-%m-%d %H:%M"}}</strong>
+                        </span>
+                    </div>
+                </div>
+                <div class="card border-width-3 border-radius-0 border-color-hover-dark mb-4">
+                    <div class="card-body">
+                        <h4 class="font-weight-bold text-uppercase text-4 mb-3">پیام دریافتی</h4>
+                        <table class="shop_table cart-totals mb-0">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <strong class="d-block text-color-dark line-height-1 font-weight-semibold">موضوع</strong>
+                                    </td>
+                                    <td class="align-top text-justify">
+                                        <span class="amount font-weight-medium text-color-grey">{{message.subject}}</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong class="d-block text-color-dark line-height-1 font-weight-semibold">پیام</strong>
+                                    </td>
+                                    <td class="align-top text-justify">
+                                        <span class="amount font-weight-medium text-color-grey">{{message.message}}</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+{% endblock main_content %}

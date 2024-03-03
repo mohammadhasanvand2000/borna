@@ -1,0 +1,547 @@
+{% load static %}
+{% load humanize %}
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <!-- Basic -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    {% block title %}
+    <title>برنا ابزار | ابزارآلات CNC و ماشین‌کاری</title>
+    {% endblock title %}
+    <meta name="keywords" content="cnc" />
+    <meta name="description" content="برنا ابزار | ابزارآلات CNC و ماشین‌کاری">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="{% static 'img/apple-touch-icon.png' %}">
+
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, shrink-to-fit=no">
+
+    <!-- Web Fonts  -->
+    <link id="googleFonts"
+        href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800%7CShadows+Into+Light&display=swap"
+        rel="stylesheet" type="text/css">
+
+    <!-- Vendor CSS -->
+    <link rel="stylesheet" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/fontawesome-free/css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/animate/animate.compat.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/simple-line-icons/css/simple-line-icons.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/owl.carousel/assets/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/owl.carousel/assets/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/magnific-popup/magnific-popup.min.css' %}">
+
+    <!-- Theme CSS -->
+    <link rel="stylesheet" href="{% static 'css/rtl-theme.css' %}">
+    <link rel="stylesheet" href="{% static 'css/rtl-theme-elements.css' %}">
+    <link rel="stylesheet" href="{% static 'css/rtl-theme-blog.css' %}">
+    <link rel="stylesheet" href="{% static 'css/rtl-theme-shop.css' %}">
+    <link rel="stylesheet" href="{% static 'css/font-style.css' %}">
+
+    <!-- Skin CSS -->
+    <link id="skinCSS" rel="stylesheet" href="{% static 'css/skins/main-css.css' %}">
+
+    <!-- Theme Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+
+    <!-- Head Libs -->
+    <script src="{% static 'vendor/modernizr/modernizr.min.js' %}"></script>
+
+    {% block header %}
+    {% endblock header %}
+
+    <!--BEGIN RAYCHAT CODE-->
+    
+  <!--BEGIN RAYCHAT CODE-->
+  <script type="text/javascript">!function(){function t(){var t=document.createElement("script");t.type="text/javascript",t.async=!0,localStorage.getItem("rayToken")?t.src="https://app.raychat.io/scripts/js/"+o+"?rid="+localStorage.getItem("rayToken")+"&href="+window.location.href:t.src="https://app.raychat.io/scripts/js/"+o+"?href="+window.location.href;var e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(t,e)}var e=document,a=window,o="ea0d236b-b9e4-4c98-8843-a37a0d1239d4";"complete"==e.readyState?t():a.attachEvent?a.attachEvent("onload",t):a.addEventListener("load",t,!1)}();</script>
+<!--END RAYCHAT CODE-->
+  
+    <!--END RAYCHAT CODE-->
+</head>
+
+<body data-plugin-page-transition>
+    <div class="body">
+        <header id="header" class="header-effect-shrink"
+            data-plugin-options="{'stickyEnabled': true, 'stickyEffect': 'shrink', 'stickyEnableOnBoxed': true, 'stickyEnableOnMobile': false, 'stickyChangeLogo': true, 'stickyStartAt': 120, 'stickyHeaderContainerHeight': 70}">
+            <div class="header-body border-top-0 sticky-nav-buttom-border">
+                <div class="header-container container">
+                    <div class="header-row">
+                        <div class="header-column">
+                            <div class="header-row">
+                                <div class="header-logo">
+                                    <a href="index.html">
+                                        <img alt="Porto" width="100" height="48" data-sticky-width="82"
+                                            data-sticky-height="40" src="{% static 'img/logo-header.png' %}">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="header-column justify-content-end">
+                            <div class="header-row">
+                                <div
+                                    class="header-nav header-nav-line header-nav-top-line header-nav-top-line-with-border order-2 order-lg-1">
+                                    <div
+                                        class="header-nav-main header-nav-main-square header-nav-main-effect-2 header-nav-main-sub-effect-1">
+                                        <nav class="collapse">
+                                            <ul class="nav nav-pills" id="mainNav">
+                                                <li class="dropdown">
+                                                    <a class="dropdown-item dropdown-toggle active"
+                                                        href="{% url 'home:home' %}">
+                                                        خانه
+                                                    </a>
+                                                </li>
+                                                <li class="dropdown">
+                                                    <a class="dropdown-item dropdown-toggle"
+                                                        href="{% url 'shop:prod-shop-list' %}">
+                                                        محصولات و خدمات
+                                                    </a>
+                                                    <ul class="dropdown-menu">
+                                                        {% for cat in shop_cat %}
+                                                        <li>
+                                                            <a class="dropdown-item"
+                                                                href="{% url 'shop:prod-cat-list' cat_id=cat.pk %}">{{cat.title}}</a>
+                                                        </li>
+                                                        {% endfor %}
+                                                    </ul>
+                                                </li>
+                                                {% comment %} <li class="dropdown">
+                                                    <a class="dropdown-item dropdown-toggle" href="#">
+                                                        مشتریان‌ما
+                                                    </a>
+                                                    <ul class="dropdown-menu">
+                                                        <li>
+                                                            <a class="dropdown-item" href="index.html">
+                                                                مشتری شماره 1
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a class="dropdown-item" href="index.html#demos">
+                                                                مشتری شماره 2
+                                                            </a>
+                                                        </li>
+                                                        <li class="dropdown-submenu">
+                                                            <a class="dropdown-item" href="#"> مشتری شماره 3</a>
+                                                            <ul class="dropdown-menu">
+                                                                <li><a class="dropdown-item"
+                                                                        href="index-classic.html">مشتری 1</a>
+                                                                </li>
+                                                                <li><a class="dropdown-item"
+                                                                        href="index-classic-color.html">مشتری 2</a>
+                                                                </li>
+                                                                <li><a class="dropdown-item"
+                                                                        href="index-classic-light.html">مشتری 3</a>
+                                                                </li>
+
+                                                            </ul>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                                <li class="dropdown">
+                                                    <a class="dropdown-item dropdown-toggle" href="#">
+                                                        همکاری‌ با ما
+                                                    </a>
+                                                    <ul class="dropdown-menu">
+                                                        <li>
+                                                            <a class="dropdown-item" href="index.html">
+                                                                همکاری در زمینه 1
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a class="dropdown-item" href="index.html#demos">
+                                                                همکاری در زمینه 2
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a class="dropdown-item" href="index.html#demos">
+                                                                همکاری در زمینه 3
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </li> {% endcomment %}
+                                                <li class="dropdown">
+                                                    <a class="dropdown-item dropdown-toggle"
+                                                        href="{% url 'shop:shop-list' %}">
+                                                        فروشگاه
+                                                    </a>
+                                                </li>
+                                                <li class="dropdown">
+                                                    <a class="dropdown-item dropdown-toggle"
+                                                        href="{% url 'blog:blog-list' %}">
+                                                        وبلاگ
+                                                    </a>
+                                                </li>
+                                                <li class="dropdown">
+                                                    <a class="dropdown-item dropdown-toggle"
+                                                        href="{% url 'home:about' %}">
+                                                        درباره ما
+                                                    </a>
+                                                </li>
+                                                <li class="dropdown">
+                                                    <a class="dropdown-item dropdown-toggle"
+                                                        href="{% url 'home:contact' %}">
+                                                        تماس با ما
+                                                    </a>
+                                                </li>
+
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                    <button class="btn header-btn-collapse-nav" data-bs-toggle="collapse"
+                                        data-bs-target=".header-nav-main nav">
+                                        <i class="fas fa-bars"></i>
+                                    </button>
+                                </div>
+                                <div
+                                    class="header-nav-features header-nav-features-no-border header-nav-features-lg-show-border order-1 order-lg-2">
+                                    <div class="header-nav-feature header-nav-features-search d-inline-flex ms-2">
+                                        <a href="{% url 'home:logout' %}" class="text-decoration-none"><i
+                                                class="fas fa-power-off header-nav-top-icon text-3"></i></a>
+                                    </div>
+                                    <div class="header-nav-feature header-nav-features-search d-inline-flex ms-2">
+                                        <a href="#" class="header-nav-features-toggle text-decoration-none"
+                                            data-focus="headerSearch"><i
+                                                class="fas fa-search header-nav-top-icon"></i></a>
+                                        <div class="header-nav-features-dropdown" id="headerTopSearchDropdown">
+                                            <form role="search" action="page-search-results.html" method="get">
+                                                <div class="simple-search input-group">
+                                                    <input class="form-control text-1" id="headerSearch" name="q"
+                                                        type="search" value="" placeholder="جستجو...">
+                                                    <button class="btn" type="submit">
+                                                        <i class="fas fa-search header-nav-top-icon"></i>
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="header-nav-feature header-nav-features-cart d-inline-flex">
+                                        <a href="#" class="header-nav-features-toggle">
+                                            <img src="{% static 'img/icons/icon-cart.svg' %}" width="14" alt=""
+                                                class="header-nav-top-icon-img">
+                                            <span class="cart-info">
+                                                <span class="cart-qty">0</span>
+                                            </span>
+                                        </a>
+                                        <div class="header-nav-features-dropdown headerTopCartDropdownContent" id="headerTopCartDropdown">
+                                            <ol class="mini-products-list">
+                                                {% comment %} cart items here... {% endcomment %}
+                                            </ol>
+                                            <div class="totals">
+                                                <span class="label float-end">مجموع:</span>
+                                                <span class="price-total float-start"><span class="price"><span class="cartTotalPrice">0</span>
+                                                    &nbsp;تومان</span></span>
+                                            </div>
+                                            <div class="actions">
+                                                <a class="btn btn-primary w-100" href="{% url 'shop:cart' %}">بررسی سبد
+                                                    خرید</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="header-nav-bar bg-color-light-scale-1 mb-3 px-3 px-lg-0">
+                        <div class="header-row">
+                            <div class="header-column">
+                                <div class="header-row justify-content-center">
+                                    <div class="header-nav header-nav-links justify-content-center"
+                                        data-sticky-header-style="{'minResolution': 991}"
+                                        data-sticky-header-style-active="{'margin-left': '0px'}"
+                                        data-sticky-header-style-deactive="{'margin-left': '0'}">
+                                        <div
+                                            class="header-nav-main header-nav-main-square header-nav-main-dropdown-no-borders header-nav-main-dropdown-arrow header-nav-main-effect-3 header-nav-main-sub-effect-1">
+                                            <nav class="collapse">
+                                                <ul class="nav nav-pills" id="mainNav">
+                                                    {% if request.user.is_superuser %}
+                                                    <li class="dropdown">
+                                                        <a class="dropdown-item active"
+                                                            href="{% url 'dashboard:home' %}">
+                                                            داشبورد
+                                                        </a>
+                                                    </li>
+                                                    <li class="dropdown">
+                                                        <a class="dropdown-item dropdown-toggle" href="#">
+                                                            مدیریت پیام‌ها
+                                                        </a>
+                                                        <ul class="dropdown-menu">
+                                                            <li>
+                                                                <a class="dropdown-item"
+                                                                    href="{% url 'dashboard:comments' %}">دیدگاه‌های
+                                                                    اخیر</a>
+                                                            </li>
+                                                            <li class="dropdown-submenu">
+                                                                <a class="dropdown-item"
+                                                                    href="#">نقد و بررسی‌های
+                                                                    اخیر</a>
+                                                                    <ul class="dropdown-menu">
+                                                                        <li><a class="dropdown-item"
+                                                                                href="{% url 'dashboard:reviews' %}">محصولات
+                                                                                فروشگاهی</a></li>
+                                                                        <li><a class="dropdown-item"
+                                                                                href="{% url 'dashboard:prod-reviews' %}">محصولات
+                                                                                اصلی</a></li>
+                                                                    </ul>
+                                                            </li>
+                                                            <li>
+                                                                <a class="dropdown-item"
+                                                                    href="{% url 'dashboard:messages' %}">پیام‌های
+                                                                    اخیر</a>
+                                                            </li>
+
+                                                        </ul>
+                                                    </li>
+                                                    <li class="dropdown">
+                                                        <a class="dropdown-item dropdown-toggle" href="#">
+                                                            مدیریت کاربران
+                                                        </a>
+                                                        <ul class="dropdown-menu">
+                                                            <li>
+                                                                <a class="dropdown-item"
+                                                                    href="{% url 'dashboard:users' %}">لیست کاربران</a>
+                                                            </li>
+                                                            <li>
+                                                                <a class="dropdown-item"
+                                                                    href="{% url 'dashboard:users-add' %}">افزودن
+                                                                    کاربران</a>
+                                                            </li>
+
+                                                        </ul>
+                                                    </li>
+                                                    <li class="dropdown">
+                                                        <a class="dropdown-item dropdown-toggle" href="#">
+                                                            مدیریت فروشگاه
+                                                        </a>
+                                                        <ul class="dropdown-menu">
+                                                            <li class="dropdown-submenu">
+                                                                <a class="dropdown-item" href="#">مدیریت
+                                                                    محصولات</a>
+                                                                <ul class="dropdown-menu">
+                                                                    <li><a class="dropdown-item"
+                                                                            href="{% url 'dashboard:shop-edit' %}">محصولات
+                                                                            فروشگاهی</a></li>
+                                                                    <li><a class="dropdown-item"
+                                                                            href="{% url 'dashboard:prod-shop-edit' %}">محصولات
+                                                                            اصلی</a></li>
+                                                                </ul>
+                                                            </li>
+
+                                                            <li class="dropdown-submenu">
+                                                                <a class="dropdown-item"
+                                                                    href="#">افزودن
+                                                                    محصول</a>
+                                                                <ul class="dropdown-menu">
+                                                                    <li><a class="dropdown-item"
+                                                                            href="{% url 'dashboard:shop-add' %}">محصولات
+                                                                            فروشگاهی</a></li>
+                                                                    <li><a class="dropdown-item"
+                                                                            href="{% url 'dashboard:prod-shop-add' %}">محصولات
+                                                                            اصلی</a></li>
+                                                                </ul>
+                                                            </li>
+                                                            <li class="dropdown-submenu">
+                                                                <a class="dropdown-item"
+                                                                    href="#">دسته‌بندی‌
+                                                                    محصولات</a>
+                                                                <ul class="dropdown-menu">
+                                                                    <li><a class="dropdown-item"
+                                                                            href="{% url 'dashboard:shop-cat' %}">محصولات
+                                                                            فروشگاهی</a></li>
+                                                                    <li><a class="dropdown-item"
+                                                                            href="{% url 'dashboard:prod-shop-cat' %}">محصولات
+                                                                            اصلی</a></li>
+                                                                </ul>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                    <li class="dropdown">
+                                                        <a class="dropdown-item dropdown-toggle" href="#">
+                                                            مدیریت وبلاگ
+                                                        </a>
+                                                        <ul class="dropdown-menu">
+                                                            <li>
+                                                                <a class="dropdown-item"
+                                                                    href="{% url 'dashboard:blog-edit' %}">مدیریت
+                                                                    مقالات</a>
+                                                            </li>
+                                                            <li>
+                                                                <a class="dropdown-item"
+                                                                    href="{% url 'dashboard:blog-add' %}">افزودن
+                                                                    مقاله</a>
+                                                            </li>
+                                                            <li>
+                                                                <a class="dropdown-item"
+                                                                    href="{% url 'dashboard:blog-cat' %}">دسته‌بندی‌ها</a>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                    <li class="dropdown">
+                                                        <a class="dropdown-item dropdown-toggle" href="#">
+                                                            مدیریت مالی
+                                                        </a>
+                                                        <ul class="dropdown-menu">
+                                                            <li>
+                                                                <a class="dropdown-item" href="{% url 'dashboard:fin-orders' %}">لیست سفارشات</a>
+                                                            </li>
+                                                            <li>
+                                                                <a class="dropdown-item" href="{% url 'dashboard:fin-transactions' %}">لیست تراکنش‌ها</a>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                    <li class="dropdown">
+                                                        <a class="dropdown-item dropdown-toggle" href="#">
+                                                            سایر تنظیمات
+                                                        </a>
+                                                        <ul class="dropdown-menu">
+                                                            <li>
+                                                                <a class="dropdown-item"
+                                                                    href="{% url 'dashboard:slider' %}">مدیریت محتوای
+                                                                    اسلایدر</a>
+                                                            </li>
+                                                            <li>
+                                                                <a class="dropdown-item"
+                                                                    href="{% url 'dashboard:slider-add' %}">افزودن
+                                                                    محتوای اسلایدر</a>
+                                                            </li>
+                                                            <li>
+                                                                <a class="dropdown-item"
+                                                                    href="{% url 'dashboard:survey-list' %}">مدیریت
+                                                                    نظرسنجی‌</a>
+                                                            </li>
+                                                            <li>
+                                                                <a class="dropdown-item"
+                                                                    href="{% url 'dashboard:sms' %}">مدیریت پیامک</a>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                    <li class="dropdown">
+                                                        <a class="dropdown-item" href="{% url 'dashboard:profile' %}">
+                                                            پروفایل کاربر
+                                                        </a>
+                                                    </li>
+                                                    {% else %}
+                                                    <li class="dropdown">
+                                                        <a class="dropdown-item active"
+                                                            href="{% url 'dashboard:user-home' %}">
+                                                            داشبورد
+                                                        </a>
+                                                    </li>
+                                                    {% comment %} <li class="dropdown">
+                                                        <a class="dropdown-item dropdown-toggle" href="#">
+                                                            مدیریت سفارشات
+                                                        </a>
+                                                        <ul class="dropdown-menu">
+                                                            <li>
+                                                                <a class="dropdown-item" href="#">لیست خریدها</a>
+                                                            </li>
+                                                            <li>
+                                                                <a class="dropdown-item" href="#">بایگانی فاکتورها</a>
+                                                            </li>
+
+                                                        </ul>
+                                                    </li> {% endcomment %}
+                                                    <li class="dropdown">
+                                                        <a class="dropdown-item dropdown-toggle" href="#">
+                                                            مدیریت مالی
+                                                        </a>
+                                                        <ul class="dropdown-menu">
+                                                            <li>
+                                                                <a class="dropdown-item" href="{% url 'dashboard:user-fin-orders' %}">لیست سفارشات</a>
+                                                            </li>
+                                                            <li>
+                                                                <a class="dropdown-item" href="{% url 'dashboard:user-fin-transactions' %}">لیست تراکنش‌ها</a>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                    <li class="dropdown">
+                                                        <a class="dropdown-item dropdown-toggle" href="#">
+                                                            مدیریت نقدها و دیدگاهها
+                                                        </a>
+                                                        <ul class="dropdown-menu">
+                                                            <li>
+                                                                <a class="dropdown-item"
+                                                                    href="{% url 'dashboard:user-comments' %}">مدیریت
+                                                                    دیدگاهها</a>
+                                                            </li>
+                                                            <li>
+                                                                <a class="dropdown-item"
+                                                                    href="{% url 'dashboard:user-reviews' %}">مدیریت
+                                                                    نقدها</a>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                    <li class="dropdown">
+                                                        <a class="dropdown-item" href="{% url 'dashboard:profile' %}">
+                                                            پروفایل کاربر
+                                                        </a>
+                                                    </li>
+                                                    {% endif %}
+
+
+                                                </ul>
+                                            </nav>
+                                        </div>
+                                        <button class="btn header-btn-collapse-nav" data-bs-toggle="collapse"
+                                            data-bs-target=".header-nav-main nav">
+                                            <i class="fas fa-bars"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        {% block main_content %}
+        {% endblock main_content %}
+
+        <footer id="footer">
+            <div class="footer-copyright">
+                <div class="container py-2">
+                    <div class="row py-4">
+                        <div class="col d-flex align-items-center justify-content-center">
+                            <p><strong>برنا ابزار</strong> - © تمام حقوق مادی و معنوی این وبسایت برای شرکت برنا ابزار
+                                محفوظ می‌باشد.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Vendor -->
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'vendor/jquery.appear/jquery.appear.min.js' %}"></script>
+    <script src="{% static 'vendor/jquery.easing/jquery.easing.min.js' %}"></script>
+    <script src="{% static 'vendor/jquery.cookie/jquery.cookie.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'vendor/jquery.validation/jquery.validate.min.js' %}"></script>
+    <script src="{% static 'vendor/lazysizes/lazysizes.min.js' %}"></script>
+    <script src="{% static 'vendor/isotope/jquery.isotope.min.js' %}"></script>
+    <script src="{% static 'vendor/owl.carousel/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'vendor/magnific-popup/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'vendor/vide/jquery.vide.min.js' %}"></script>
+    <script src="{% static 'vendor/vivus/vivus.min.js' %}"></script>
+
+    <!-- Theme Base, Components and Settings -->
+    <script src="{% static 'js/theme.js' %}"></script>
+
+    <!-- Theme Custom -->
+    <script src="{% static 'js/custom.js' %}"></script>
+
+    <!-- Theme Initialization Files -->
+    <script src="{% static 'js/theme.init.js' %}"></script>
+
+    {% block end_body %}
+    {% endblock end_body %}
+
+</body>
+
+</html>

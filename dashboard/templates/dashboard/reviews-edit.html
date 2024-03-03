@@ -1,0 +1,83 @@
+{% extends "base-dashboard.html" %}
+{% load static %}
+{% load widget_tweaks %}
+{% block header %}
+{% endblock header %}
+{% block main_content %}
+<div role="main" class="main">
+	<section id="elements" class="section section-height-2 border-0 mt-5 mb-0 pt-5">
+
+		<div class="container py-2">
+			<div class="row appear-animation" data-appear-animation="fadeInUpShorter" data-appear-animation-delay="400">
+				<div class="col-lg-12">
+					<h4 class="mb-3">ویرایش نقدها</h4>
+						<div class="card mb-4">
+							<div class="card-body">
+								<div class="row">
+									<div class="col">
+										  <form class="contact-form form-with-icons needs-validation" method="POST">
+											{% csrf_token %}
+											<div class="contact-form-success alert alert-success d-none mt-4">
+												<strong>تایید!</strong> نقد مورد نظر با موفقیت ویرایش شد.
+											</div>
+
+											<div class="contact-form-error alert alert-danger d-none mt-4">
+												<strong>خطا!</strong>مشکلی در ویرایش نقد وجود دارد. لطفا مجددا تلاش نمایید. 
+												<span class="mail-error-message text-1 d-block"></span>
+											</div>
+
+											<div class="row">
+												<div class="form-group col-lg-6">
+													<label class="form-label mb-1 text-2">نام</label>
+													<div class="position-relative">
+														<i class="icons icon-emotsmile text-color-primary text-3 position-absolute left-15 top-50pct transform3dy-n50"></i>
+														{% render_field form.name class="form-control text-3 h-auto py-2" %}
+													</div>
+												</div>
+												<div class="form-group col-lg-6">
+													<label class="form-label mb-1 text-2">آدرس ایمیل</label>
+													<div class="position-relative">
+														<i class="icons icon-envelope text-color-primary text-3 position-absolute left-15 top-50pct transform3dy-n50"></i>
+														{% render_field form.email class="form-control text-3 h-auto py-2" data-msg-email="لطفا فرمت صحیح ادرس ایمیل را وارد نمایید." %}
+														
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="form-group col-lg-6">
+													<label class="form-label mb-1 text-2">امتیاز</label>
+													<div class="position-relative">
+														<i class="icons icon-diamond text-color-primary text-3 position-absolute left-15 top-50pct transform3dy-n50"></i>
+														{% render_field form.rate class="form-control text-3 h-auto py-2" data-msg-required="لطفا امتیاز خود را وارد نمایید." data-rule-number="true" data-msg-number="لطفا یک عدد بین 0 تا 5 وارد نمایید." data-msg-min="امتیاز نمی‌تواند کمتر از 0 باشد." data-rule-min="0" data-rule-max="5" data-msg-max="امتیاز نمی‌تواند بیشتر از 5 باشد." required=required %}
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="form-group col-12">
+													<label class="form-label">دیدگاه</label>
+													<div class="position-relative">
+														<i class="icons icon-envelope-open text-color-primary text-3 position-absolute left-15 top-50pct transform3dy-n50 z-index-1"></i>
+														{% render_field form.review class="form-control text-3 h-auto py-2" %}
+														  </div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="form-group col">
+													<input type="submit" value="تایید و انتشار نقد و بررسی" class="btn btn-primary" data-loading-text="در حال بارگذاری...">
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+				</div>
+			</div>
+
+		</div>
+	</section>
+</div>
+{% endblock main_content %}
+{% block end_body %}
+
+{% endblock end_body %}

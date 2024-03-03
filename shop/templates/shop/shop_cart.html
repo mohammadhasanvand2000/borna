@@ -1,0 +1,219 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+{% block main_content %}
+<div role="main" class="main shop pb-4">
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col">
+                <ul class="breadcrumb font-weight-bold text-6 justify-content-center my-5">
+                    <li class="text-transform-none me-2">
+                        <a href="#" class="text-decoration-none text-color-primary">سبد خرید</a>
+                    </li>
+                    <li class="text-transform-none text-color-grey-lighten me-2">
+                        <a href="#"
+                            class="text-decoration-none text-color-grey-lighten text-color-hover-primary">بررسی سبد خرید</a>
+                    </li>
+                    <li class="text-transform-none text-color-grey-lighten">
+                        <a href="#"
+                            class="text-decoration-none text-color-grey-lighten text-color-hover-primary">تکمیل فرایند خرید</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="row pb-4 mb-5">
+            <div class="col-lg-8 mb-5 mb-lg-0">
+                <form method="post" action="">
+                    <div class="table-responsive">
+                        <table class="shop_table cart">
+                            <thead>
+                                <tr class="text-color-dark">
+                                    <th class="product-thumbnail" width="15%">
+                                        &nbsp;
+                                    </th>
+                                    <th class="product-name text-uppercase" width="30%">
+                                        محصول/کالا
+                                    </th>
+                                    <th class="product-price text-uppercase" width="15%">
+                                        قیمت
+                                    </th>
+                                    <th class="product-quantity text-uppercase" width="20%">
+                                        تعداد
+                                    </th>
+                                    <th class="product-subtotal text-uppercase text-end" width="20%">
+                                        مجموع
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in cart.items %}
+                                <tr class="cart_table_item">
+                                    <td class="product-thumbnail">
+                                        <div class="product-thumbnail-wrapper">
+                                            <a href="#" class="product-thumbnail-image"
+                                                title="{{item.title}}">
+                                                {% if item.pic %}
+                                                <img width="90" height="90" alt="" class="img-fluid"
+                                                    src="{{ item.pic }}">
+                                                {% else %}
+                                                <img width="90" height="90" alt="" class="img-fluid"
+                                                    src="{% static 'img/products/placeholder.jpg' %}">
+                                                {% endif %}
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td class="product-name">
+                                        <a href="shop-product-sidebar-right.html"
+                                            class="font-weight-semi-bold text-color-dark text-color-hover-primary text-decoration-none">{{ item.title }}</a>
+                                    </td>
+                                    <td class="product-price">
+                                        <span class="amount font-weight-medium text-color-grey">{{item.price|intcomma}} تومان</span>
+                                    </td>
+                                    <td class="product-quantity">
+                                            {{item.count}}
+                                    </td>
+                                    <td class="product-subtotal text-end">
+                                        <span class="amount text-color-dark font-weight-bold text-4">{{item.total|intcomma}} تومان</span>
+                                    </td>
+                                </tr>
+                                {% endfor %} 
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
+                <a href="{% url 'shop:cart' %}"
+                            class="btn btn-dark btn-modern w-50 text-uppercase bg-color-hover-primary border-color-hover-primary border-radius-0 text-3 py-3 float-start mt-4">به‌روزرسانی سبد خرید<i class="fas fa-sync-alt me-2"></i></a>
+            </div>
+            <div class="col-lg-4 position-relative">
+                <div class="card border-width-3 border-radius-0 border-color-hover-dark" data-plugin-sticky
+                    data-plugin-options="{'minWidth': 991, 'containerSelector': '.row', 'padding': {'top': 85}}">
+                    <div class="card-body">
+                        <h4 class="font-weight-bold text-uppercase text-4 mb-3">مجموع سبد</h4>
+                        <table class="shop_table cart-totals mb-4">
+                            <tbody>
+                                <tr class="cart-subtotal">
+                                    <td class="border-top-0">
+                                        <strong class="text-color-dark">مجموع سبد: </strong>
+                                    </td>
+                                    <td class="border-top-0 text-end">
+                                        <strong><span class="amount font-weight-medium">{{cart.total|intcomma}} تومان</span></strong>
+                                    </td>
+                                </tr>
+                                <tr class="shipping">
+                                    <td colspan="2">
+                                        <strong class="d-block text-color-dark mb-2">شیوه ارسال: </strong>
+
+                                        <div class="d-flex flex-column">
+                                            <label class="d-flex align-items-center text-color-grey mb-0"
+                                                for="shipping_method1">
+                                                <input id="shipping_method1" type="radio" class="ms-2"
+                                                    name="shipping_method" value="free" disabled /> 
+                                                    ارسال رایگان
+                                            </label>
+                                            <label class="d-flex align-items-center text-color-grey mb-0"
+                                                for="shipping_method2">
+                                                <input id="shipping_method2" type="radio" class="ms-2"
+                                                    name="shipping_method" value="local-pickup" disabled /> 
+                                                    ارسال محلی
+                                            </label>
+                                            <label class="d-flex align-items-center text-color-grey mb-0"
+                                                for="shipping_method3">
+                                                <input id="shipping_method3" type="radio" class="ms-2"
+                                                    name="shipping_method" value="flat-rate" checked /> 
+                                                    ارسال پیشتاز: {{shipping|intcomma }} تومان
+                                            </label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="total">
+                                    <td>
+                                        <strong class="text-color-dark text-3-5">مجموع: </strong>
+                                    </td>
+                                    <td class="text-end">
+                                        <strong class="text-color-dark"><span
+                                                class="amount text-color-dark text-5">{{total_invoice|intcomma }} تومان</span></strong>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <a href="{% url 'shop:checkout' %}"
+                            class="btn btn-dark btn-modern w-100 text-uppercase bg-color-hover-primary border-color-hover-primary border-radius-0 text-3 py-3">تکمیل فرایند خرید<i class="fas fa-arrow-left me-2"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h4 class="font-weight-semibold text-4 mb-3">محصولات پیشنهادی</h4>
+                <hr class="mt-0">
+                <div class="products row">
+                    <div class="col">
+                        <div class="owl-carousel owl-theme show-nav-title nav-dark mb-0"
+                            data-plugin-options="{'loop': true, 'autoplay': true, 'autoplayTimeout': 3000, 'items': 4, 'nav': true, 'dots': false, 'margin': 20, 'autoplayHoverPause': true, 'autoHeight': true}">
+                            {% for pr in products_sim %}
+                            <div class="product mb-0">
+                                <div class="product-thumb-info border-0 mb-3">
+
+                                    <div class="product-thumb-info-badges-wrapper">
+                                        <span class="badge badge-ecommerce badge-success">جدید</span>
+                                        {% if pr.discount > 0 %}
+                                        <span class="badge badge-ecommerce badge-danger">{{pr.discount}}٪ تخفیف</span>
+                                        {% else %}
+                                        {% endif %}
+
+                                    </div>
+                                    <a href="#" class="quick-view text-uppercase font-weight-semibold text-2 add-to-cart" data-prod="{{ pr.pk }}">
+                                        افزودن به سبد خرید
+                                    </a>
+                                    <a href="{% url 'shop:shop-detail' product_id=pr.pk %}">
+                                        <div class="product-thumb-info-image">
+                                            {% if pr.image_cover %}
+                                            <img alt="" class="img-fluid" src="{{pr.image_cover.url}}">
+                                            {% else %}
+                                            <img alt="" class="img-fluid"
+                                                src="{% static 'img/products/placeholder.jpg' %}">
+                                            {% endif %}
+
+
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <a href="#"
+                                        class="text-decoration-none text-color-default text-color-hover-dark text-4"><i
+                                            class="far fa-heart"></i></a>
+                                    <div>
+                                        <a href="{% url 'shop:shop-detail' product_id=pr.pk %}"
+                                            class="d-block text-uppercase text-decoration-none text-color-default text-color-hover-primary line-height-1 text-0 mb-1">{{pr.category.title}}</a>
+                                        <h3
+                                            class="text-3-5 font-weight-medium font-alternative text-transform-none line-height-3 mb-0">
+                                            <a href="#"
+                                                class="text-color-dark text-color-hover-primary">{{pr.title}}</a></h3>
+                                    </div>
+                                </div>
+                                <p class="price text-5 mb-3">
+                                    <span class="sale text-color-dark font-weight-semi-bold">{{pr.final_price|intcomma}}
+                                        تومان</span>
+                                    {% if pr.discount > 0 %}
+                                    <span class="amount">{{pr.price|intcomma}} تومان</span>
+                                    {% else %}
+                                    {% endif %}
+                                </p>
+                            </div>
+                            {% endfor %}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock main_content %}
+{% block end_body %}
+<script src="{% static 'vendor/bootstrap-star-rating/themes/krajee-fas/theme.min.js' %}"></script>
+<script src="{% static 'js/views/view.shop.js' %}"></script>
+{% endblock end_body %}

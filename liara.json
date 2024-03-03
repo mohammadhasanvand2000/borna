@@ -1,0 +1,10 @@
+{
+  "platform": "django",
+  "app": "bornaabzar",
+  "disks": [
+    {
+      "name": "data",
+      "mountTo": "media"
+    }
+  ]
+}

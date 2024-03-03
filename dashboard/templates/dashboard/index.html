@@ -1,0 +1,398 @@
+{% extends "base-dashboard.html" %}
+{% load static %}
+{% load humanize %}
+{% load jalali_tags %}
+{% block header %}
+<link rel="stylesheet" href="{% static 'admin/vendor/chartist/chartist.min.css' %}" />
+
+<!-- Admin Extension CSS -->
+<link rel="stylesheet" href="{% static 'admin/css/theme-admin-extension.css' %}">
+
+<!-- Admin Extension Skin CSS -->
+<link rel="stylesheet" href="{% static 'admin/css/skins/extension.css' %}">
+
+<!-- Skin CSS -->
+<link id="skinCSS" rel="stylesheet" href="{% static 'css/skins/default.css' %}">
+
+<!-- Head Libs -->
+<script src="{% static 'vendor/modernizr/modernizr.min.js' %}"></script>
+{% endblock header %}
+{% block main_content %}
+<div role="main" class="main">
+	<section id="elements" class="section section-height-2 border-0 mt-5 mb-0 pt-5">
+
+		<div class="container py-2">
+			<div class="row mb-5 pb-3">
+				<div class="col-md-6 col-lg-4 mb-5 mb-lg-0 appear-animation" data-appear-animation="fadeInUpShorter"
+					data-appear-animation-delay="400">
+					<h4 class="mb-4">میزان تراکنش‌های موفق یک هفته اخیر</h4>
+
+					<div
+						class="card card-border card-border-bottom card-border-hover bg-color-light box-shadow-6 box-shadow-hover anim-hover-translate-top-10px transition-3ms">
+						<div class="card-body">
+							<h4 class="card-title mb-1 text-4 font-weight-bold text-center">{{week|intcomma}} تومان</h4>
+							<p class="card-text">مجموع تراکنش‌های با <strong>پرداخت موفق</strong> در یک هفته اخیر.</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6 col-lg-4 mb-5 mb-lg-0 appear-animation" data-appear-animation="fadeInUpShorter"
+					data-appear-animation-delay="600">
+					<h4 class="mb-4">میزان تراکنش‌های موفق یک ماه اخیر</h4>
+
+					<div
+						class="card card-border card-border-bottom card-border-hover bg-color-light box-shadow-6 box-shadow-hover anim-hover-translate-top-10px transition-3ms">
+						<div class="card-body">
+							<h4 class="card-title mb-1 text-4 font-weight-bold text-center">{{month|intcomma}} تومان
+							</h4>
+							<p class="card-text">مجموع تراکنش‌های با <strong>پرداخت موفق</strong> در یک ماه اخیر.</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6 col-lg-4 mb-5 mb-lg-0 appear-animation" data-appear-animation="fadeInUpShorter"
+					data-appear-animation-delay="400">
+					<h4 class="mb-4">میزان تراکنش‌های موفق یک سال اخیر</h4>
+
+					<div
+						class="card card-border card-border-bottom card-border-hover bg-color-light box-shadow-6 box-shadow-hover anim-hover-translate-top-10px transition-3ms">
+						<div class="card-body">
+							<h4 class="card-title mb-1 text-4 font-weight-bold text-center">{{year|intcomma}} تومان</h4>
+							<p class="card-text">مجموع تراکنش‌های با <strong>پرداخت موفق</strong> در یک سال اخیر.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row appear-animation" data-appear-animation="fadeInUpShorter" data-appear-animation-delay="600">
+				<div class="col-lg-6">
+					<section class="card card-admin">
+						<header class="card-header">
+
+							<h2 class="card-title">حجم تراکنش‌های موفق تفکیکی یک هفته اخیر (تومان)</h2>
+							<p class="card-subtitle">این میزان تراکنش موفق متناسب با روزهای هفته تفکیک شده است.
+							</p>
+						</header>
+						<div class="card-body">
+							<!-- Flot: Bars -->
+							<div class="chart chart-md" id="flotBars1"></div>
+							<script type="text/javascript">
+								var flotBarsData1 = JSON.parse("{{weekly_price|safe}}".replace(/("|')/g, "\""));
+
+								// See: js/examples/examples.charts.js for more settings.
+							</script>
+
+						</div>
+					</section>
+				</div>
+				<div class="col-lg-6">
+					<section class="card card-admin">
+						<header class="card-header">
+
+							<h2 class="card-title">تعداد تراکنش‌های موفق تفکیکی یک هفته اخیر (تعداد)</h2>
+							<p class="card-subtitle">این میزان تراکنش موفق متناسب با روزهای هفته تفکیک شده است.
+							</p>
+						</header>
+						<div class="card-body">
+
+							<!-- Flot: Bars -->
+							<div class="chart chart-md" id="flotBars2"></div>
+							<script type="text/javascript">
+								var flotBarsData2 = JSON.parse("{{weekly_count|safe}}".replace(/("|')/g, "\""));
+
+								// See: js/examples/examples.charts.js for more settings.
+							</script>
+
+						</div>
+					</section>
+				</div>
+			</div>
+			<div class="row appear-animation" data-appear-animation="fadeInUpShorter" data-appear-animation-delay="800">
+				<div class="col-lg-12">
+					<section class="card card-admin">
+						<header class="card-header">
+
+							<h2 class="card-title">مقایسه روند تراکنش‌های موفق یک ماه اخیر نسبت به میانگین 3 ماه اخیر (تومان)</h2>
+						</header>
+						<div class="card-body">
+							<div id="ChartistLineChartWithTooltips"
+								class="ct-chart ct-perfect-fourth ct-golden-section">
+							</div>
+							<script type="text/javascript">
+								var month3Avg = JSON.parse("{{month3_avg|safe}}");
+								var monthPrice = JSON.parse("{{month_price|safe}}");
+
+								var chartWithTooltipData = {
+									labels: Array.from(Array(31).keys()).map(item => String(item + 2)),
+									series: [{
+										name: 'یک ماه اخیر',
+										data: monthPrice,
+									}, {
+										name: 'میانگین سه ماه اخیر',
+										data: month3Avg,
+									}],
+
+
+								};
+							</script>
+
+							<!-- See: js/examples/examples.charts.js for the example code. -->
+						</div>
+					</section>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
+{% endblock main_content %}
+{% block end_body %}
+<script src="{% static 'admin/js/theme.admin.extension.js' %}"></script>
+
+<!-- Admin Extension Examples -->
+<script src="{% static 'admin/vendor/flot/jquery.flot.js' %}"></script>
+<script src="{% static 'admin/vendor/flot.tooltip/jquery.flot.tooltip.js' %}"></script>
+<script src="{% static 'admin/vendor/flot/jquery.flot.categories.js' %}"></script>
+<script src="{% static 'admin/vendor/flot/jquery.flot.resize.js' %}"></script>
+<script src="{% static 'admin/vendor/chartist/chartist.js' %}"></script>
+
+<!-- Admin Extension Examples -->
+<script src="{% static 'admin/js/examples/examples.charts.js' %}"></script>
+
+<style>
+	#ChartistCSSAnimation .ct-series.ct-series-a .ct-line {
+		fill: none;
+		stroke-width: 4px;
+		stroke-dasharray: 5px;
+		-webkit-animation: dashoffset 1s linear infinite;
+		-moz-animation: dashoffset 1s linear infinite;
+		animation: dashoffset 1s linear infinite;
+	}
+
+	#ChartistCSSAnimation .ct-series.ct-series-b .ct-point {
+		-webkit-animation: bouncing-stroke 0.5s ease infinite;
+		-moz-animation: bouncing-stroke 0.5s ease infinite;
+		animation: bouncing-stroke 0.5s ease infinite;
+	}
+
+	#ChartistCSSAnimation .ct-series.ct-series-b .ct-line {
+		fill: none;
+		stroke-width: 3px;
+	}
+
+	#ChartistCSSAnimation .ct-series.ct-series-c .ct-point {
+		-webkit-animation: exploding-stroke 1s ease-out infinite;
+		-moz-animation: exploding-stroke 1s ease-out infinite;
+		animation: exploding-stroke 1s ease-out infinite;
+	}
+
+	#ChartistCSSAnimation .ct-series.ct-series-c .ct-line {
+		fill: none;
+		stroke-width: 2px;
+		stroke-dasharray: 40px 3px;
+	}
+
+	/* Chartist Skin */
+	.ct-chart .tooltip {
+		background: #0088cc;
+	}
+
+	.ct-chart .tooltip:after {
+		border-top-color: #0088cc;
+	}
+
+	.ct-chart .ct-series.ct-series-a .ct-bar,
+	.ct-chart .ct-series.ct-series-a .ct-line,
+	.ct-chart .ct-series.ct-series-a .ct-point,
+	.ct-chart .ct-series.ct-series-a .ct-slice.ct-donut {
+		stroke: #0088cc;
+	}
+
+	.ct-chart .ct-series.ct-series-a .ct-area,
+	.ct-chart .ct-series.ct-series-a .ct-slice:not(.ct-donut) {
+		fill: #0088cc;
+	}
+
+	.ct-chart .ct-series.ct-series-b .ct-bar,
+	.ct-chart .ct-series.ct-series-b .ct-line,
+	.ct-chart .ct-series.ct-series-b .ct-point,
+	.ct-chart .ct-series.ct-series-b .ct-slice.ct-donut {
+		stroke: #005580;
+	}
+
+	.ct-chart .ct-series.ct-series-b .ct-area,
+	.ct-chart .ct-series.ct-series-b .ct-slice:not(.ct-donut) {
+		fill: #005580;
+	}
+
+	.ct-chart .ct-series.ct-series-i .ct-bar,
+	.ct-chart .ct-series.ct-series-i .ct-line,
+	.ct-chart .ct-series.ct-series-i .ct-point,
+	.ct-chart .ct-series.ct-series-i .ct-slice.ct-donut {
+		stroke: #005580;
+	}
+
+	.ct-chart .ct-series.ct-series-i .ct-area,
+	.ct-chart .ct-series.ct-series-i .ct-slice:not(.ct-donut) {
+		fill: #005580;
+	}
+
+	.ct-chart .ct-series.ct-series-j .ct-bar,
+	.ct-chart .ct-series.ct-series-j .ct-line,
+	.ct-chart .ct-series.ct-series-j .ct-point,
+	.ct-chart .ct-series.ct-series-j .ct-slice.ct-donut {
+		stroke: #1ab2ff;
+	}
+
+	.ct-chart .ct-series.ct-series-j .ct-area,
+	.ct-chart .ct-series.ct-series-j .ct-slice:not(.ct-donut) {
+		fill: #1ab2ff;
+	}
+
+	.ct-chart .ct-series.ct-series-n .ct-bar,
+	.ct-chart .ct-series.ct-series-n .ct-line,
+	.ct-chart .ct-series.ct-series-n .ct-point,
+	.ct-chart .ct-series.ct-series-n .ct-slice.ct-donut {
+		stroke: #00111a;
+	}
+
+	.ct-chart .ct-series.ct-series-n .ct-area,
+	.ct-chart .ct-series.ct-series-n .ct-slice:not(.ct-donut) {
+		fill: #00111a;
+	}
+
+	.ct-chart .ct-series.ct-series-o .ct-bar,
+	.ct-chart .ct-series.ct-series-o .ct-line,
+	.ct-chart .ct-series.ct-series-o .ct-point,
+	.ct-chart .ct-series.ct-series-o .ct-slice.ct-donut {
+		stroke: #80d4ff;
+	}
+
+	.ct-chart .ct-series.ct-series-o .ct-area,
+	.ct-chart .ct-series.ct-series-o .ct-slice:not(.ct-donut) {
+		fill: #80d4ff;
+	}
+
+	@-webkit-keyframes dashoffset {
+		0% {
+			stroke-dashoffset: 0px;
+		}
+
+		100% {
+			stroke-dashoffset: -20px;
+		}
+
+		;
+	}
+
+	@-moz-keyframes dashoffset {
+		0% {
+			stroke-dashoffset: 0px;
+		}
+
+		100% {
+			stroke-dashoffset: -20px;
+		}
+
+		;
+	}
+
+	@keyframes dashoffset {
+		0% {
+			stroke-dashoffset: 0px;
+		}
+
+		100% {
+			stroke-dashoffset: -20px;
+		}
+
+		;
+	}
+
+	@-webkit-keyframes bouncing-stroke {
+		0% {
+			stroke-width: 5px;
+		}
+
+		50% {
+			stroke-width: 10px;
+		}
+
+		100% {
+			stroke-width: 5px;
+		}
+
+		;
+	}
+
+	@-moz-keyframes bouncing-stroke {
+		0% {
+			stroke-width: 5px;
+		}
+
+		50% {
+			stroke-width: 10px;
+		}
+
+		100% {
+			stroke-width: 5px;
+		}
+
+		;
+	}
+
+	@keyframes bouncing-stroke {
+		0% {
+			stroke-width: 5px;
+		}
+
+		50% {
+			stroke-width: 10px;
+		}
+
+		100% {
+			stroke-width: 5px;
+		}
+
+		;
+	}
+
+	@-webkit-keyframes exploding-stroke {
+		0% {
+			stroke-width: 2px;
+			opacity: 1;
+		}
+
+		100% {
+			stroke-width: 20px;
+			opacity: 0;
+		}
+
+		;
+	}
+
+	@-moz-keyframes exploding-stroke {
+		0% {
+			stroke-width: 2px;
+			opacity: 1;
+		}
+
+		100% {
+			stroke-width: 20px;
+			opacity: 0;
+		}
+
+		;
+	}
+
+	@keyframes exploding-stroke {
+		0% {
+			stroke-width: 2px;
+			opacity: 1;
+		}
+
+		100% {
+			stroke-width: 20px;
+			opacity: 0;
+		}
+
+		;
+	}
+</style>
+{% endblock end_body %}

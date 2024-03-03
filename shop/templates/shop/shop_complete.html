@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+{% load jalali_tags %}
+
+{% block main_content %}
+<div role="main" class="main shop pb-4">
+
+    <div class="container">
+
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <ul class="breadcrumb breadcrumb-dividers-no-opacity font-weight-bold text-6 justify-content-center my-5">
+                    <li class="text-transform-none me-2">
+                        <a href="shop-cart.html" class="text-decoration-none text-color-dark text-color-hover-primary">سبد خرید</a>
+                    </li>
+                    <li class="text-transform-none text-color-dark me-2">
+                        <a href="shop-checkout.html" class="text-decoration-none text-color-dark text-color-hover-primary">بررسی سبد خرید</a>
+                    </li>
+                    <li class="text-transform-none text-color-dark">
+                        <a href="shop-order-complete.html" class="text-decoration-none text-color-primary">تکمیل فرایند خرید</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card border-width-3 border-radius-0 border-color-success">
+                    <div class="card-body text-center">
+                        <p class="text-color-dark font-weight-bold text-4-5 mb-0"><i class="fas fa-check text-color-success ms-1"></i>سفارش شما با موفقیت ثبت شد. از شما سپاسگزاریم.</p>
+                    </div>
+                </div>
+                <div class="d-flex flex-column flex-md-row justify-content-between py-3 px-4 my-4">
+                    <div class="text-center">
+                        <span>
+                            شماره پیگیری <br>
+                            <strong class="text-color-dark">{{refid}}</strong>
+                        </span>
+                    </div>
+                    <div class="text-center">
+                        <span>
+                            شماره سفارش <br>
+                            <strong class="text-color-dark">{{invoice.invoice_number}}</strong>
+                        </span>
+                    </div>
+                    <div class="text-center mt-4 mt-md-0">
+                        <span>
+                            تاریخ<br>
+                            <strong class="text-color-dark">{{invoice.date_created|to_jalali:'%Y/%m/%d'}}</strong>
+                        </span>
+                    </div>
+                    <div class="text-center mt-4 mt-md-0">
+                        <span>
+                            مجموع <br>
+                            <strong class="text-color-dark">{{invoice.total|intcomma}} تومان</strong>
+                        </span>
+                    </div>
+                    <div class="text-center mt-4 mt-md-0">
+                        <span>
+                            روش پرداخت <br>
+                            <strong class="text-color-dark">آنلاین</strong>
+                        </span>
+                    </div>
+                </div>
+                <div class="card border-width-3 border-radius-0 border-color-hover-dark mb-4">
+                    <div class="card-body">
+                        <h4 class="font-weight-bold text-uppercase text-4 mb-3">سفارش شما</h4>
+                        <table class="shop_table cart-totals mb-0">
+                            <tbody>
+                                <tr>
+                                    <td colspan="2" class="border-top-0">
+                                        <strong class="text-color-dark">محصولات</strong>
+                                    </td>
+                                </tr>
+                                {% for item in invoice.items.all %}
+                                <tr>
+                                    <td>
+                                        <strong class="d-block text-color-dark line-height-1 font-weight-semibold">{{item.title}}<span class="product-qty"> ({{item.count}}عدد)</span></strong>
+                                        <span class="text-1">قیمت واحد: {{item.price|intcomma}}</span>
+                                    </td>
+                                    <td class="text-end align-top">
+                                        <span class="amount font-weight-medium text-color-grey">{{item.total|intcomma}} تومان</span>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                                <tr class="cart-subtotal">
+                                    <td class="border-top-0">
+                                        <strong class="text-color-dark">مجموع سبد</strong>
+                                    </td>
+                                    <td class="border-top-0 text-end">
+                                        <strong><span class="amount font-weight-medium">{{invoice.sub_total|intcomma}} تومان</span></strong>
+                                    </td>
+                                </tr>
+                                <tr class="shipping">
+                                    <td class="border-top-0">
+                                        <strong class="text-color-dark">هزینه ارسال</strong>
+                                    </td>
+                                    <td class="border-top-0 text-end">
+                                        <strong><span class="amount font-weight-medium">{{invoice.shipping|intcomma}} تومان</span></strong>
+                                    </td>
+                                </tr>
+                                <tr class="total">
+                                    <td>
+                                        <strong class="text-color-dark text-3-5">مجموع</strong>
+                                    </td>
+                                    <td class="text-end">
+                                        <strong class="text-color-dark"><span class="amount text-color-dark text-5">{{invoice.total|intcomma}} تومان</span></strong>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row pt-3">
+                    
+                    <div class="col-lg-12">
+                        <h2 class="text-color-dark font-weight-bold text-5-5 mb-1">آدرس دریافت کالا</h2>
+                        <ul class="list list-unstyled text-2 mb-0">
+                            <li class="mb-0">نام خریدار: {{invoice.name}}</li>
+                            <li class="mb-0">آدرس پستی: {{invoice.address}}</li>
+                            <li class="mb-0">کدپستی: {{invoice.zipcode}}</li>
+                            <li class="mb-0">شماره تماس: {{invoice.phone}}</li>
+                            <li class="mb-0">ایمیل: {{invoice.email|default_if_none:"-"}}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+{% endblock main_content %}

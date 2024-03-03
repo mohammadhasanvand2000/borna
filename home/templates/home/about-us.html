@@ -1,0 +1,215 @@
+{% extends "base.html" %}
+{% load static %}
+{% block header %}
+<link rel="stylesheet" href="{% static 'vendor/animate/animate.compat.css' %}">
+{% endblock header %}
+{% block main_content %}
+<div role="main" class="main">
+	
+	<div class="container pb-1 mt-2">
+
+		<div class="row pt-4">
+			<div class="col">
+				<div class="overflow-hidden mb-3">
+					<h2 class="word-rotator slide font-weight-bold text-8 mb-0 appear-animation" data-appear-animation="maskUp">
+						<span>برنا ابزار راهی به سوی</span>
+						<span class="word-rotator-words bg-primary">
+							<b class="is-visible">پیشرفت</b>
+							<b>موفقیت</b>
+							<b>دیده‌شدن</b>
+							<b>انتخاب‌شدن</b>
+						</span>
+					</h2>
+				</div>
+			</div>
+		</div>
+
+		<div class="row mb-2">
+			<div class="col-12">
+				<div class="overflow-hidden">
+					<p class="lead mb-0 appear-animation text-justify" data-appear-animation="maskUp" data-appear-animation-delay="250">شرکت دانش بنیان برنا ابزار، در سال ۱۳۷۶ با توجه به نیاز کشور و به منظور طراحی و ساخت سیستم های اتوماسیون صنعتی و انواع دستگاه های سی ان سی با برند تجاری (برنا ابزار توس) فعالیت های خود را آغاز نموده است.
+					</p>
+				</div>
+			</div>
+			<div class="col-12 appear-animation d-flex justify-content-end" data-appear-animation="fadeIn" data-appear-animation-delay="450">
+				<a href="{% url 'home:contact' %}" class="btn btn-primary btn-primary mt-1">تماس با ما</a>
+			</div>
+		</div>
+	</div>
+	<section class="section section-default border-0 my-5 appear-animation" data-appear-animation="fadeIn" data-appear-animation-delay="750">
+		<div class="container py-4">
+
+			<div class="row align-items-center">
+				<div class="col-md-6 appear-animation" data-appear-animation="fadeInLeftShorter" data-appear-animation-delay="1000">
+					<div class="owl-carousel owl-theme nav-inside mb-0" data-plugin-options="{'items': 1, 'margin': 10, 'animateOut': 'fadeOut', 'autoplay': true, 'autoplayTimeout': 6000, 'loop': true}">
+						<div>
+							<img alt="" class="img-fluid" src="{% static 'img/generic/about-1.jpg' %}">
+						</div>
+						<div>
+							<img alt="" class="img-fluid" src="{% static 'img/generic/about-2.jpg' %}">
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="overflow-hidden mb-2">
+						<h2 class="text-color-dark font-weight-normal text-7 mb-0 pt-0 mt-0 appear-animation" data-appear-animation="maskUp" data-appear-animation-delay="1200">کسب و کار<strong class="font-weight-extra-bold">برنا ابزار</strong></h2>
+					</div>
+					<p class="appear-animation text-justify" data-appear-animation="fadeInUpShorter" data-appear-animation-delay="1400">شرکت دانش بنیان برنا ابزار، در سال ۱۳۷۶ با توجه به نیاز کشور و به منظور طراحی و ساخت سیستم های اتوماسیون صنعتی و انواع دستگاه های سی ان سی با برند تجاری (برنا ابزار توس) فعالیت های خود را آغاز نموده است. با تلاش و پیگیری مستمر متخصصین این مجموعه، در جهت تولید و بومی سازی دانش روز دنیا، موفق به کسب عنوان دانش بنیان شده و توانستیم در اندک زمانی با تاکید بر تحقیق و توسعه مداوم R & D و استفاده از تکنولوژی های جدید ضمن طراحی و ساخت دستگاه های سی ان سی در مدل ها و کاربردهای متفاوت، باعث جلب رضایت مشتریان خود شویم، که گواه این مدعا تولید و فروش بیش از 3000 دستگاه در بازارهای داخلی و خارجی ( ارمنستان، کانادا، تاجیکستان، افغانستان، سوریه، ترکمنستان و عراق) بوده و برگ زرین دیگری را برای صنعت ایران عزیزمان به ارمغان اوریم.</p>
+					<p class="mb-0 appear-animation text-justify" data-appear-animation="fadeInUpShorter" data-appear-animation-delay="1600">کیفیت در ساخت ماشین آلات CNC از ویژگی های بارز دستگاهای برند برناابزارتوس می باشد و همچنین کیفیت در خدمات با ارائه 12 ماه گارانتی و 10 سال خدمات از فروش که تعهدی برای کسب رضایت مشتریان عزیزمان است، نشانه تحقق شعار ما (جاده کیفیت را پایانی نیست) است. چرا که ما فروش را آغاز یک همکاری مشترک در آینده می دانیم و هیچگاه شما را تنها نخواهیم گذاشت.</p>
+				</div>
+			</div>
+
+		</div>
+	</section>
+
+	<div class="container">
+
+		<div class="row mt-5 py-3">
+			<div class="col-md-6">
+				<div class="toggle toggle-primary toggle-simple m-0" data-plugin-toggle>
+					<section class="toggle active mt-0">
+						<a class="toggle-title">چشم انداز ما</a>
+						<div class="toggle-content text-justify">شرکت دانش بنیان برنا ابزار، در سال ۱۳۷۶ با توجه به نیاز کشور و به منظور طراحی و ساخت سیستم های اتوماسیون صنعتی و انواع دستگاه های سی ان سی با برند تجاری (برنا ابزار توس) فعالیت های خود را آغاز نموده است. با تلاش و پیگیری مستمر متخصصین این مجموعه، در جهت تولید و بومی سازی دانش روز دنیا، موفق به کسب عنوان دانش بنیان شده و توانستیم در اندک زمانی با تاکید بر تحقیق و توسعه مداوم R & D و استفاده از تکنولوژی های جدید ضمن طراحی و ساخت دستگاه های سی ان سی در مدل ها و کاربردهای متفاوت، باعث جلب رضایت مشتریان خود شویم، که گواه این مدعا تولید و فروش بیش از 3000 دستگاه در بازارهای داخلی و خارجی ( ارمنستان، کانادا، تاجیکستان، افغانستان، سوریه، ترکمنستان و عراق) بوده و برگ زرین دیگری را برای صنعت ایران عزیزمان به ارمغان اوریم.</p>
+						</div>
+					</section>
+					<section class="toggle">
+						<a class="toggle-title">خط‌مشی ما</a>
+						<div class="toggle-content text-justify">کیفیت در ساخت ماشین آلات CNC از ویژگی های بارز دستگاهای برند برناابزارتوس می باشد و همچنین کیفیت در خدمات با ارائه 12 ماه گارانتی و 10 سال خدمات از فروش که تعهدی برای کسب رضایت مشتریان عزیزمان است، نشانه تحقق شعار ما (جاده کیفیت را پایانی نیست) است. چرا که ما فروش را آغاز یک همکاری مشترک در آینده می دانیم و هیچگاه شما را تنها نخواهیم گذاشت.</p>
+						</div>
+					</section>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="progress-bars">
+					<div class="progress-label">
+						<span class="text-1">صنعت</span>
+					</div>
+					<div class="progress mb-2">
+						<div class="progress-bar progress-bar-primary" data-appear-progress-animation="100%">
+							<span class="progress-bar-tooltip">100%</span>
+						</div>
+					</div>
+					<div class="progress-label">
+						<span class="text-1">تکولوژی</span>
+					</div>
+					<div class="progress mb-2">
+						<div class="progress-bar progress-bar-primary" data-appear-progress-animation="85%" data-appear-animation-delay="300">
+							<span class="progress-bar-tooltip">85%</span>
+						</div>
+					</div>
+					<div class="progress-label">
+						<span class="text-1">بازاریابی</span>
+					</div>
+					<div class="progress mb-2">
+						<div class="progress-bar progress-bar-primary" data-appear-progress-animation="75%" data-appear-animation-delay="600">
+							<span class="progress-bar-tooltip">75%</span>
+						</div>
+					</div>
+					<div class="progress-label">
+						<span class="text-1">چوب و فلز</span>
+					</div>
+					<div class="progress mb-2">
+						<div class="progress-bar progress-bar-primary" data-appear-progress-animation="85%" data-appear-animation-delay="900">
+							<span class="progress-bar-tooltip">85%</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col py-4">
+				<hr class="solid">
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-8 mx-md-auto text-center">
+
+				<h2 class="text-color-dark font-weight-normal text-7 mb-0 pt-2">سیر پیشرفت <strong class="font-weight-extra-bold">برنا ابزار</strong></h2>
+				<p>نگاهی کوتاه به سیر پیشرفت برنا ابزار.</p>
+
+				<section class="timeline" id="timeline">
+					<div class="timeline-body">
+						<div class="timeline-date">
+							<h3 class="text-primary font-weight-bold">1401</h3>
+						</div>
+
+						<article class="timeline-box left text-start appear-animation" data-appear-animation="fadeIn" data-appear-animation-delay="200">
+							<div class="timeline-box-arrow"></div>
+							<div class="p-2">
+								<img alt="" class="img-fluid" src="{% static 'img/history/history-3.jpg' %}" />
+								<h3 class="font-weight-bold text-3 mt-3 mb-1 text-justify">طراحی وبسایت</h3>
+								<p class="mb-0 text-2 text-justify">وبسایت جدید شرکت برناابزار در مهرماه سال 1401 باز طراحی و مورد استفاده قرار گرفت.</p>
+							</div>
+						</article>
+
+						<div class="timeline-date">
+							<h3 class="text-primary font-weight-bold">1390</h3>
+						</div>
+
+						<article class="timeline-box right text-start appear-animation" data-appear-animation="fadeIn" data-appear-animation-delay="400">
+							<div class="timeline-box-arrow"></div>
+							<div class="p-2">
+								<img alt="" class="img-fluid" src="{% static 'img/history/history-2.jpg' %}" />
+								<h3 class="font-weight-bold text-3 mt-3 mb-1 text-justify">همکاران جدید</h3>
+								<p class="mb-0 text-2 text-justify">ما در شرکت برناابزار همواره به دنبال همکارانی خلاق و با انگیزه هستیم. در این سالها با لطف خداوند دوستان و همکاران بسیاری به مجموعه اضافه شده‌اند.</p>
+							</div>
+						</article>
+
+						<div class="timeline-date">
+							<h3 class="text-primary font-weight-bold">1376</h3>
+						</div>
+
+						<article class="timeline-box left text-start appear-animation" data-appear-animation="fadeIn" data-appear-animation-delay="600">
+							<div class="timeline-box-arrow"></div>
+							<div class="p-2">
+								<img alt="" class="img-fluid" src="{% static 'img/history/history-1.jpg' %}" />
+								<h3 class="font-weight-bold text-3 mt-3 mb-1 text-justify">تاسیس</h3>
+								<p class="mb-0 text-2 text-justify">شرکت دانش بنیان برنا ابزار، در سال ۱۳۷۶ با توجه به نیاز کشور و به منظور طراحی و ساخت سیستم های اتوماسیون صنعتی و انواع دستگاه های سی ان سی با برند تجاری (برنا ابزار توس) فعالیت های خود را آغاز نمود.</p>
+							</div>
+						</article>
+					</div>
+				</section>
+
+			</div>
+		</div>
+
+	</div>
+
+	<div class="container">
+		<h2 class="text-color-dark text-5 mb-0"><strong>برخی مشتریان ما</strong></h2>
+		<div class="row py-5 mt-2 mb-5">
+			<div class="col">
+
+				<div class="owl-carousel owl-theme mb-0" data-plugin-options="{'responsive': {'0': {'items': 1}, '476': {'items': 1}, '768': {'items': 5}, '992': {'items': 7}, '1200': {'items': 7}}, 'autoplay': true, 'autoplayTimeout': 3000, 'dots': false}">
+					<div>
+						<img class="img-fluid opacity-2" src="{% static 'img/logos/lg01.png' %}" alt="">
+					</div>
+					<div>
+						<img class="img-fluid opacity-2" src="{% static 'img/logos/lg02.png' %}" alt="">
+					</div>
+					<div>
+						<img class="img-fluid opacity-2" src="{% static 'img/logos/lg03.png' %}" alt="">
+					</div>
+					<div>
+						<img class="img-fluid opacity-2" src="{% static 'img/logos/lg04.png' %}" alt="">
+					</div>
+					<div>
+						<img class="img-fluid opacity-2" src="{% static 'img/logos/lg05.png' %}" alt="">
+					</div>
+					<div>
+						<img class="img-fluid opacity-2" src="{% static 'img/logos/lg06.png' %}" alt="">
+					</div>
+					<div>
+						<img class="img-fluid opacity-2" src="{% static 'img/logos/lg08.png' %}" alt="">
+					</div>
+					<div>
+						<img class="img-fluid opacity-2" src="{% static 'img/logos/lg05.png' %}" alt="">
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+</div>
+{% endblock main_content %}

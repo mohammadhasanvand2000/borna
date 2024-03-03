@@ -1,0 +1,93 @@
+{% extends "base-dashboard.html" %}
+{% load static %}
+{% load widget_tweaks %}
+{% load jalali_tags %}
+{% block header %}
+<link rel="stylesheet" href="{% static 'admin/jquery.ui.datepicker.jalali/themes/base/jquery-ui.min.css' %}">
+{% endblock header %}
+{% block main_content %}
+<div role="main" class="main">
+	<section id="elements" class="section section-height-2 border-0 mt-5 mb-0 pt-5">
+
+		<div class="container py-2">
+			<div class="row appear-animation" data-appear-animation="fadeInUpShorter" data-appear-animation-delay="400">
+				<h4 class="mb-3">پنل ارسال پیامک</h4>
+				<div class="card mb-4">
+					<div class="card-body">
+						<div class="row">
+							<div class="col">
+								<form class="contact-form form-with-icons needs-validation" method="POST">
+									{% csrf_token %}
+									<div class="contact-form-success alert alert-success d-none mt-4">
+										<strong>تایید!</strong> درخواست با موفقیت ارسال شد.
+									</div>
+
+									<div class="contact-form-error alert alert-danger d-none mt-4">
+										<strong>خطا!</strong> مشکلی در ارسال درخواست وجود دارد. لطفا مجددا تلاش نمایید.
+										<span class="mail-error-message text-1 d-block"></span>
+									</div>
+									<div class="row">
+										<div class="form-group col">
+											<label class="form-label mb-1 text-2">شماره‌های تماس (درصورت وجود چند شماره
+												با کاما از هم جدا نمایید)</label>
+											<div class="position-relative">
+												<i
+													class="icons icon-phone text-color-primary text-3 position-absolute left-15 top-50pct transform3dy-n50"></i>
+												{% render_field form.numbers class="form-control text-3 h-auto py-2" data-msg-required="لطفا حداقل یک شماره تماس وارد نمایید." placeholder="09120000000,09121111111" %}
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="form-group col-4">
+											<label class="form-label mb-1 text-2">ارسال پیام در زمان دیگر</label>
+											<div class="form-check">
+												
+												{% render_field form.another_time class="form-check-input" %}
+												<label class="form-check-label" for="anothertimesms">
+													آیا پیامک در زمان دیگری ارسال شود؟
+												</label>
+											</div>
+										</div>
+										<div class="form-group col-8">
+											<label class="form-label mb-1 text-2">انتخاب تاریخ و زمان ارسال پیامک (درصورتی که
+												گزینه ارسال به زمان دیگر فعال باشد)</label>
+											<div class="position-relative d-flex">
+												<i
+													class="icons icon-event text-color-primary text-3 position-absolute left-15 top-50pct transform3dy-n50"></i>
+												{% render_field form.date class+="form-control text-3 h-auto py-2 jdate-style" data-msg-required="لطفا تاریخ ارسال را وارد نمایید." %}
+												{% render_field form.time class+="form-control text-3 h-auto py-2 jdate-style" data-msg-required="لطفا زمان ارسال را وارد نمایید." type="time" %}
+
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="form-group col">
+											<label class="form-label mb-1 text-2">متن پیام</label>
+											<div class="position-relative">
+												<i
+													class="icons icon-bubble text-color-primary text-3 position-absolute left-15 top-15"></i>
+												{% render_field form.text class="form-control text-3 h-auto py-2" data-msg-required="لطفا متن پیامک را وارد نمایید." %}
+											</div>
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="form-group col">
+											<input type="submit" value="ارسال درخواست" class="btn btn-primary"
+												data-loading-text="درحال بارگذاری...">
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</section>
+</div>
+{% endblock main_content %}
+{% block end_body %}
+<script src="{% static 'admin/js/django_jalali.min.js' %}"></script>
+{% endblock end_body %}

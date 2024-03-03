@@ -1,0 +1,540 @@
+{% extends "base-dashboard.html" %}
+{% load static %}
+{% load widget_tweaks %}
+{% block header %}
+{{ form.media }}
+{% endblock header %}
+{% block main_content %}
+<div role="main" class="main">
+	<section id="elements" class="section section-height-2 border-0 mt-5 mb-0 pt-5">
+
+		<div class="container py-2">
+			<div class="row appear-animation" data-appear-animation="fadeInUpShorter" data-appear-animation-delay="400">
+				<div class="col-lg-12">
+					<h4 class="mb-3">افزودن/ویرایش محصولات اصلی</h4>
+					<div class="card mb-4">
+						<div class="card-body">
+							<div class="row">
+								<div class="col">
+									<form class="contact-form form-with-icons needs-validation" method="POST" enctype="multipart/form-data">
+										{% csrf_token %}
+										<div class="contact-form-success alert alert-success d-none mt-4">
+											<strong>تایید!</strong> محصول مورد نظر با موفقیت ثبت شد.
+										</div>
+
+										<div class="contact-form-error alert alert-danger d-none mt-4">
+											<strong>خطا!</strong>مشکلی در ثبت محصول وجود دارد. لطفا مجددا تلاش نمایید.
+											<span class="mail-error-message text-1 d-block"></span>
+										</div>
+
+										<div class="row">
+											<div class="form-group col-lg-6">
+												<label class="form-label mb-1 text-2">عنوان محصول</label>
+												<div class="position-relative">
+													<i
+														class="icons icon-emotsmile text-color-primary text-3 position-absolute left-15 top-50pct transform3dy-n50"></i>
+													{% render_field form.title type="text" class="form-control text-3 h-auto py-2" data-msg-required="لطفا عنوان محصول را وارد نمایید."%}
+												</div>
+											</div>
+											<div class="form-group col-lg-6">
+												<label class="form-label mb-1 text-2">توضیحات</label>
+												<div class="position-relative">
+													<i
+														class="icons icon-notebook text-color-primary text-3 position-absolute left-15 top-50pct transform3dy-n50"></i>
+													{% render_field form.description class="form-control text-3 h-auto py-2" data-msg-required="لطفا توضیحات محصول را وارد نمایید." %}
+												</div>
+											</div>
+											<div class="form-group col-lg-6">
+												<label class="form-label mb-1 text-2">دسته‌بندی</label>
+												<div class="position-relative">
+													<i
+														class="icons icon-organization text-color-primary text-3 position-absolute left-15 top-50pct transform3dy-n50 z-index-1"></i>
+													<div class="custom-select-1">
+														{% render_field form.category class="form-select form-control h-auto" data-msg-required="لطفا دسته‌بندی محصول را وارد نمایید." %}
+													</div>
+												</div>
+											</div>
+											<div class="form-group col-lg-6">
+												<label class="form-label mb-1 text-2">تگ‌ها (با خط تیره تگ‌ها جدا شوند)</label>
+												<div class="position-relative">
+													<i
+														class="icons icon-tag text-color-primary text-3 position-absolute left-15 top-50pct transform3dy-n50"></i>
+													{% render_field form.tags class="form-control text-3 h-auto py-2" data-msg-required="لطفا تگ‌ها را وارد و با خط تیره(-) جدا نمایید." %}
+												</div>
+											</div>
+											<div class="form-group col-lg-6">
+												<label class="form-label mb-1 text-2">کد لینک ویدئو در آپارات</label>
+												<div class="position-relative">
+													<i
+														class="icons icon-film text-color-primary text-3 position-absolute left-15 top-50pct transform3dy-n50"></i>
+													{% render_field form.video class="form-control text-3 h-auto py-2" data-msg-required="لطفا کد لینک ویدئو در آپارات را وارد نمایید." %}
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="form-group col-lg-12">
+												<label class="form-label mb-1 text-2">محتوای محصول</label>
+												<div class="position-relative">
+													<i
+														class="icons icon-pencil text-color-primary text-3 position-absolute left-15 top-50pct transform3dy-n50 z-index-1"></i>
+														{% render_field form.content class+="form-control text-3 h-auto py-2" data-msg-required="لطفا محتوای محصول را وارد نمایید." %}
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="form-group col-lg-6">
+												<label class="form-label mb-1 text-2">فایل اول کاتالوگ</label>
+												<div class="position-relative">
+													<i
+														class="icons icon-doc text-color-primary text-3 position-absolute left-15 top-50pct transform3dy-n50"></i>
+														{% render_field form.catalog1 class="d-block" %}
+												</div>
+											</div>
+											<div class="form-group col-lg-6">
+												<label class="form-label mb-1 text-2">فایل دوم کاتالوگ</label>
+												<div class="position-relative">
+													<i
+														class="icons icon-doc text-color-primary text-3 position-absolute left-15 top-50pct transform3dy-n50"></i>
+														{% render_field form.catalog2 class="d-block" %}
+												</div>
+											</div>
+											<div class="form-group col-lg-6">
+												<label class="form-label mb-1 text-2">فایل سوم کاتالوگ</label>
+												<div class="position-relative">
+													<i
+														class="icons icon-doc text-color-primary text-3 position-absolute left-15 top-50pct transform3dy-n50"></i>
+														{% render_field form.catalog3 class="d-block" %}
+												</div>
+											</div>
+											
+										</div>
+										<div class="row">
+											<div class="form-group col-lg-6">
+												<label class="form-label mb-1 text-2">تصویر کاور</label>
+												<div class="position-relative">
+													<i
+														class="icons icon-picture text-color-primary text-3 position-absolute left-15 top-50pct transform3dy-n50"></i>
+														{% render_field form.image_cover class="d-block" data-msg-required="لطفا تصویر کاور را وارد نمایید." %}
+												</div>
+											</div>
+											<div class="form-group col-6">
+												<label class="form-label">وضعیت غیرفعال بودن</label>
+												<div class="position-relative">
+													<div class="form-check">
+														
+												{% render_field form.disabled class="form-check-input" %}
+														
+														<label class="form-check-label">
+														  آیا محصول غیرفعال می‌باشد؟
+														</label>
+													 </div>
+												</div>
+											</div><br><br><br><br><br>
+											<div class="text-center form-group col-lg-12">
+												<label class="form-label mb-1 text-2"><h2 style="color: black; font-size: x-large;">اطلاعات  جدول مشخصات عمومی محصول</h2></label>
+												
+											</div>
+											
+											<div class="form-group col-lg-6">
+												<label class="form-label mb-1 text-2">ابعاد بال گیر</label>
+												<div class="position-relative">
+													<i class="icons  text-color-primary text-3 position-absolute left-15 top-50pct transform3dy-n50"></i>
+													{% render_field form.wing_dimensions type="text" class="form-control text-3 h-auto py-2" %}
+												</div>
+											</div>
+											
+											<div class="form-group col-lg-6">
+												<label class="form-label mb-1 text-2">حد اکثر ضخامت بال قابل نورد</label>
+												<div class="position-relative">
+													<i class="icons icon text-color-primary text-3 position-absolute left-15 top-50pct transform3dy-n50"></i>
+													{% render_field form.maximum_thickness type="text" class="form-control text-3 h-auto py-2" %}
+												</div>
+											</div>
+											<div class="form-group col-lg-6">
+												<label class="form-label mb-1 text-2">موتور اصلی حرکت طولی</label>
+												<div class="position-relative">
+													<i class="icons  text-color-primary text-3 position-absolute left-15 top-50pct transform3dy-n50"></i>
+													{% render_field form.longitudinal_movement type="text" class="form-control text-3 h-auto py-2" %}
+												</div>
+											</div>
+											
+											<div class="form-group col-lg-6">
+												<label class="form-label mb-1 text-2">موتور های فشار دهنده</label>
+												<div class="position-relative">
+													<i class="icons text-color-primary text-3 position-absolute left-15 top-50pct transform3dy-n50"></i>
+													{% render_field form.pusher_engines type="text" class="form-control text-3 h-auto py-2" %}
+												</div>
+											</div>
+											
+											<div class="form-group col-lg-6">
+												<label class="form-label mb-1 text-2">گیربکس های فشار دهنده</label>
+												<div class="position-relative">
+													<i class="icons  text-color-primary text-3 position-absolute left-15 top-50pct transform3dy-n50"></i>
+													{% render_field form.pusher_gearboxes type="text" class="form-control text-3 h-auto py-2" %}
+												</div>
+											</div>
+											
+											<div class="form-group col-lg-6">
+												<label class="form-label mb-1 text-2">انتقال نیرو در فشاردهنده ها</label>
+												<div class="position-relative">
+													<i class="icons  text-color-primary text-3 position-absolute left-15 top-50pct transform3dy-n50"></i>
+													{% render_field form.power_transmission type="text" class="form-control text-3 h-auto py-2" %}
+												</div>
+											</div>
+											
+											<div class="form-group col-lg-6">
+												<label class="form-label mb-1 text-2">نوع گیربکس فشاردهنده بالا</label>
+												<div class="position-relative">
+													<i class="icons  text-color-primary text-3 position-absolute left-15 top-50pct transform3dy-n50"></i>
+													{% render_field form.high_pressure_gearbox type="text" class="form-control text-3 h-auto py-2" %}
+												</div>
+											</div>
+											
+											<div class="form-group col-lg-6">
+												<label class="form-label mb-1 text-2">نوع موتور فشاردهنده بالا</label>
+												<div class="position-relative">
+													<i class="icons  text-color-primary text-3 position-absolute left-15 top-50pct transform3dy-n50"></i>
+													{% render_field form.high_pressure_engine type="text" class="form-control text-3 h-auto py-2" %}
+												</div>
+											</div>
+											
+											<div class="form-group col-lg-6">
+												<label class="form-label mb-1 text-2">موتور محرک دستگاه</label>
+												<div class="position-relative">
+													<i class="icons  text-color-primary text-3 position-absolute left-15 top-50pct transform3dy-n50"></i>
+													{% render_field form.drive_motor type="text" class="form-control text-3 h-auto py-2" %}
+												</div>
+											</div>
+											<div class="form-group col-lg-6">
+												<label class="form-label mb-1 text-2">نوع مکانیزم</label>
+												<div class="position-relative">
+													{% render_field form.mechanism_type type="text" class="form-control text-3 h-auto py-2" %}
+												</div>
+											</div>
+											
+											<div class="form-group col-lg-6">
+												<label class="form-label mb-1 text-2">تعداد هد برشکاری/فرزکاری</label>
+												<div class="position-relative">
+													{% render_field form.cutting_milling_head_count type="text" class="form-control text-3 h-auto py-2" %}
+												</div>
+											</div>
+											
+											<div class="form-group col-lg-6">
+												<label class="form-label mb-1 text-2">ابعاد مفید میزکار</label>
+												<div class="position-relative">
+													{% render_field form.worktable_dimensions type="text" class="form-control text-3 h-auto py-2" %}
+												</div>
+											</div>
+											
+											<div class="form-group col-lg-6">
+												<label class="form-label mb-1 text-2">وزن کلی دستگاه</label>
+												<div class="position-relative">
+													{% render_field form.total_weight type="text" class="form-control text-3 h-auto py-2" %}
+												</div>
+											</div>
+											
+											<div class="form-group col-lg-6">
+												<label class="form-label mb-1 text-2">ولتاژ کاری</label>
+												<div class="position-relative">
+													{% render_field form.operating_voltage type="text" class="form-control text-3 h-auto py-2" %}
+												</div>
+											</div>
+											
+											<div class="form-group col-lg-6">
+												<label class="form-label mb-1 text-2">سیستم حرکتی محور X & Y</label>
+												<div class="position-relative">
+													{% render_field form.axis_x_y_movement_system type="text" class="form-control text-3 h-auto py-2" %}
+												</div>
+											</div>
+											
+											<div class="form-group col-lg-6">
+												<label class="form-label mb-1 text-2">سیستم حرکتی محور A & B</label>
+												<div class="position-relative">
+													{% render_field form.axis_a_b_movement_system type="text" class="form-control text-3 h-auto py-2" %}
+												</div>
+											</div>
+											
+											<div class="form-group col-lg-6">
+												<label class="form-label mb-1 text-2">سیستم حرکتی محور Z</label>
+												<div class="position-relative">
+													{% render_field form.axis_z_movement_system type="text" class="form-control text-3 h-auto py-2" %}
+												</div>
+											</div>
+											
+											<div class="form-group col-lg-6">
+												<label class="form-label mb-1 text-2">محور C روتاری</label>
+												<div class="position-relative">
+													{% render_field form.rotary_axis_c type="text" class="form-control text-3 h-auto py-2" %}
+												</div>
+											</div>
+											
+											<div class="form-group col-lg-6">
+												<label class="form-label mb-1 text-2">محدوده کاری محور Z</label>
+												<div class="position-relative">
+													{% render_field form.z_axis_working_range type="text" class="form-control text-3 h-auto py-2" %}
+												</div>
+											</div>
+											
+											<div class="form-group col-lg-6">
+												<label class="form-label mb-1 text-2">سرعت حرکتی محور X & Y</label>
+												<div class="position-relative">
+													{% render_field form.x_y_axis_speed type="text" class="form-control text-3 h-auto py-2" %}
+												</div>
+											</div>
+											<div class="form-group col-lg-6">
+												<label class="form-label mb-1 text-2">سرعت حرکتی محور Z</label>
+												<div class="position-relative">
+													{% render_field form.z_axis_speed type="text" class="form-control text-3 h-auto py-2" %}
+												</div>
+											</div>
+											
+											<div class="form-group col-lg-6">
+												<label class="form-label mb-1 text-2">نوع اسپیندل</label>
+												<div class="position-relative">
+													{% render_field form.spindle_type type="text" class="form-control text-3 h-auto py-2" %}
+												</div>
+											</div>
+											
+											<div class="form-group col-lg-6">
+												<label class="form-label mb-1 text-2">سیستم انتقال نیرو</label>
+												<div class="position-relative">
+													{% render_field form.power_transmission_system type="text" class="form-control text-3 h-auto py-2" %}
+												</div>
+											</div>
+											
+											<div class="form-group col-lg-6">
+												<label class="form-label mb-1 text-2">نوع موتورهای حرکتی</label>
+												<div class="position-relative">
+													{% render_field form.drive_motor_type type="text" class="form-control text-3 h-auto py-2" %}
+												</div>
+											</div>
+											
+											<div class="form-group col-lg-6">
+												<label class="form-label mb-1 text-2">نوع جک ها</label>
+												<div class="position-relative">
+													{% render_field form.jack_type type="text" class="form-control text-3 h-auto py-2" %}
+												</div>
+											</div>
+											
+											<div class="form-group col-lg-6">
+												<label class="form-label mb-1 text-2">نوع سیستم گیربکس</label>
+												<div class="position-relative">
+													{% render_field form.gearbox_type type="text" class="form-control text-3 h-auto py-2" %}
+												</div>
+											</div>
+											
+											<div class="form-group col-lg-6">
+												<label class="form-label mb-1 text-2">گیربکس های روتاری</label>
+												<div class="position-relative">
+													{% render_field form.rotary_gearboxes type="text" class="form-control text-3 h-auto py-2" %}
+												</div>
+											</div>
+											
+											<div class="form-group col-lg-6">
+												<label class="form-label mb-1 text-2">سیستم کنترل ارتفاع</label>
+												<div class="position-relative">
+													{% render_field form.height_control_system type="text" class="form-control text-3 h-auto py-2" %}
+												</div>
+											</div>
+											
+											<div class="form-group col-lg-6">
+												<label class="form-label mb-1 text-2">حداکثر خطای ماشین</label>
+												<div class="position-relative">
+													{% render_field form.machine_maximum_error type="text" class="form-control text-3 h-auto py-2" %}
+												</div>
+											</div>
+											
+											<div class="form-group col-lg-6">
+												<label class="form-label mb-1 text-2">حداکثر خطای سیستم کنترلر</label>
+												<div class="position-relative">
+													{% render_field form.controller_maximum_error type="text" class="form-control text-3 h-auto py-2" %}
+												</div>
+											</div>
+											
+											<div class="form-group col-lg-6">
+												<label class="form-label mb-1 text-2">محدوده ضخامت برشکاری / فرزکاری</label>
+												<div class="position-relative">
+													{% render_field form.cutting_milling_thickness_range type="text" class="form-control text-3 h-auto py-2" %}
+												</div>
+											</div>
+											
+											<div class="form-group col-lg-6">
+												<label class="form-label mb-1 text-2">آکس بین اسپیندل ها</label>
+												<div class="position-relative">
+													{% render_field form.spindle_distance_between_axes type="text" class="form-control text-3 h-auto py-2" %}
+												</div>
+											</div>
+											
+											<div class="form-group col-lg-6">
+												<label class="form-label mb-1 text-2">حداکثر طول باز شدن قسمت روتاری</label>
+												<div class="position-relative">
+													{% render_field form.maximum_rotary_part_opening_length type="text" class="form-control text-3 h-auto py-2" %}
+												</div>
+											</div>
+											
+											<div class="form-group col-lg-6">
+												<label class="form-label mb-1 text-2">حداکثر قطر دیسک</label>
+												<div class="position-relative">
+													{% render_field form.maximum_disk_diameter type="text" class="form-control text-3 h-auto py-2" %}
+												</div>
+											</div>
+											
+											<div class="form-group col-lg-6">
+												<label class="form-label mb-1 text-2">پیش نیاز نصب پلاسما</label>
+												<div class="position-relative">
+													{% render_field form.plasma_installation_prerequisites type="text" class="form-control text-3 h-auto py-2" %}
+												</div>
+											</div>
+											
+											<div class="form-group col-lg-6">
+												<label class="form-label mb-1 text-2">حداکثر توان لیزر</label>
+												<div class="position-relative">
+													{% render_field form.maximum_laser_power type="text" class="form-control text-3 h-auto py-2" %}
+												</div>
+											</div>
+											
+											<div class="form-group col-lg-6">
+												<label class="form-label mb-1 text-2">نوع تکنولوژی لیزر</label>
+												<div class="position-relative">
+													{% render_field form.laser_technology_type type="text" class="form-control text-3 h-auto py-2" %}
+												</div>
+											</div>
+											
+											<div class="form-group col-lg-6">
+												<label class="form-label mb-1 text-2">دقت حرکتی دستگاه</label>
+												<div class="position-relative">
+													{% render_field form.machine_movement_accuracy type="text" class="form-control text-3 h-auto py-2" %}
+												</div>
+											</div>
+											
+											<div class="form-group col-lg-6">
+												<label class="form-label mb-1 text-2">دقت سوراخکاری دستگاه</label>
+												<div class="position-relative">
+													{% render_field form.drilling_accuracy type="text" class="form-control text-3 h-auto py-2" %}
+												</div>
+											</div>
+											<div class="form-group col-lg-6">
+												<label class="form-label mb-1 text-2">ضخامت کابل / طول کابل</label>
+												<div class="position-relative">
+													{% render_field form.cable_thickness_cable_length type="text" class="form-control text-3 h-auto py-2" %}
+												</div>
+											</div>
+											
+											<div class="form-group col-lg-6">
+												<label class="form-label mb-1 text-2">ظرفیت پمپ آب</label>
+												<div class="position-relative">
+													{% render_field form.water_pump_capacity type="text" class="form-control text-3 h-auto py-2" %}
+												</div>
+											</div>
+											
+											<div class="form-group col-lg-6">
+												<label class="form-label mb-1 text-2">حوضچه جمع آوری آب</label>
+												<div class="position-relative">
+													{% render_field form.water_collection_tank type="text" class="form-control text-3 h-auto py-2" %}
+												</div>
+											</div>
+											
+											<div class="form-group col-lg-6">
+												<label class="form-label mb-1 text-2">سیستم جداسازی شیشه پس از برش</label>
+												<div class="position-relative">
+													{% render_field form.glass_separation_system_after_cutting type="text" class="form-control text-3 h-auto py-2" %}
+												</div>
+											</div>
+											
+											<div class="form-group col-lg-6">
+												<label class="form-label mb-1 text-2">سیستم حرکت آسان شیشه</label>
+												<div class="position-relative">
+													{% render_field form.glass_easy_movement_system type="text" class="form-control text-3 h-auto py-2" %}
+												</div>
+											</div>
+											
+											<div class="form-group col-lg-6">
+												<label class="form-label mb-1 text-2">ابعاد مفید لوله بر</label>
+												<div class="position-relative">
+													{% render_field form.pipe_boring_dimensions type="text" class="form-control text-3 h-auto py-2" %}
+												</div>
+											</div>
+											
+											<div class="form-group col-lg-6">
+												<label class="form-label mb-1 text-2">نوع کنترلر</label>
+												<div class="position-relative">
+													{% render_field form.controller_type type="text" class="form-control text-3 h-auto py-2" %}
+												</div>
+											</div>
+											
+											<div class="form-group col-lg-6">
+												<label class="form-label mb-1 text-2">قابلیت خواندن G-code</label>
+												<div class="position-relative">
+													{% render_field form.g_code_reading_capability type="text" class="form-control text-3 h-auto py-2" %}
+												</div>
+											</div>
+											
+											<div class="form-group col-lg-6">
+												<label class="form-label mb-1 text-2">تابلو برق</label>
+												<div class="position-relative">
+													{% render_field form.electrical_panel type="text" class="form-control text-3 h-auto py-2" %}
+												</div>
+											</div>
+											
+											<div class="form-group col-lg-6">
+												<label class="form-label mb-1 text-2">سیستم کامپیوتری</label>
+												<div class="position-relative">
+													{% render_field form.computer_system type="text" class="form-control text-3 h-auto py-2" %}
+												</div>
+											</div>
+											
+											<div class="form-group col-lg-6">
+												<label class="form-label mb-1 text-2">مخزن پاشش یکنواخت ماده ساینده</label>
+												<div class="position-relative">
+													{% render_field form.uniform_spraying_material_reservoir type="text" class="form-control text-3 h-auto py-2" %}
+												</div>
+											</div>
+											
+											<div class="form-group col-lg-6">
+												<label class="form-label mb-1 text-2">مخزن ماده ساینده</label>
+												<div class="position-relative">
+													{% render_field form.abrasive_tank type="text" class="form-control text-3 h-auto py-2" %}
+												</div>
+											</div>
+											
+											<div class="form-group col-lg-6">
+												<label class="form-label mb-1 text-2">Abrasive hopper</label>
+												<div class="position-relative">
+													{% render_field form.abrasive_hopper type="text" class="form-control text-3 h-auto py-2" %}
+												</div>
+											</div>
+											
+											<div class="form-group col-lg-6">
+												<label class="form-label mb-1 text-2">توان پمپ واترجت</label>
+												<div class="position-relative">
+													{% render_field form.waterjet_pump_power type="text" class="form-control text-3 h-auto py-2" %}
+												</div>
+											</div>
+											
+											<!-- تکرار این بلوک برای سایر فیلدها -->
+											
+											
+											<!-- سایر فیلدها اینجا قرار می‌گیرند -->
+											
+										</div>
+										<div class="row">
+											<div class="form-group col">
+												<input type="submit" value="اعمال تغییرات" class="btn btn-primary float-start"
+													data-loading-text="در حال بارگذاری...">
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</section>
+</div>
+{% endblock main_content %}
+{% block end_body %}
+
+{% endblock end_body %}

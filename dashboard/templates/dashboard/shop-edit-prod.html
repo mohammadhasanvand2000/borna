@@ -1,0 +1,110 @@
+{% extends "base-dashboard.html" %}
+{% load static %}
+{% load widget_tweaks %}
+{% load jalali_tags %}
+{% block header %}
+{{ form.media }}
+{% endblock header %}
+{% block main_content %}
+<div role="main" class="main">
+
+	<div class="container py-4 appear-animation" data-appear-animation="fadeInUpShorter" data-appear-animation-delay="400">
+
+		<div class="row">
+			<div class="col-lg-12 order-lg-1">
+				<div class="blog-posts">
+					{% for prod in prods %}
+					<article class="post post-medium">
+						<div class="row mb-3">
+							<div class="col-lg-3">
+								<div class="post-image">
+									<a href="#">
+										{% if prod.image_cover %}
+										<img src="{{prod.image_cover.url}}" class="img-fluid img-thumbnail img-thumbnail-no-borders rounded-0 post-image-dashboard-edit" alt="" />
+										{% else %}
+										<img src="{% static 'img/products/placeholder.jpg' %}" class="img-fluid img-thumbnail img-thumbnail-no-borders rounded-0 post-image-dashboard-edit" alt="" />
+										{% endif %}
+									</a>
+								</div>
+							</div>
+							<div class="col-lg-9">
+								<div class="post-content">
+									<h2 class="font-weight-semibold pt-4 pt-lg-0 text-5 line-height-4 mb-2"><a href="#">{{prod.title}}</a></h2>
+									<p class="mb-0 text-justify">{{prod.content|striptags|safe|slice:":350"}}...</p>
+									<hr>
+								</div>
+								<div>
+									<p>
+										<a href="{% url 'shop:prod-shop-detail' product_id=prod.pk %}" target="_blank" class="mb-1 mt-1 ms-1 btn btn-light"><i class="fas fa-eye ms-1"></i>مشاهده محصول</a>
+										<a href="{% url 'dashboard:prod-shop-reviews' prod_id=prod.pk %}" target="_blank" class="mb-1 mt-1 ms-1 btn btn-light"><i class="fas fa-comments ms-1"></i>مشاهده نظرات</a>
+										<a href="{% url 'dashboard:prod-shop-images' prod_id=prod.pk %}" class="mb-1 mt-1 ms-1 btn btn-light"><i class="fas fa-image ms-1"></i>افزودن تصاویر</a>
+										<a href="/dashboard/main-shop-add/?prodid={{prod.pk}}" target="_blank" class="mb-1 mt-1 ms-1 btn btn-light"><i class="fas fa-pencil ms-1"></i>ویرایش</a>
+										<a href="/dashboard/main-shop-delete/?prodid={{prod.pk}}" class="mb-1 mt-1 ms-1 btn btn-light"><i class="fas fa-trash ms-1"></i>حذف</a>
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col">
+								<div class="post-meta">
+									<span><i class="far fa-calendar-alt"></i>{{prod.date_created|to_jalali:"%Y-%m-%d"}}</span>
+									<span><i class="far fa-user"></i> توسط <a href="#">{{prod.user.fullname|default_if_none:"-"}}</a> </span>
+									<span><i class="far fa-folder"></i> <a href="#">{{prod.category.title}}</a></span>
+									<span><i class="far fa-comments"></i> <a href="#">{{prod.reviews.all.count}} نقد و بررسی</a></span>
+								</div>
+							</div>
+						</div>
+					</article>
+					{% empty %}
+                        <h3 class="mt-5 text-center">تاکنون محصولی منتشر نشده است!</h3>
+					{% endfor %}
+
+					{% if prods.has_other_pages %}
+					<div class="row mt-4">
+						<div class="col">
+							<ul class="pagination float-start">
+								{% if prods.has_previous %}
+								<li class="page-item"><a class="page-link" href="?page={{prods.previous_page_number}}"><i
+											class="fas fa-angle-right"></i></a></li>
+								{% else %}
+								<li class="page-item"><a class="page-link disabled-el" href="#"><i
+											class="fas fa-angle-right"></i></a></li>
+								{% endif %}
+								{% for page_number in page_range %}
+								{% if page_number == prods.number and page_number == paginator.ELLIPSIS %}
+								<li class="page-item active"><a class="page-link" href="#">{{page_number}}</a></li>
+								{% elif page_number == paginator.ELLIPSIS %}
+								<li class="page-item"><a class="page-link" href="#">{{page_number}}</a></li>
+								{% elif page_number == prods.number %}
+								<li class="page-item active"><a class="page-link"
+										href="#">{{page_number}}</a></li>
+								{% else %}
+								<li class="page-item"><a class="page-link"
+										href="?page={{page_number}}">{{page_number}}</a></li>
+								{% endif %}
+								{% endfor %}
+
+								{% if prods.has_next %}
+								<li class="page-item"><a class="page-link" href="?page={{prods.next_page_number}}"><i
+											class="fas fa-angle-left"></i></a></li>
+								{% else %}
+								<li class="page-item"><a class="page-link disabled-el" href="#"><i
+											class="fas fa-angle-left"></i></a></li>
+								{% endif %}
+							</ul>
+						</div>
+					</div>
+					{% else %}
+					{% endif %}
+
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+</div>
+{% endblock main_content %}
+{% block end_body %}
+
+{% endblock end_body %}

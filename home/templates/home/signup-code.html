@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block main_content %}
+<div role="main" class="main shop pb-4">
+
+    <div class="container">
+
+        <div class="row justify-content-center appear-animation" data-appear-animation="fadeInUpShorter"
+            data-appear-animation-delay="300">
+            <div class="col-lg-8">
+                <div class="card border-width-3 border-radius-0 border-color-success mt-2">
+                    <div class="card-body text-center">
+                        <p class="text-color-dark font-weight-bold text-4 mb-0"><i
+                                class="fas fa-check text-color-success ms-1"></i>ارسال رمز یکبار مصرف با موفقیت انجام
+                            شد.</p>
+                        <p class="text-color-dark font-weight-bold text-3 mb-0 mt-2 text-justify">یک پیامک حاوی کد شش
+                            رقمی برای شماره {{phone}} ارسال شده است. لطفا کد را در کادر زیر وارد نمایید.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center appear-animation mt-3" data-appear-animation="fadeInUpShorter"
+            data-appear-animation-delay="450">
+            <div class="col-md-6 col-lg-5 mb-5 mb-lg-0">
+                <form method="POST" class="needs-validation">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="form-group col">
+                            <label class="form-label text-color-dark text-3">رمز یکبار مصرف دریافتی<span
+                                    class="text-color-danger">*</span></label>
+                            {% render_field form.code data-rule-minlength="6" data-rule-maxlength="6" data-msg-minlength="کد دریافتی باید شامل 6 رقم باشد." data-msg-maxlength="کد دریافتی باید شامل 6 رقم باشد." class="form-control form-control-lg text-4" required=required data-msg-required="کد دریافتی را وارد نمایید." %}
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col">
+                            <button type="submit"
+                                class="btn btn-dark btn-modern w-100 text-uppercase rounded-0 font-weight-bold text-3 py-3"
+                                data-loading-text="Loading...">اعتبارسنجی کد دریافتی</button>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+{% endblock main_content %}

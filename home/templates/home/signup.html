@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+{% block main_content %}
+<div role="main" class="main shop py-4">
+
+	<div class="container py-4">
+
+		<div class="row justify-content-center">
+			<div class="col-md-6 col-lg-5 mb-5 mb-lg-0">
+				<h2 class="font-weight-bold text-5 mb-0">ایجاد حساب کاربری</h2>
+				<form method="POST" class="needs-validation">
+					{% csrf_token %}
+					<div class="row">
+						<div class="form-group col">
+							<label class="form-label text-color-dark text-3">نام کاربری (شماره تماس)<span
+									class="text-color-danger">*</span></label>
+							{% render_field form.username class="form-control form-control-lg text-4" required=required data-msg-digits="شماره تماس فقط می‌تواند شامل اعداد باشد." data-rule-digits="true" data-rule-minlength="11" data-rule-maxlength="11" data-msg-minlength="شماره تماس تنها می‌تواند شامل 11 رقم و شروع با 09 باشد." data-msg-maxlength="شماره تماس تنها می‌تواند شامل 11 رقم و شروع با 09 باشد." data-msg-required="لطفا نام کاربری (شماره تماس) خود را وارد نمایید..." %}
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col">
+							<label class="form-label text-color-dark text-3">عبارت امنیتی <span
+									class="text-color-danger">*</span></label>
+							{% render_field form.captcha class="form-control form-control-lg text-4" required=required data-msg-required="لطفا عبارت داخل تصویر را وارد نمایید..." %}
+
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col">
+							<button type="submit"
+								class="btn btn-dark btn-modern w-100 text-uppercase rounded-0 font-weight-bold text-3 py-3"
+								data-loading-text="Loading...">ارسال کد اعتبارسنجی</button>
+
+						</div>
+					</div>
+				</form>
+			</div>
+
+		</div>
+
+	</div>
+
+</div>
+{% endblock main_content %}
+{% block end_body %}
+<script>
+	$('.captcha').click(function () {
+		$.getJSON("/captcha/refresh/", function (result) {
+			$('.captcha').attr('src', result['image_url']);
+			$('#id_captcha_0').val(result['key'])
+		});
+	});
+</script>
+{% endblock end_body %}

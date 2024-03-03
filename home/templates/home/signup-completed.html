@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block main_content %}
+<div role="main" class="main shop pb-4">
+
+    <div class="container">
+
+        <div class="row justify-content-center appear-animation mt-5" data-appear-animation="fadeInUpShorter"
+            data-appear-animation-delay="300">
+            <div class="col-md-6 col-lg-5 mb-5 mb-lg-0">
+                <form method="POST" class="needs-validation">
+                    {% csrf_token %}
+                    <div class="row">
+						<div class="form-group col">
+							<label class="form-label text-color-dark text-3">نام (اختیاری)</label>
+                            {% render_field form.fullname class="form-control form-control-lg text-4" %}
+						</div>
+					</div>
+                    <div class="row">
+						<div class="form-group col">
+							<label class="form-label text-color-dark text-3">آدرس ایمیل (اختیاری)</label>
+                            {% render_field form.email class="form-control form-control-lg text-4" type="email" data-msg-email="لطفا فرمت صحیح ادرس ایمیل را وارد نمایید." %}
+						</div>
+					</div>
+                    <div class="row">
+                        <div class="form-group col-12">
+                            <label class="form-label text-color-dark text-3">رمز ورود (حداقل 5 کاراکتر شامل اعداد و حروف انگلیسی)<span
+                                    class="text-color-danger">*</span></label>
+                            {% render_field form.password data-rule-minlength="5" data-msg-minlength="رمز ورود باید شامل حداقل 5 کاراکتر و ترکیبی از حروف و اعداد باشد." class="form-control form-control-lg text-4" required=required data-msg-required="رمز ورود جدید را وارد نمایید." %}
+
+                        </div>
+                        <div class="form-group col-12">
+                            <label class="form-label text-color-dark text-3">تکرار رمز ورود<span
+                                    class="text-color-danger">*</span></label>
+                            {% render_field form.re_password data-rule-minlength="5" data-msg-minlength="رمز ورود باید شامل حداقل 5 کاراکتر و ترکیبی از حروف و اعداد باشد." class="form-control form-control-lg text-4" required=required data-msg-required="تکرار رمز ورود جدید را وارد نمایید." %}
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col">
+                            <button type="submit"
+                                class="btn btn-dark btn-modern w-100 text-uppercase rounded-0 font-weight-bold text-3 py-3"
+                                data-loading-text="Loading...">ایجاد حساب کاربری</button>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+{% endblock main_content %}

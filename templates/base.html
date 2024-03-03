@@ -1,0 +1,508 @@
+{% load static %}
+{% load humanize %}
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <!-- Basic -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    {% block title %}
+    <link href="/static/img/bornaabzar.png" rel="shortcut icon">
+    <title>برنا ابزار توس - تولید کننده انواع دستگاههای صنعتی</title>
+    {% endblock title %}
+    <meta name="keywords" content="cnc" />
+    <meta name="description" content="برنا ابزار طوس - تولید کننده انواع دستگاههای صنعتی">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="{% static 'img/apple-touch-icon.png' %}">
+
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, shrink-to-fit=no">
+
+    <!-- Web Fonts  -->
+    <link id="googleFonts"
+        href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800%7CShadows+Into+Light&display=swap"
+        rel="stylesheet" type="text/css">
+
+    <!-- Vendor CSS -->
+    <link rel="stylesheet" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/fontawesome-free/css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/animate/animate.compat.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/simple-line-icons/css/simple-line-icons.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/owl.carousel/assets/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/owl.carousel/assets/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/magnific-popup/magnific-popup.min.css' %}">
+
+    <!-- Theme CSS -->
+    <link rel="stylesheet" href="{% static 'css/rtl-theme.css' %}">
+    <link rel="stylesheet" href="{% static 'css/rtl-theme-elements.css' %}">
+    <link rel="stylesheet" href="{% static 'css/rtl-theme-blog.css' %}">
+    <link rel="stylesheet" href="{% static 'css/rtl-theme-shop.css' %}">
+    <link rel="stylesheet" href="{% static 'css/font-style.css' %}">
+
+    <!-- Skin CSS -->
+    <link id="skinCSS" rel="stylesheet" href="{% static 'css/skins/main-css.css' %}">
+
+    <!-- Theme Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+
+    <!-- Head Libs -->
+    <script src="{% static 'vendor/modernizr/modernizr.min.js' %}"></script>
+
+    {% block header %}
+    {% endblock header %}
+    <!--BEGIN RAYCHAT CODE-->
+    
+  <!--BEGIN RAYCHAT CODE-->
+  <script type="text/javascript">!function(){function t(){var t=document.createElement("script");t.type="text/javascript",t.async=!0,localStorage.getItem("rayToken")?t.src="https://app.raychat.io/scripts/js/"+o+"?rid="+localStorage.getItem("rayToken")+"&href="+window.location.href:t.src="https://app.raychat.io/scripts/js/"+o+"?href="+window.location.href;var e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(t,e)}var e=document,a=window,o="ea0d236b-b9e4-4c98-8843-a37a0d1239d4";"complete"==e.readyState?t():a.attachEvent?a.attachEvent("onload",t):a.addEventListener("load",t,!1)}();</script>
+<!--END RAYCHAT CODE-->
+  
+    <!--END RAYCHAT CODE-->
+
+</head>
+
+<body data-plugin-page-transition>
+    <div class="body">
+        <header id="header" class="header-effect-shrink"
+            data-plugin-options="{'stickyEnabled': true, 'stickyEffect': 'shrink', 'stickyEnableOnBoxed': true, 'stickyEnableOnMobile': false, 'stickyChangeLogo': true, 'stickyStartAt': 120, 'stickyHeaderContainerHeight': 70}">
+            <div class="header-body border-top-0 sticky-nav-buttom-border">
+                <div class="header-top">
+                    <div class="container">
+                        <div class="header-row py-2">
+                            <div class="header-column justify-content-start">
+                                <div class="header-row">
+                                    <nav class="header-nav-top">
+                                        <ul class="nav nav-pills">
+                                            <li class="nav-item nav-item-anim-icon d-none d-md-block">
+                                                <a class="nav-link ps-0" href="{% url 'home:about' %}"><i
+                                                        class="fas fa-angle-left"></i> درباره ما</a>
+                                            </li>
+                                            <li class="nav-item nav-item-anim-icon d-none d-md-block">
+                                                <a class="nav-link" href="{% url 'home:contact' %}"><i
+                                                        class="fas fa-angle-left"></i> تماس با ما</a>
+                                            </li>
+
+                                            <li
+                                                class="nav-item nav-item-left-border nav-item-left-border-remove nav-item-left-border-sm-show">
+                                                <span class="ws-nowrap"><i class="fas fa-phone"></i> 021-66509882</span>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                            <div class="header-column justify-content-end">
+                                <div class="header-row">
+                                    <ul class="header-social-icons social-icons d-none d-sm-block social-icons-clean">
+                                        <li class="social-icons-facebook"><a href="http://www.facebook.com/"
+                                                target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                                        </li>
+                                        <li class="social-icons-twitter"><a href="http://www.twitter.com/"
+                                                target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a></li>
+                                        <li class="social-icons-linkedin"><a href="http://www.linkedin.com/"
+                                                target="_blank" title="Linkedin"><i class="fab fa-linkedin-in"></i></a>
+                                        </li>
+                                        <li class="social-icons-instagram">
+                                            <a href="https://www.instagram.com/" target="_blank" title="Instagram">
+                                                <i class="fab fa-instagram"></i>
+                                            </a>
+                                        </li>
+                                        
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="header-container container">
+                    <div class="header-row">
+                        <div class="header-column">
+                            <div class="header-row">
+                                <div class="header-logo">
+                                    <a href="{% url 'home:home' %}">
+                                        <img alt="Porto" width="100" height="48" data-sticky-width="82"
+                                            data-sticky-height="40" src="{% static 'img/bornaabzar.png' %}">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="header-column justify-content-end">
+                            <div class="header-row">
+                                <div
+                                    class="header-nav header-nav-line header-nav-top-line header-nav-top-line-with-border order-2 order-lg-1">
+                                    <div
+                                        class="header-nav-main header-nav-main-square header-nav-main-effect-2 header-nav-main-sub-effect-1">
+                                        <nav class="collapse">
+                                            <ul class="nav nav-pills" id="mainNav">
+                                                <li class="dropdown">
+                                                    <a class="dropdown-item dropdown-toggle active"
+                                                        href="{% url 'home:home' %}">
+                                                        خانه
+                                                    </a>
+                                                </li>
+                                                <li class="dropdown">
+                                                    <a class="dropdown-item dropdown-toggle" href="{% url 'shop:prod-shop-list' %}">
+                                                        محصولات و خدمات
+                                                    </a>
+                                                    <ul class="dropdown-menu">
+                                                        {% for cat in shop_cat %}
+                                                        <li>
+                                                            <a class="dropdown-item"
+                                                                href="{% url 'shop:prod-cat-list' cat_id=cat.pk %}">{{cat.title}}</a>
+                                                        </li>
+                                                        {% endfor %}
+                                                    </ul>
+                                                </li>
+                                                {% comment %} <li class="dropdown">
+                                                    <a class="dropdown-item dropdown-toggle" href="#">
+                                                        مشتریان‌ما
+                                                    </a>
+                                                    <ul class="dropdown-menu">
+                                                        <li>
+                                                            <a class="dropdown-item" href="index.html">
+                                                                مشتری شماره 1
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a class="dropdown-item" href="index.html#demos">
+                                                                مشتری شماره 2
+                                                            </a>
+                                                        </li>
+                                                        <li class="dropdown-submenu">
+                                                            <a class="dropdown-item" href="#"> مشتری شماره 3</a>
+                                                            <ul class="dropdown-menu">
+                                                                <li><a class="dropdown-item"
+                                                                        href="index-classic.html">مشتری 1</a>
+                                                                </li>
+                                                                <li><a class="dropdown-item"
+                                                                        href="index-classic-color.html">مشتری 2</a>
+                                                                </li>
+                                                                <li><a class="dropdown-item"
+                                                                        href="index-classic-light.html">مشتری 3</a>
+                                                                </li>
+
+                                                            </ul>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                                <li class="dropdown">
+                                                    <a class="dropdown-item dropdown-toggle" href="#">
+                                                        همکاری‌ با ما
+                                                    </a>
+                                                    <ul class="dropdown-menu">
+                                                        <li>
+                                                            <a class="dropdown-item" href="index.html">
+                                                                همکاری در زمینه 1
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a class="dropdown-item" href="index.html#demos">
+                                                                همکاری در زمینه 2
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a class="dropdown-item" href="index.html#demos">
+                                                                همکاری در زمینه 3
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </li> {% endcomment %}
+                                                <li class="dropdown">
+                                                    <a class="dropdown-item dropdown-toggle"
+                                                        href="{% url 'shop:shop-list' %}">
+                                                        فروشگاه
+                                                    </a>
+                                                </li>
+                                                <li class="dropdown">
+                                                    <a class="dropdown-item dropdown-toggle"
+                                                        href="{% url 'blog:blog-list' %}">
+                                                        وبلاگ
+                                                    </a>
+                                                </li>
+                                                <li class="dropdown">
+                                                    <a class="dropdown-item dropdown-toggle"
+                                                        href="{% url 'home:about' %}">
+                                                        درباره ما
+                                                    </a>
+                                                </li>
+                                                <li class="dropdown">
+                                                    <a class="dropdown-item dropdown-toggle"
+                                                        href="{% url 'home:contact' %}">
+                                                        تماس با ما
+                                                    </a>
+                                                </li>
+
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                    <button class="btn header-btn-collapse-nav" data-bs-toggle="collapse"
+                                        data-bs-target=".header-nav-main nav">
+                                        <i class="fas fa-bars"></i>
+                                    </button>
+                                </div>
+                                <div
+                                    class="header-nav-features header-nav-features-no-border header-nav-features-lg-show-border order-1 order-lg-2">
+                                    <div class="header-nav-feature header-nav-features-cart d-inline-flex ms-2">
+                                        {% if request.user.is_authenticated %}
+                                        <a href="#" data-bs-toggle="dropdown" aria-haspopup="true"
+                                            aria-expanded="false">
+                                            <i class="fas fa-user-gear header-nav-top-icon text-4"></i>
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownLanguage">
+                                            {% if request.user.is_superuser %}
+                                            <a class="dropdown-item login-dropdown-item text-2 text-bold"
+                                                href="{% url 'dashboard:home' %}"><i
+                                                    class="fas fa-gear header-nav-top-icon text-4 ms-2"></i> حساب
+                                                کاربری</a>
+                                            {% else %}
+                                            <a class="dropdown-item login-dropdown-item text-2 text-bold"
+                                                href="{% url 'dashboard:user-home' %}"><i
+                                                    class="fas fa-gear header-nav-top-icon text-4 ms-2"></i> حساب
+                                                کاربری</a>
+                                            {% endif %}
+                                            <a class="dropdown-item login-dropdown-item text-2 text-bold"
+                                                href="{% url 'home:logout' %}"><i
+                                                    class="fas fa-right-to-bracket header-nav-top-icon text-4 ms-2"></i>
+                                                خروج</a>
+                                        </div>
+                                        {% else %}
+                                        <a href="{% url 'home:login' %}" class="text-decoration-none"><i
+                                                class="fas fa-right-to-bracket fa-rotate-180 header-nav-top-icon text-4"></i>
+                                        </a>
+                                        {% endif %}
+                                    </div>
+                                    <div class="header-nav-feature header-nav-features-search d-inline-flex ms-2">
+                                        <a href="#" class="header-nav-features-toggle text-decoration-none"
+                                            data-focus="headerSearch"><i
+                                                class="fas fa-search header-nav-top-icon"></i></a>
+                                        <div class="header-nav-features-dropdown" id="headerTopSearchDropdown">
+                                            <form role="search" action="page-search-results.html" method="get">
+                                                <div class="simple-search input-group">
+                                                    <input class="form-control text-1" id="headerSearch" name="q"
+                                                        type="search" value="" placeholder="جستجو...">
+                                                    <button class="btn" type="submit">
+                                                        <i class="fas fa-search header-nav-top-icon"></i>
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="header-nav-feature header-nav-features-cart d-inline-flex">
+                                        <a href="#" class="header-nav-features-toggle">
+                                            <img src="{% static 'img/icons/icon-cart.svg' %}" width="14" alt=""
+                                                class="header-nav-top-icon-img">
+                                            <span class="cart-info">
+                                                <span class="cart-qty">0</span>
+                                            </span>
+                                        </a>
+                                        <div class="header-nav-features-dropdown headerTopCartDropdownContent" id="headerTopCartDropdown">
+                                            <ol class="mini-products-list">
+                                                {% comment %} cart items here ... {% endcomment %}
+                                            </ol>
+                                            <div class="totals">
+                                                <span class="label float-end">مجموع:</span>
+                                                <span class="price-total float-start"><span class="price"><span class="cartTotalPrice">0</span>
+                                                &nbsp;تومان </span></span>
+                                            </div>
+                                            <div class="actions">
+                                                <a class="btn btn-primary w-100" href="{% url 'shop:cart' %}">بررسی سبد
+                                                    خرید</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        {% block main_content %}
+        {% endblock main_content %}
+
+
+        <footer id="footer">
+            <div class="container">
+                <div class="footer-ribbon">
+                    <span>با ما در ارتباط باشید</span>
+                </div>
+                <div class="row py-5 my-4">
+                    <div class="col-md-9 mb-4 mb-lg-0">
+                        <h5 class="text-3 mb-3">درباره ما</h5>
+                        <p class="mt-2 mb-2 text-justify">شرکت دانش بنیان برنا ابزار، در سال ۱۳۷۶ با توجه به نیاز کشور و
+                            به منظور طراحی و ساخت سیستم های اتوماسیون صنعتی و انواع دستگاه های سی ان سی با برند تجاری
+                            (برنا ابزار توس) فعالیت های خود را آغاز نموده است.
+                            با تلاش و پیگیری مستمر متخصصین این مجموعه، در جهت تولید و بومی سازی دانش روز دنیا، موفق به
+                            کسب عنوان دانش بنیان شده و توانستیم در اندک زمانی با تاکید بر تحقیق و توسعه مداوم R & D و
+                            استفاده از تکنولوژی های جدید ضمن طراحی و ساخت دستگاه های سی ان سی در مدل ها و کاربردهای
+                            متفاوت، باعث جلب رضایت مشتریان خود شویم، که گواه این مدعا تولید و فروش بیش از 3000 دستگاه در
+                            بازارهای داخلی و خارجی ( ارمنستان، کانادا، تاجیکستان، افغانستان، سوریه، ترکمنستان و عراق)
+                            بوده و برگ زرین دیگری را برای صنعت ایران عزیزمان به ارمغان اوریم ...
+
+                        </p>
+                        <p><a href="{% url 'home:about' %}" class="btn-flat btn-xs text-color-light"><strong
+                                    class="text-2">مطالعه
+                                    بیشتر</strong><i class="fas fa-angle-left p-relative top-1 pe-2"></i></a></p>
+                        <div class="row pt-3">
+                            <div class="col-6 col-lg-3 mb-4 mb-lg-0">
+                                <h5 class="text-3 mb-3">وبلاگ</h5>
+                                <ul class="list list-icons list-icons-sm mb-0">
+                                    <li><i class="fas fa-angle-left top-8"></i> <a class="link-hover-style-1"
+                                            href="#">آخرین مقالات</a></li>
+                                    <li><i class="fas fa-angle-left top-8"></i> <a class="link-hover-style-1"
+                                            href="#">مقالات برگزیده</a></li>
+                                    <li><i class="fas fa-angle-left top-8"></i> <a class="link-hover-style-1"
+                                            href="#">مقالات پربازدید</a></li>
+
+                                </ul>
+                            </div>
+                            <div class="col-6 col-lg-3 mb-4 mb-lg-0">
+                                <h5 class="text-3 mb-3">محصولات</h5>
+                                <ul class="list list-icons list-icons-sm mb-0">
+                                    <li><i class="fas fa-angle-left top-8"></i> <a class="link-hover-style-1"
+                                            href="#">آخرین محصولات</a></li>
+                                    <li><i class="fas fa-angle-left top-8"></i> <a class="link-hover-style-1"
+                                            href="#">محصولات پربازدید</a></li>
+                                    <li><i class="fas fa-angle-left top-8"></i> <a class="link-hover-style-1"
+                                            href="#">محصولات پرفروش</a></li>
+
+                                </ul>
+                            </div>
+                            <div class="col-6 col-lg-3 mb-4 mb-lg-0">
+                                <h5 class="text-3 mb-3">لینک‌های مفید</h5>
+                                <ul class="list list-icons list-icons-sm mb-0">
+                                    <li><i class="fas fa-angle-left top-8"></i> <a class="link-hover-style-1"
+                                            href="#">دفتر بازرگانی تهران</a></li>
+                                    <li><i class="fas fa-angle-left top-8"></i> <a class="link-hover-style-1"
+                                            href="#">وزارت صمت تهران</a></li>
+                                    <li><i class="fas fa-angle-left top-8"></i> <a class="link-hover-style-1"
+                                            href="#">اتحادیه تولید تجهیزات صنعتی</a></li>
+
+                                </ul>
+                            </div>
+                            <div class="col-6 col-lg-3 mb-4 mb-lg-0">
+                                <h5 class="text-3 mb-3">درباره ما</h5>
+                                <ul class="list list-icons list-icons-sm mb-0">
+                                    <li><i class="fas fa-angle-left top-8"></i> <a class="link-hover-style-1"
+                                            href="#">خط مشی ما</a></li>
+                                    <li><i class="fas fa-angle-left top-8"></i> <a class="link-hover-style-1"
+                                            href="#">چشم‌انداز ما</a></li>
+                                    <li><i class="fas fa-angle-left top-8"></i> <a class="link-hover-style-1"
+                                            href="#">ارتباط با ما</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-4 mb-lg-0">
+                        <h5 class="text-3 mb-3 pb-1">تماس با ما</h5>
+                        <p class="text-8 text-color-light font-weight-bold"><a href="tel:02166509882"
+                                class="text-decoration-none text-color-light">021-66509882</a></p>
+                        <ul class="list list-icons list-icons-lg">
+                            <li class="mb-1"><i class="far fa-comments text-color-primary"></i>
+                                <p class="mb-0">خدمات پس از فروش:<a href="tel:0123456789"
+                                        class="text-decoration-none">02166509873</a></p>
+                            </li>
+                            <li class="mb-1"><i class="fas fa-mobile-alt text-color-primary"></i>
+                                <p class="mb-0">شماره موبایل1: 09128347068</p>
+                            </li>
+                            <li class="mb-1"><i class="fas fa-mobile-alt text-color-primary"></i>
+                                <p class="mb-0">شماره موبایل2: 09125387195</p>
+                            </li>
+                            <li class="mb-1"><i class="far fa-folder text-color-primary"></i>
+                                <p class="mb-0">شماره فکس: 02166509873</p>
+                            </li>
+
+                            <li class="mb-1"><i class="far fa-dot-circle text-color-primary"></i>
+                                <p class="m-0">ستارخان روبه‌روی باقرخان، نبش کوچه ستایش، پلاک1 واحد2</p>
+                            </li>
+                            <li class="mb-1"><i class="far fa-envelope text-color-primary"></i>
+                                <p class="m-0"><a href="mailto:info@bornaabzarcnc.ir">info@bornaabzarcnc.ir</a></p>
+                            </li>
+                        </ul>
+                        <ul class="footer-social-icons social-icons mt-4">
+                            <li class="social-icons-facebook"><a href="http://www.facebook.com/" target="_blank"
+                                    title="Facebook"><i class="fab fa-facebook-f text-2"></i></a></li>
+                            <li class="social-icons-twitter"><a href="http://www.twitter.com/" target="_blank"
+                                    title="Twitter"><i class="fab fa-twitter text-2"></i></a></li>
+                            <li class="social-icons-linkedin"><a href="http://www.linkedin.com/" target="_blank"
+                                    title="Linkedin"><i class="fab fa-linkedin-in text-2"></i></a></li>
+                                    <li class="social-icons-instagram">
+                                        <a href="https://www.instagram.com/" target="_blank" title="Instagram">
+                                            <i class="fab fa-instagram"></i>
+                                        </a>
+                                    </li>
+                                    <li class="social-icons-e">
+                                        <a href="#" target="_blank" title="itaa">
+                                            itaa
+                                        </a>
+                                    </li>
+                                    
+                                    
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-copyright">
+                <div class="container py-2">
+                    <div class="row py-4">
+                        <div
+                            class="col-lg-1 d-flex align-items-center justify-content-center justify-content-lg-start mb-2 mb-lg-0">
+                            <a href="{% url 'home:home' %}" class="logo pe-0 pe-lg-3">
+                                <img alt="Porto Website Template" src="{% static 'img/logo-footer2.png' %}"
+                                    class="opacity-5" height="32">
+                            </a>
+                        </div>
+                        <div
+                            class="col-lg-7 d-flex align-items-center justify-content-center justify-content-lg-start mb-4 mb-lg-0">
+                            <p>تمام حقوق مادی و معنوی متلق به شرکت برنا ابزار می باشد.</p>
+                        </div>
+                        <div class="col-lg-4 d-flex align-items-center justify-content-center justify-content-lg-end">
+                            <nav id="sub-menu">
+                                <ul>
+                                    <li><i class="fas fa-angle-left"></i><a href="#" class="me-1 text-decoration-none">
+                                            سوالات متداول</a></li>
+                                    <li><i class="fas fa-angle-left"></i><a href="#" class="me-1 text-decoration-none">
+                                            نقشه سایت</a></li>
+                                    <li><i class="fas fa-angle-left"></i><a href="#" class="me-1 text-decoration-none">
+                                            مشاوره خرید</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Vendor -->
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'vendor/jquery.appear/jquery.appear.min.js' %}"></script>
+    <script src="{% static 'vendor/jquery.easing/jquery.easing.min.js' %}"></script>
+    <script src="{% static 'vendor/jquery.cookie/jquery.cookie.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'vendor/jquery.validation/jquery.validate.min.js' %}"></script>
+    <script src="{% static 'vendor/lazysizes/lazysizes.min.js' %}"></script>
+    <script src="{% static 'vendor/isotope/jquery.isotope.min.js' %}"></script>
+    <script src="{% static 'vendor/owl.carousel/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'vendor/magnific-popup/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'vendor/vide/jquery.vide.min.js' %}"></script>
+    <script src="{% static 'vendor/vivus/vivus.min.js' %}"></script>
+
+    <!-- Theme Base, Components and Settings -->
+    <script src="{% static 'js/theme.js' %}"></script>
+
+    <!-- Theme Custom -->
+    <script src="{% static 'js/custom.js' %}"></script>
+
+    <!-- Theme Initialization Files -->
+    <script src="{% static 'js/theme.init.js' %}"></script>
+
+    {% block end_body %}
+    {% endblock end_body %}
+
+</body>
+
+</html>

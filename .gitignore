@@ -1,0 +1,16 @@
+#  venv files
+venv_wsl
+venv
+
+# Vscode files
+.vscode
+
+#  cache and other django files
+**/__pycache__
+
+
+# src files
+src/media/*
+
+#  fandogh
+fandogh*

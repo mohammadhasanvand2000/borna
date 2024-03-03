@@ -1,0 +1,127 @@
+{% extends "base-dashboard.html" %}
+{% load static %}
+{% load jalali_tags %}
+{% load humanize %}
+{% block header %}
+{% endblock header %}
+{% block main_content %}
+<div role="main" class="main">
+	<section id="elements" class="section section-height-2 border-0 mt-5 mb-0 pt-5">
+
+		<div class="container py-2">
+			<div class="row appear-animation" data-appear-animation="fadeInUpShorter" data-appear-animation-delay="400">
+				<div class="col-lg-12">
+					<h4>لیست سفارشات</h4>
+
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>
+									ردیف
+								</th>
+								<th>
+									شماره فاکتور
+								</th>
+								<th>
+									نام مشتری
+								</th>
+								<th>
+									تاریخ پرداخت
+								</th>
+								<th>
+									شماره تماس
+								</th>
+								<th>
+									جمع فاکتور
+								</th>
+								<th>
+									هزینه ارسال
+								</th>
+								<th>
+									مشاهده فاکتور
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for order in orders %}
+							<tr>
+								<td>
+									{% comment %} {{forloop.counter}} {% endcomment %}
+									{{order.row_num}}
+								</td>
+								<td>
+									{{order.invoice_number}}
+								</td>
+								<td>
+									{{order.name}}
+								</td>
+								<td>
+									{{order.payment.date_modified|to_jalali:"%H:%M %Y/%m/%d"}}
+								</td>
+								<td>
+									{{order.phone}}
+								</td>
+								<td>
+									{{order.total|intcomma}} تومان
+								</td>
+								<td>
+									{{order.shipping|intcomma}} تومان
+								</td>
+								<td>
+									<a href="{% url 'dashboard:fin-order' invoice_num=order.invoice_number %}"><i
+											class="far fa-eye text-primary text-6"></i></a>
+								</td>
+							</tr>
+							{% empty %}
+							<h3>لیست سفارشات خالی می‌باشد.</h3>
+							{% endfor %}
+
+						</tbody>
+					</table>
+					{% if orders.has_other_pages %}
+					<div class="row mt-4">
+						<div class="col">
+							<ul class="pagination float-start">
+								{% if orders.has_previous %}
+								<li class="page-item"><a class="page-link" href="?page={{orders.previous_page_number}}"><i
+											class="fas fa-angle-right"></i></a></li>
+								{% else %}
+								<li class="page-item"><a class="page-link disabled-el" href="#"><i
+											class="fas fa-angle-right"></i></a></li>
+								{% endif %}
+								{% for page_number in page_range %}
+								{% if page_number == orders.number and page_number == paginator.ELLIPSIS %}
+								<li class="page-item active"><a class="page-link" href="#">{{page_number}}</a></li>
+								{% elif page_number == paginator.ELLIPSIS %}
+								<li class="page-item"><a class="page-link" href="#">{{page_number}}</a></li>
+								{% elif page_number == orders.number %}
+								<li class="page-item active"><a class="page-link"
+										href="#">{{page_number}}</a></li>
+								{% else %}
+								<li class="page-item"><a class="page-link"
+										href="?page={{page_number}}">{{page_number}}</a></li>
+								{% endif %}
+								{% endfor %}
+
+								{% if orders.has_next %}
+								<li class="page-item"><a class="page-link" href="?page={{orders.next_page_number}}"><i
+											class="fas fa-angle-left"></i></a></li>
+								{% else %}
+								<li class="page-item"><a class="page-link disabled-el" href="#"><i
+											class="fas fa-angle-left"></i></a></li>
+								{% endif %}
+							</ul>
+						</div>
+					</div>
+					{% else %}
+					{% endif %}
+				</div>
+			</div>
+
+		</div>
+	</section>
+</div>
+{% endblock main_content %}
+{% block end_body %}
+
+{% endblock end_body %}

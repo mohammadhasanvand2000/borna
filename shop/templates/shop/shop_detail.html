@@ -1,0 +1,510 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% load humanize %}
+{% block header %}
+<link rel="stylesheet" href="{% static 'vendor/bootstrap-star-rating/css/star-rating.min.css' %}">
+<link rel="stylesheet" href="{% static 'vendor/bootstrap-star-rating/themes/krajee-fas/theme.min.css' %}">
+<link id="skinCSS" rel="stylesheet" href="{% static 'css/skins/default.css' %}">
+{% endblock header %}
+
+
+{% block main_content %}
+<div role="main" class="main shop py-4">
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-lg-9">
+
+                <div class="row">
+                    <div class="col-lg-6">
+
+                        <div class="thumb-gallery-wrapper">
+                            <div
+                                class="thumb-gallery-detail owl-carousel owl-theme manual nav-inside nav-style-1 nav-dark mb-3">
+                                {% for img in images %}
+                                {% if img.image %}
+                                <div>
+                                    <img alt="" class="img-fluid" src="{{img.image.url}}"
+                                        data-zoom-image="{{img.image.url}}">
+                                </div>
+                                {% else %}
+                                {% endif %}
+                                {% endfor %}
+
+                            </div>
+                            <div class="thumb-gallery-thumbs owl-carousel owl-theme manual thumb-gallery-thumbs">
+                                {% for img in images %}
+                                {% if img.image %}
+                                <div class="cur-pointer">
+                                    <img alt="" class="img-fluid" src="{{img.image.url}}">
+                                </div>
+                                {% else %}
+                                {% endif %}
+                                {% endfor %}
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-6">
+
+                        <div class="summary entry-summary position-relative">
+
+                            <h1 class="mb-0 font-weight-bold text-7">{{product.title|safe}}</h1>
+
+                            <div class="pb-0 clearfix d-flex align-items-center">
+                                <div title="Rated 3 out of 5" class="float-start">
+                                    <input type="text" class="d-none" value="3" title="" data-plugin-star-rating
+                                        data-plugin-options="{'displayOnly': true, 'color': 'primary', 'size':'xs'}">
+                                </div>
+
+                                <div class="review-num">
+                                    <a href="#description"
+                                        class="text-decoration-none text-color-default text-color-hover-primary"
+                                        data-hash data-hash-offset="0" data-hash-offset-lg="75"
+                                        data-hash-trigger-click=".nav-link-reviews"
+                                        data-hash-trigger-click-delay="1000">
+                                        <span class="count text-color-inherit"
+                                            itemprop="ratingCount">({{all_reviews.count}}</span> نقد و
+                                        بررسی)
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="divider divider-small">
+                                <hr class="bg-color-grey-scale-4">
+                            </div>
+
+                            <p class="price mb-3">
+                                <span class="sale text-color-dark">{{product.final_price|safe|intcomma}} تومان</span>
+                                {% if product.discount > 0 %}
+                                <span class="amount">{{product.price|safe|intcomma}} تومان</span>
+                                {% else %}
+                                {% endif %}
+                            </p>
+
+                            <p class="text-3-5 mb-3 text-justify">{{product.content|safe|slice:":300"}} ...</p>
+
+                            <ul class="list list-unstyled text-2">
+                                <li class="mb-0">وضعیت موجودی: <strong
+                                        class="text-color-dark">{% if product.amount > 0 %}
+                                        موجود
+                                        {% else %}
+                                        ناموجود
+                                        {% endif %}</strong></li>
+                                <li class="mb-0">شماره محصول: <strong class="text-color-dark">PROD-{{ product.uuid|upper|slice:"24:" }}</strong></li>
+                            </ul>
+                            <button class="btn btn-dark btn-modern w-75 rounded-5 font-weight-bold text-3 py-3 my-3 add-to-cart" data-loading-text="Loading..." data-prod="{{ product.pk }}">افزودن محصول به سبد خرید</button>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <div id="description"
+                            class="tabs tabs-simple tabs-simple-full-width-line tabs-product tabs-dark mb-2">
+                            <ul class="nav nav-tabs justify-content-start">
+                                <li class="nav-item"><a
+                                        class="nav-link active font-weight-bold text-3 text-uppercase py-2 px-3"
+                                        href="#productDescription" data-bs-toggle="tab">توضیحات</a></li>
+                                
+                                <li class="nav-item"><a
+                                        class="nav-link font-weight-bold text-3 text-uppercase py-2 px-3"
+                                        href="#productCatalog" data-bs-toggle="tab">کاتالوگ محصولات</a></li>
+                                <li class="nav-item"><a
+                                        class="nav-link nav-link-reviews font-weight-bold text-3 text-uppercase py-2 px-3"
+                                        href="#productReviews" data-bs-toggle="tab">نقد و بررسی
+                                        ({{all_reviews.count}})</a></li>
+                            </ul>
+                            <div class="tab-content p-0">
+                                <div class="tab-pane px-0 py-3 active" id="productDescription">
+                                    <p>{{product.content|safe}}</p>
+                                </div>
+                                <div class="tab-pane px-0 py-3" id="productCatalog">
+                                    <table class="table table-striped m-0">
+                                        <tbody>
+                                            {% if product.catalog1 or product.catalog2 or product.catalog3 %}
+                                            {% if product.catalog1 %}
+                                            <tr>
+                                                <th class="border-top-0">
+                                                    فایل شماره 1:
+                                                </th>
+                                                <td class="border-top-0">
+                                                    <a href="{{product.catalog1.url}}">
+                                                        <i class="icons icon-doc text-color-dark text-4 text-bold"></i>
+                                                        برای دانلود فایل کلیک نمایید.
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            {% else %}
+                                            {% endif %}
+                                            {% if product.catalog2 %}
+                                            <tr>
+                                                <th class="border-top-0">
+                                                    فایل شماره 2:
+                                                </th>
+                                                <td class="border-top-0">
+                                                    <a href="{{product.catalog2.url}}">
+                                                        <i class="icons icon-doc text-color-dark text-4 text-bold"></i>
+                                                        برای دانلود فایل کلیک نمایید.
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            {% else %}
+                                            {% endif %}
+                                            {% if product.catalog3 %}
+                                            <tr>
+                                                <th class="border-top-0">
+                                                    فایل شماره 3:
+                                                </th>
+                                                <td class="border-top-0">
+                                                    <a href="{{product.catalog3.url}}">
+                                                        <i class="icons icon-doc text-color-dark text-4 text-bold"></i>
+                                                        برای دانلود فایل کلیک نمایید.
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            {% else %}
+                                            {% endif %}
+                                            {% else %}
+                                            <tr>
+                                                <th class="border-top-0">
+                                                    برای این محصول کاتالوگی ثبت نشده است...
+                                                </th>
+                                            </tr>
+                                            {% endif %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="tab-pane px-0 py-3" id="productReviews">
+                                    <ul class="comments">
+                                        {% for review in reviews %}
+                                        <li>
+                                            {% if review.is_approved == True %}
+                                            <div class="comment">
+                                                <div class="img-thumbnail border-0 p-0 d-none d-md-block">
+                                                    {% if review.user %}
+                                                    {% if review.user.profile.avatar %}
+                                                    <img class="avatar rounded-circle" alt=""
+                                                        src="{{review.user.profile.avatar.url}}">
+                                                    {% else %}
+                                                    <img class="avatar rounded-circle" alt=""
+                                                        src="{% static 'img/avatars/placeholder.png' %}">
+                                                    {% endif %}
+                                                    {% else %}
+                                                    <img class="avatar rounded-circle" alt=""
+                                                        src="{% static 'img/avatars/placeholder.png' %}">
+                                                    {% endif %}
+                                                </div>
+                                                <div class="comment-block">
+                                                    <div class="comment-arrow"></div>
+                                                    <span class="comment-by">
+                                                        <strong>{{review.name}}</strong>
+                                                        <span class="float-start">
+                                                            <div class="pb-0 clearfix">
+
+                                                                <div class="review-num">
+                                                                    امتیاز <span
+                                                                        class="rating-review">{{review.rate}}</span> از
+                                                                    5
+                                                                </div>
+                                                            </div>
+                                                        </span>
+                                                    </span>
+                                                    <p>{{review.review}}</p>
+                                                </div>
+                                            </div>
+                                            {% else %}
+                                            {% if review.user == request.user %}
+                                            <div class="comment">
+                                                <div class="img-thumbnail border-0 p-0 d-none d-md-block">
+                                                    {% if review.user %}
+                                                    {% if review.user.profile.avatar %}
+                                                    <img class="avatar rounded-circle" alt=""
+                                                        src="{{review.user.profile.avatar.url}}">
+                                                    {% else %}
+                                                    <img class="avatar rounded-circle" alt=""
+                                                        src="{% static 'img/avatars/placeholder.png' %}">
+                                                    {% endif %}
+                                                    {% else %}
+                                                    <img class="avatar rounded-circle" alt=""
+                                                        src="{% static 'img/avatars/placeholder.png' %}">
+                                                    {% endif %}
+                                                </div>
+                                                <div class="comment-block">
+                                                    <div class="comment-arrow"></div>
+                                                    <span class="comment-by">
+                                                        <strong>{{review.name}}</strong> <span class="text-danger">(نقد
+                                                            و بررسی شما پس از تایید بصورت عمومی منتشر
+                                                            خواهد شد)</span>
+                                                        <span class="float-start">
+                                                            <div class="pb-0 clearfix">
+
+                                                                <div class="review-num">
+                                                                    امتیاز <span
+                                                                        class="rating-review">{{review.rate}}</span> از
+                                                                    5
+                                                                </div>
+                                                            </div>
+                                                        </span>
+                                                    </span>
+                                                    <p>{{review.review}}</p>
+                                                </div>
+                                            </div>
+                                            {% else %}
+                                            {% endif %}
+                                            {% endif %}
+                                        </li>
+                                        {% endfor %}
+
+
+                                    </ul>
+
+                                    <hr class="solid my-5">
+                                    <h4>یک نقد و بررسی اضافه کنید</h4>
+                                    <div class="row">
+                                        <div class="col">
+
+                                            <form method="post" class="needs-validation">
+                                                {% csrf_token %}
+                                                <div class="row">
+                                                    <div class="form-group col pb-2">
+                                                        <label
+                                                            class="form-label required font-weight-bold text-dark">امتیاز</label>
+                                                        {% render_field form.rate class="form-control w-25" data-msg-required="لطفا امتیاز خود را وارد نمایید." data-rule-number="true" data-msg-number="لطفا یک عدد بین 0 تا 5 وارد نمایید." data-msg-min="امتیاز نمی‌تواند کمتر از 0 باشد." data-rule-min="0" data-rule-max="5" data-msg-max="امتیاز نمی‌تواند بیشتر از 5 باشد." required=required %}
+                                                    </div>
+                                                </div>
+                                                {% if request.user.is_authenticated %}
+                                                <div class="row">
+                                                    <div class="form-group col-lg-6">
+                                                        <label
+                                                            class="form-label required font-weight-bold text-dark">نام</label>
+                                                        {% if request.user.fullname %}
+
+                                                        {% render_field form.name class="form-control" data-msg-required="لطفا نام خود را وارد نمایید." required=required value=request.user.fullname disabled=disabled %}
+                                                        {% else %}
+                                                        {% render_field form.name class="form-control" data-msg-required="لطفا نام خود را وارد نمایید." required=required value="کاربر سایت" disabled=disabled %}
+                                                        {% endif %}
+                                                    </div>
+                                                    <div class="form-group col-lg-6">
+                                                        <label class="form-label font-weight-bold text-dark">آدرس
+                                                            ایمیل (اختیاری)</label>
+                                                        {% if request.user.email %}
+
+                                                        {% render_field form.email class="form-control" data-msg-email="لطفا آدرس ایمیل خود را به درستی وارد نمایید." value=request.user.email disabled=disabled %}
+                                                        {% else %}
+                                                        {% render_field form.email class="form-control" data-msg-email="لطفا آدرس ایمیل خود را به درستی وارد نمایید." value="-" disabled=disabled %}
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                                {% else %}
+                                                <div class="row">
+                                                    <div class="form-group col-lg-6">
+                                                        <label
+                                                            class="form-label required font-weight-bold text-dark">نام
+                                                            کامل</label>
+                                                        {% render_field form.name class="form-control" data-msg-required="لطفا نام خود را وارد نمایید." required=required %}
+                                                    </div>
+                                                    <div class="form-group col-lg-6">
+                                                        <label class="form-label font-weight-bold text-dark">آدرس
+                                                            ایمیل (اختیاری)</label>
+                                                        {% render_field form.email class="form-control" data-msg-email="لطفا آدرس ایمیل خود را به درستی وارد نمایید." %}
+                                                    </div>
+                                                </div>
+                                                {% endif %}
+                                                <div class="row">
+                                                    <div class="form-group col">
+                                                        <label
+                                                            class="form-label required font-weight-bold text-dark">نقد و
+                                                            بررسی</label>
+                                                        {% render_field form.review class="form-control" data-msg-required="لطفا نقد خود را وارد نمایید."  required=required %}
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="form-group col mb-0">
+                                                        <input type="submit" value="ارسال نقد و بررسی"
+                                                            class="btn btn-primary btn-modern"
+                                                            data-loading-text="در حال بارگذاری...">
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                {% if product.video %}
+                <div class="row">
+                    <div class="col-lg-10">
+                        <h4 class="my-3"> ویدئو پیشنهادی محصولات</h4>
+                        <div class="h_iframe-aparat_embed_frame"><span style="display: block;padding-top: 57%"></span><iframe src="https://www.aparat.com/video/video/embed/videohash/{{product.video}}/vt/frame"  allowFullScreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe></div>
+                    </div>
+                </div>
+                {% endif %}
+                <hr class="solid mb-5 mt-2">
+
+                <h4 class="mb-3">محصولات مشابه</h4>
+                <div class="products row">
+                    <div class="col">
+                        <div class="owl-carousel owl-theme show-nav-title nav-dark mb-0"
+                            data-plugin-options="{'loop': true, 'autoplay': true, 'autoplayTimeout': 3000, 'items': 4, 'nav': true, 'dots': false, 'margin': 20, 'autoplayHoverPause': true, 'autoHeight': true}">
+                            {% for pr in products_sim %}
+                            <div class="product mb-0">
+                                <div class="product-thumb-info border-0 mb-3">
+
+                                    <div class="product-thumb-info-badges-wrapper">
+                                        <span class="badge badge-ecommerce badge-success">جدید</span>
+                                        {% if pr.discount > 0 %}
+                                        <span class="badge badge-ecommerce badge-danger">{{pr.discount}}٪ تخفیف</span>
+                                        {% else %}
+                                        {% endif %}
+
+                                    </div>
+                                    <a href="#" class="quick-view text-uppercase font-weight-semibold text-2 add-to-cart" data-prod="{{ pr.pk }}">
+                                        افزودن به سبد خرید
+                                    </a>
+                                    <a href="{% url 'shop:shop-detail' product_id=pr.pk %}">
+                                        <div class="product-thumb-info-image">
+                                            {% if pr.image_cover %}
+                                            <img alt="" class="img-fluid" src="{{pr.image_cover.url}}">
+                                            {% else %}
+                                            <img alt="" class="img-fluid"
+                                                src="{% static 'img/products/placeholder.jpg' %}">
+                                            {% endif %}
+
+
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <a href="#"
+                                        class="text-decoration-none text-color-default text-color-hover-dark text-4"><i
+                                            class="far fa-heart"></i></a>
+                                    <div>
+                                        <a href="{% url 'shop:shop-detail' product_id=pr.pk %}"
+                                            class="d-block text-uppercase text-decoration-none text-color-default text-color-hover-primary line-height-1 text-0 mb-1">{{pr.category.title}}</a>
+                                        <h3
+                                            class="text-3-5 font-weight-medium font-alternative text-transform-none line-height-3 mb-0">
+                                            <a href="#"
+                                                class="text-color-dark text-color-hover-primary">{{pr.title|safe}}</a></h3>
+                                    </div>
+                                </div>
+                                <p class="price text-5 mb-3">
+                                    <span class="sale text-color-dark font-weight-semi-bold">{{pr.final_price|intcomma}}
+                                        تومان</span>
+                                    {% if pr.discount > 0 %}
+                                    <span class="amount">{{pr.price|intcomma}} تومان</span>
+                                    {% else %}
+                                    {% endif %}
+                                </p>
+                            </div>
+                            {% endfor %}
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-lg-3">
+                <aside class="sidebar">
+                    <form action="page-search-results.html" method="get">
+                        <div class="input-group mb-3 pb-1">
+                            <input class="form-control text-1" placeholder="جستجو ..." name="s" id="s" type="text">
+                            <button type="submit" class="btn btn-dark text-1 p-2"><i
+                                    class="fas fa-search m-2"></i></button>
+                        </div>
+                    </form>
+                    <h5 class="font-weight-semi-bold pt-3">دسته‌بندی‌ها</h5>
+                    <ul class="nav nav-list flex-column mb-5">
+                        {% for cat in all_cats  %}
+                        <li class="nav-item">
+                            <a class="nav-link active" href="{% url 'shop:cat-list' cat_id=cat.pk %}">{{ cat.title }}</a>
+                            {% if cat.children.all.count >= 1 %}
+                            <ul>
+                                {% for scat in cat.children.all %}
+                                <li class="nav-item"><a class="nav-link" href="{% url 'shop:cat-list' cat_id=scat.pk %}">{{ scat.title }}</a></li>
+                                {% endfor %}
+                            </ul>
+                            {% else %}
+                            {% endif %}
+
+                        </li>
+                        {% endfor %}
+                        
+                    </ul>
+                    <h5 class="font-weight-semi-bold pt-5">برچسب‌ها</h5>
+                    <div class="mb-3 pb-1">
+                        {% for tag in product.tags.all %}
+                        <a href="{% url 'shop:shop-tag' tag_slug=tag.slug %}">
+                            <span class="badge badge-dark badge-sm rounded-pill text-uppercase px-2 py-1 me-1">
+                                {{ tag }}
+                            </span>
+                        </a>
+                        {% endfor %}
+                    </div>
+                    <div class="row mb-5">
+                        <div class="col">
+                            <h5 class="font-weight-semi-bold pt-5">محصولات با امتیاز بالا</h5>
+                            {% for pr in products_fav %}
+                            <div class="product row row-gutter-sm align-items-center mb-4">
+                                <div class="col-5 col-lg-5">
+                                    <div class="product-thumb-info border-0">
+                                        <a href="{% url 'shop:shop-detail' product_id=pr.pk %}">
+                                            <div class="product-thumb-info-image">
+                                                {% if pr.image_cover %}
+                                                <img alt="" class="img-fluid" src="{{pr.image_cover.url}}">
+                                                {% else %}
+                                                <img alt="" class="img-fluid"
+                                                    src="{% static 'img/products/placeholder.jpg' %}">
+                                                {% endif %}
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-7 col-lg-7 ms-md-0 ms-lg-0 ps-lg-1 pt-1">
+                                    <a href="{% url 'shop:shop-detail' product_id=pr.pk %}"
+                                        class="d-block text-uppercase text-decoration-none text-color-default text-color-hover-primary line-height-1 text-0 mb-2">{{pr.category.title}}</a>
+                                    <h3
+                                        class="text-3-5 font-weight-medium font-alternative text-transform-none line-height-3 mb-0">
+                                        <a href="#"
+                                            class="text-color-dark text-color-hover-primary text-decoration-none">{{pr.title}}</a>
+                                    </h3>
+
+                                    <p class="price text-4 mb-0">
+                                        <span class="sale text-color-dark font-weight-semi-bold">{{pr.final_price|intcomma}}
+                                            تومان</span>
+                                        {% if pr.discount > 0 %}
+                                        <span class="amount">{{pr.price|intcomma}} تومان</span>
+                                        {% else %}
+                                        {% endif %}
+                                    </p>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock main_content %}
+
+{% block end_body %}
+<script src="{% static 'vendor/bootstrap-star-rating/js/star-rating.min.js' %}"></script>
+<script src="{% static 'vendor/bootstrap-star-rating/themes/krajee-fas/theme.min.js' %}"></script>
+<script src="{% static 'vendor/elevatezoom/jquery.elevatezoom.min.js' %}"></script>
+<script src="{% static 'js/views/view.shop.js' %}"></script>
+<script src="{% static 'js/examples/examples.gallery.js' %}"></script>
+{% endblock end_body %}

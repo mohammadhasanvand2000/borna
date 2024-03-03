@@ -1,0 +1,103 @@
+{% extends "base-dashboard.html" %}
+{% load static %}
+{% load widget_tweaks %}
+{% block header %}
+{% endblock header %}
+{% block main_content %}
+<div role="main" class="main">
+	<section id="elements" class="section section-height-2 border-0 mt-5 mb-0 pt-5">
+
+		<div class="container py-2">
+			<div class="row appear-animation" data-appear-animation="fadeInUpShorter" data-appear-animation-delay="400">
+				<div class="col-lg-12">
+					<h4 class="mb-3">افزودن/ویرایش کاربران</h4>
+						<div class="card mb-4">
+							<div class="card-body">
+								<div class="row">
+									<div class="col">
+										  <form class="contact-form form-with-icons needs-validation" method="POST">
+											{% csrf_token %}
+											<div class="contact-form-success alert alert-success d-none mt-4">
+												<strong>تایید!</strong> کاربر مورد نظر با موفقیت ثبت شد.
+											</div>
+
+											<div class="contact-form-error alert alert-danger d-none mt-4">
+												<strong>خطا!</strong>مشکلی در ثبت کاربر وجود دارد. لطفا مجددا تلاش نمایید. 
+												<span class="mail-error-message text-1 d-block"></span>
+											</div>
+
+											<div class="row">
+												<div class="form-group col-lg-6">
+													<label class="form-label mb-1 text-2">نام کامل</label>
+													<div class="position-relative">
+														<i class="icons icon-emotsmile text-color-primary text-3 position-absolute left-15 top-50pct transform3dy-n50"></i>
+														{% render_field form.fullname type="text" value="" class="form-control text-3 h-auto py-2" %}
+													</div>
+												</div>
+												<div class="form-group col-lg-6">
+													<label class="form-label mb-1 text-2">نام کاربری (شماره تماس)</label>
+													<div class="position-relative">
+														<i class="icons icon-user text-color-primary text-3 position-absolute left-15 top-50pct transform3dy-n50"></i>
+														{% render_field form.phone type="text" value="" class="form-control text-3 h-auto py-2" required=required data-msg-digits="شماره تماس فقط می‌تواند شامل اعداد باشد." data-rule-digits="true" data-rule-minlength="11" data-rule-maxlength="11" data-msg-minlength="شماره تماس تنها می‌تواند شامل 11 رقم و شروع با 09 باشد." data-msg-maxlength="شماره تماس تنها می‌تواند شامل 11 رقم و شروع با 09 باشد." data-msg-required="لطفا نام کاربری (شماره تماس) خود را وارد نمایید..." %}
+													</div>
+												</div>
+												<div class="form-group col-lg-6">
+													<label class="form-label mb-1 text-2">رمز ورود</label>
+													<div class="position-relative">
+														<i class="icons icon-phone text-color-primary text-3 position-absolute left-15 top-50pct transform3dy-n50"></i>
+														{% render_field form.password value="" class="form-control text-3 h-auto py-2" data-rule-minlength="5" data-msg-minlength="رمز ورود باید شامل حداقل 5 کاراکتر و ترکیبی از حروف و اعداد باشد." %}
+													</div>
+												</div>
+												<div class="form-group col-lg-6">
+													<label class="form-label mb-1 text-2">آدرس ایمیل</label>
+													<div class="position-relative">
+														<i class="icons icon-envelope text-color-primary text-3 position-absolute left-15 top-50pct transform3dy-n50"></i>
+														{% render_field form.email type="email" value="" class="form-control text-3 h-auto py-2" data-msg-email="لطفا فرمت صحیح ادرس ایمیل را وارد نمایید." %}
+														
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="form-group col-6">
+													<label class="form-label">سطح دسترسی</label>
+													<div class="position-relative">
+														<i class="icons icon-key text-color-primary text-3 position-absolute left-15 top-50pct transform3dy-n50 z-index-1"></i>
+														<div class="custom-select-1">
+															{% render_field form.is_superuser value="" class="form-select form-control h-auto" %}
+														  </div>
+													</div>
+												</div>
+												<div class="form-group col-6">
+													<label class="form-label">وضعیت مسدود بودن</label>
+													<div class="position-relative">
+														<div class="form-check">
+															
+													{% render_field form.is_active class="form-check-input" %}
+															
+															<label class="form-check-label">
+															  آیا کاربر مسدود می‌باشد؟
+															</label>
+														 </div>
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="form-group col">
+													<input type="submit" value="اعمال تغییرات" class="btn btn-primary" data-loading-text="در حال بارگذاری...">
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+				</div>
+			</div>
+
+		</div>
+	</section>
+</div>
+{% endblock main_content %}
+{% block end_body %}
+
+{% endblock end_body %}

@@ -1,0 +1,181 @@
+{% extends "base-dashboard.html" %}
+{% load static %}
+{% block header %}
+{% endblock header %}
+{% block main_content %}
+<div role="main" class="main">
+	<section id="elements" class="section section-height-2 border-0 mt-5 mb-0 pt-5">
+
+		<div class="container py-2">
+			<div class="row appear-animation" data-appear-animation="fadeInUpShorter" data-appear-animation-delay="400">
+				<div class="col-lg-12">
+					<h4>لیست نظرسنجی‌ها</h4>
+
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>
+									ردیف
+								</th>
+								<th>
+									شماره نظرسنجی
+								</th>
+								<th>
+									تاریخ
+								</th>
+								<th>
+									نام و نام خانوادگی
+								</th>
+								<th>
+									شماره تماس
+								</th>
+								<th>
+									ایمیل
+								</th>
+								<th>
+									مشاهده
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									1
+								</td>
+								<td>
+									12451
+								</td>
+								<td>
+									24 اسفند 1401
+								</td>
+								<td>
+									محمد شایان
+								</td>
+								<td>
+									09120000000
+								</td>
+								<td>
+									a@b.com
+								</td>
+								<td>
+									<a href='{% url "dashboard:survey-detail" survey_token=12 %}'><i class="far fa-eye text-5"></i></a>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									2
+								</td>
+								<td>
+									18547
+								</td>
+								<td>
+									14 خرداد 1398
+								</td>
+								<td>
+									احمد روستا
+								</td>
+								<td>
+									09120000000
+								</td>
+								<td>
+									a@b.com
+								</td>
+								<td>
+									<a href='{% url "dashboard:survey-detail" survey_token=12 %}'><i class="far fa-eye text-5"></i></a>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									3
+								</td>
+								<td>
+									15789
+								</td>
+								<td>
+									24 اسفند 1401
+								</td>
+								<td>
+									ندا عظیمی
+								</td>
+								<td>
+									09120000000
+								</td>
+								<td>
+									a@b.com
+								</td>
+								<td>
+									<a href='{% url "dashboard:survey-detail" survey_token=12 %}'><i class="far fa-eye text-5"></i></a>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									4
+								</td>
+								<td>
+									48756
+								</td>
+								<td>
+									25 اردیبهشت 1401
+								</td>
+								<td>
+									محمد شایان
+								</td>
+								<td>
+									09120000000
+								</td>
+								<td>
+									a@b.com
+								</td>
+								<td>
+									<a href='{% url "dashboard:survey-detail" survey_token=12 %}'><i class="far fa-eye text-5"></i></a>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									5
+								</td>
+								<td>
+									15648
+								</td>
+								<td>
+									06 تیر 1400
+								</td>
+								<td>
+									زهرا خسروی
+								</td>
+								<td>
+									09120000000
+								</td>
+								<td>
+									a@b.com
+								</td>
+								<td>
+									<a href='{% url "dashboard:survey-detail" survey_token=12 %}'><i class="far fa-eye text-5"></i></a>
+								</td>
+							</tr>
+
+						</tbody>
+					</table>
+					<div class="row mt-4">
+						<div class="col">
+							<ul class="pagination float-start">
+								<li class="page-item"><a class="page-link" href="#"><i
+											class="fas fa-angle-right"></i></a></li>
+								<li class="page-item active"><a class="page-link" href="#">1</a></li>
+								<li class="page-item"><a class="page-link" href="#">2</a></li>
+								<li class="page-item"><a class="page-link" href="#">3</a></li>
+								<li class="page-item"><a class="page-link" href="#"><i
+											class="fas fa-angle-left"></i></a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</section>
+</div>
+{% endblock main_content %}
+{% block end_body %}
+
+{% endblock end_body %}

@@ -1,0 +1,842 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block header %}
+<link rel="stylesheet" href="{% static 'vendor/bootstrap-star-rating/css/star-rating.min.css' %}">
+<link rel="stylesheet" href="{% static 'vendor/bootstrap-star-rating/themes/krajee-fas/theme.min.css' %}">
+<link id="skinCSS" rel="stylesheet" href="{% static 'css/skins/default.css' %}">
+
+{% endblock header %}
+
+
+{% block main_content %}
+<div role="main" class="main shop py-4">
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-lg-9">
+
+                <div class="row">
+                    <div class="col-lg-6">
+                       
+                        <div class="thumb-gallery-wrapper">
+                            <div
+                                class="thumb-gallery-detail owl-carousel owl-theme manual nav-inside nav-style-1 nav-dark mb-3">
+                                {% for img in images %}
+                                {% if img.image %}
+                                <div>
+                                    <img alt="" class="img-fluid" src="{{img.image.url}}"
+                                        data-zoom-image="{{img.image.url}}">
+                                </div>
+                                {% else %}
+                                {% endif %}
+                                {% endfor %}
+
+                            </div>
+                            <div class="thumb-gallery-thumbs owl-carousel owl-theme manual thumb-gallery-thumbs">
+                                {% for img in images %}
+                                {% if img.image %}
+                                <div class="cur-pointer">
+                                    <img alt="" class="img-fluid" src="{{img.image.url}}">
+                                </div>
+                                {% else %}
+                                {% endif %}
+                                {% endfor %}
+
+                            </div>
+                        </div>
+
+                    </div>
+                   
+                    <div class="col-lg-6">
+
+                        <div class="summary entry-summary position-relative">
+
+                            <h1 class="mb-0 font-weight-bold text-7">{{product.title}}</h1>
+
+                            <div class="pb-0 clearfix d-flex align-items-center">
+                                <div title="Rated 3 out of 5" class="float-start">
+                                    <input type="text" class="d-none" value="3" title="" data-plugin-star-rating
+                                        data-plugin-options="{'displayOnly': true, 'color': 'primary', 'size':'xs'}">
+                                </div>
+                                <div class="review-num">
+                                    <a href="#description"
+                                        class="text-decoration-none text-color-default text-color-hover-primary"
+                                        data-hash data-hash-offset="0" data-hash-offset-lg="75"
+                                        data-hash-trigger-click=".nav-link-reviews"
+                                        data-hash-trigger-click-delay="1000">
+                                        <span class="count text-color-inherit"
+                                            itemprop="ratingCount">({{all_reviews.count}}</span> نقد و
+                                        بررسی)
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="divider divider-small">
+                                <hr class="bg-color-grey-scale-4">
+                            </div>
+
+                            <p class="text-3-5 mb-3 text-justify">{{product.content|safe|slice:":300"}} ...</p>
+
+                            <ul class="list list-unstyled text-2">
+                                <li class="mb-0">وضعیت موجودی: <strong class="text-color-dark"><a
+                                            href="{% url 'home:contact' %}">تماس بگیرید</a></strong></li>
+                                <li class="mb-0">شماره محصول: <strong class="text-color-dark">PROD-{{ product.uuid|upper|slice:"24:" }}</strong></li>
+                            </ul>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <div id="description"
+                            class="tabs tabs-simple tabs-simple-full-width-line tabs-product tabs-dark mb-2">
+                            <ul class="nav nav-tabs justify-content-start">
+                                <li class="nav-item"><a
+                                        class="nav-link active font-weight-bold text-3 text-uppercase py-2 px-3"
+                                        href="#productDescription" data-bs-toggle="tab">توضیحات</a></li>
+                                
+                                <li class="nav-item"><a
+                                        class="nav-link font-weight-bold text-3 text-uppercase py-2 px-3"
+                                        href="#productCatalog" data-bs-toggle="tab">کاتالوگ محصولات</a></li>
+                                <li class="nav-item"><a
+                                        class="nav-link nav-link-reviews font-weight-bold text-3 text-uppercase py-2 px-3"
+                                        href="#productReviews" data-bs-toggle="tab">نقد و بررسی
+                                        ({{all_reviews.count}})</a></li>
+                            </ul>
+                            <div class="tab-content p-0">
+                                <div class="tab-pane px-0 py-3 active" id="productDescription">
+                                    <p>{{product.content|safe}}</p>
+                                    <div dir="rtl" class="u-s-m-b-15">
+                                        <div style="color: black; border: 1px solid #000000;" class="pd-table gl-scroll">
+                                            <table style="width: 100%; border-collapse: collapse;">
+                                                <tbody>
+                                                    <tr  style="border-bottom: 1px solid #0c0b0b;">
+                                                        <h4 class="text-center mt-2">مشخصات عمومی محصول </h4> 
+                                                     </tr>
+                                                    {% if product.wing_dimensions %}
+                                                    <tr style="border-bottom: 1px solid #0c0b0b;">
+                                                        <td style="font-size: 14px; color: #090909; padding: 12px;"><h5>ابعاد بال گیر</h5></td>
+                                                        <td style="font-size: 14px; color: #070707; padding: 12px;">{{ product.wing_dimensions }}</td>
+                                                    </tr>
+                                                    {% endif %}
+                                                    {% if product.maximum_thickness %}
+                                                    <tr style="border-bottom: 1px solid #080808;">
+                                                        <td style="font-size: 14px; color: #0e0e0e; padding: 12px;"><h5>حد اکثر ضخامت بال قابل نورد</h5></td>
+                                                        <td style="font-size: 14px; color: #0c0b0b; padding: 12px;">{{ product.maximum_thickness }}</td>
+                                                    </tr>
+                                                    {% endif %}
+                                                    {% if product.longitudinal_movement %}
+                                                    <tr style="border-bottom: 1px solid #0d0d0d;">
+                                                        <td style="font-size: 14px; color: #0f0e0e; padding: 12px;"><h5>موتور اصلی حرکت طولی</h5></td>
+                                                        <td style="font-size: 14px; color: #080707; padding: 12px;">{{ product.longitudinal_movement }}</td>
+                                                    </tr>
+                                                    {% endif %}
+                                                    {% if product.pusher_engines %}
+                                                    <tr style="border-bottom: 1px solid #040303;">
+                                                        <td style="font-size: 14px; color: #090505; padding: 12px;"><h5>موتور های فشار دهنده</h5></td>
+                                                        <td style="font-size: 14px; color: #070606; padding: 12px;">{{ product.pusher_engines }}</td>
+                                                    </tr>
+                                                    {% endif %}
+                                                    {% if product.pusher_gearboxes %}
+                                                    <tr style="border-bottom: 1px solid #060505;">
+                                                        <td style="font-size: 14px; color: #060505; padding: 12px;"><h5>گیربکس های فشار دهنده</h5></td>
+                                                        <td style="font-size: 14px; color: #040303; padding: 12px;">{{ product.pusher_gearboxes }}</td>
+                                                    </tr>
+                                                    {% endif %}
+                                                    {% if product.power_transmission %}
+                                                    <tr style="border-bottom: 1px solid #070606;">
+                                                        <td style="font-size: 14px; color: #030202; padding: 12px;"><h5>انتقال نیرو در فشار دهنده ها</h5></td>
+                                                        <td style="font-size: 14px; color: #060505; padding: 12px;">{{ product.power_transmission }}</td>
+                                                    </tr>
+                                                    {% endif %}
+                                                    {% if product.high_pressure_gearbox %}
+                                                    <tr style="border-bottom: 1px solid #060505;">
+                                                        <td style="font-size: 14px; color: #030303; padding: 12px;"><h5>نوع گیربکس فشار دهنده بالا</h5></td>
+                                                        <td style="font-size: 14px; color: #050303; padding: 12px;">{{ product.high_pressure_gearbox }}</td>
+                                                    </tr>
+                                                    {% endif %}
+                                                    {% if product.high_pressure_engine %}
+                                                    <tr style="border-bottom: 1px solid #0c0909;">
+                                                        <td style="font-size: 14px; color: #060505; padding: 12px;"><h5>نوع موتور فشار دهنده بالا</h5></td>
+                                                        <td style="font-size: 14px; color: #0c0a0a; padding: 12px;">{{ product.high_pressure_engine }}</td>
+                                                    </tr>
+                                                    {% endif %}
+                                                    {% if product.The_drive_motor %}
+                                                    <tr style="border-bottom: 1px solid #0c0909;">
+                                                        <td style="font-size: 14px; color: #130808; padding: 12px;"><h5>موتور محرک دستگاه</h5></td>
+                                                        <td style="font-size: 14px; color: #0c0a0a; padding: 12px;">{{ product.The_drive_motor }}</td>
+                                                    </tr>
+                                                    
+                                                    {% endif %}
+                                                    {% if product.mechanism_type %}
+                                                    <tr style="border-bottom: 1px solid #0c0909;">
+                                                        <td style="font-size: 14px; color: #130808; padding: 12px;"><h5>نوع مکانیزم</h5></td>
+                                                        <td style="font-size: 14px; color: #0c0a0a; padding: 12px;">{{ product.mechanism_type }}</td>
+                                                    </tr>
+                                                    
+                                                    {% endif %}
+                                                    {% if product.cutting_milling_head_count %}
+                                                    <tr style="border-bottom: 1px solid #0c0909;">
+                                                        <td style="font-size: 14px; color: #130808; padding: 12px;"><h5> تعداد هد برشکاری/فرزکاری </h5></td>
+                                                        <td style="font-size: 14px; color: #0c0a0a; padding: 12px;">{{ product.cutting_milling_head_count }}</td>
+                                                    </tr>
+                                                    
+                                                    {% endif %}
+                                                    {% if product.worktable_dimensions %}
+                                                    <tr style="border-bottom: 1px solid #0c0909;">
+                                                        <td style="font-size: 14px; color: #130808; padding: 12px;"><h5>ابعاد مفید میزکار</h5></td>
+                                                        <td style="font-size: 14px; color: #0c0a0a; padding: 12px;">{{ product.worktable_dimensions }}</td>
+                                                    </tr>
+                                                    
+                                                    {% endif %}
+                                                    {% if product.total_weight %}
+                                                    <tr style="border-bottom: 1px solid #0c0909;">
+                                                        <td style="font-size: 14px; color: #130808; padding: 12px;"><h5>وزن کلی دستگاه</h5></td>
+                                                        <td style="font-size: 14px; color: #0c0a0a; padding: 12px;">{{ product.total_weight }}</td>
+                                                    </tr>
+                                                    
+                                                    {% endif %}
+                                                    {% if product.operating_voltage %}
+                                                    <tr style="border-bottom: 1px solid #0c0909;">
+                                                        <td style="font-size: 14px; color: #130808; padding: 12px;"><h5>ولتاژ کاری</h5></td>
+                                                        <td style="font-size: 14px; color: #0c0a0a; padding: 12px;">{{ product.operating_voltage }}</td>
+                                                    </tr>
+                                                    
+                                                    {% endif %}
+                                                    {% if product.axis_x_y_movement_system %}
+                                                    <tr style="border-bottom: 1px solid #0c0909;">
+                                                        <td style="font-size: 14px; color: #130808; padding: 12px;"><h5>سیستم حرکتی محور X & Y</h5></td>
+                                                        <td style="font-size: 14px; color: #0c0a0a; padding: 12px;">{{ product.axis_x_y_movement_system }}</td>
+                                                    </tr>
+                                                    
+                                                    {% endif %}
+                                                    {% if product.axis_a_b_movement_system %}
+                                                    <tr style="border-bottom: 1px solid #0c0909;">
+                                                        <td style="font-size: 14px; color: #130808; padding: 12px;"><h5>سیستم حرکتی محور A & B</h5></td>
+                                                        <td style="font-size: 14px; color: #0c0a0a; padding: 12px;">{{ product.axis_a_b_movement_system }}</td>
+                                                    </tr>
+                                                    
+                                                    {% endif %}
+                                                    {% if product.axis_z_movement_system %}
+                                                    <tr style="border-bottom: 1px solid #0c0909;">
+                                                        <td style="font-size: 14px; color: #130808; padding: 12px;"><h5>سیستم حرکتی محور Z</h5></td>
+                                                        <td style="font-size: 14px; color: #0c0a0a; padding: 12px;">{{ product.axis_z_movement_system }}</td>
+                                                    </tr>
+                                                    
+                                                    {% endif %}
+                                                    {% if product.rotary_axis_c %}
+                                                    <tr style="border-bottom: 1px solid #0c0909;">
+                                                        <td style="font-size: 14px; color: #130808; padding: 12px;"><h5>محور C روتاری</h5></td>
+                                                        <td style="font-size: 14px; color: #0c0a0a; padding: 12px;">{{ product.rotary_axis_c }}</td>
+                                                    </tr >
+                                                    
+                                                    {% endif %}
+                                                    {% if product.z_axis_working_range %}
+                                                    <tr style="border-bottom: 1px solid #0c0909;">
+                                                        <td style="font-size: 14px; color: #130808; padding: 12px;"><h5>محدوده کاری محور Z</h5></td>
+                                                        <td style="font-size: 14px; color: #0c0a0a; padding: 12px;">{{ product.z_axis_working_range }}</td>
+                                                    </tr>
+                                                    
+                                                    {% endif %}
+                                                    {% if product.x_y_axis_speed %}
+                                                    <tr style="border-bottom: 1px solid #0c0909;">
+                                                        <td style="font-size: 14px; color: #130808; padding: 12px;"><h5>سرعت حرکتی محور X & Y</h5></td>
+                                                        <td style="font-size: 14px; color: #0c0a0a; padding: 12px;">{{ product.x_y_axis_speed }}</td>
+                                                    </tr>
+                                                    
+                                                    {% endif %}
+                                                    {% if product.z_axis_speed %}
+                                                    <tr style="border-bottom: 1px solid #0c0909;">
+                                                        <td style="font-size: 14px; color: #130808; padding: 12px;"><h5>سرعت حرکتی محور Z</h5></td>
+                                                        <td style="font-size: 14px; color: #0c0a0a; padding: 12px;">{{ product.z_axis_speed }}</td>
+                                                    </tr>
+                                                    
+                                                    {% endif %}
+                                                    {% if product.spindle_type %}
+                                                    <tr style="border-bottom: 1px solid #0c0909;">
+                                                        <td style="font-size: 14px; color: #130808; padding: 12px;"><h5>نوع اسپیندل</h5></td>
+                                                        <td style="font-size: 14px; color: #0c0a0a; padding: 12px;">{{ product.spindle_type }}</td>
+                                                    </tr>
+                                                    
+                                                    {% endif %}
+                                                    {% if product.power_transmission_system %}
+                                                    <tr style="border-bottom: 1px solid #0c0909;">
+                                                        <td style="font-size: 14px; color: #130808; padding: 12px;"><h5>سیستم انتقال نیرو</h5></td>
+                                                        <td style="font-size: 14px; color: #0c0a0a; padding: 12px;">{{ product.power_transmission_system }}</td>
+                                                    </tr>
+                                                    
+                                                    {% endif %}
+                                                    {% if product.drive_motor_type %}
+                                                    <tr style="border-bottom: 1px solid #0c0909;">
+                                                        <td style="font-size: 14px; color: #130808; padding: 12px;"><h5>نوع موتورهای حرکتی</h5></td>
+                                                        <td style="font-size: 14px; color: #0c0a0a; padding: 12px;">{{ product.drive_motor_type }}</td>
+                                                    </tr>
+                                                    
+                                                    {% endif %}
+                                                    {% if product.jack_type %}
+                                                    <tr style="border-bottom: 1px solid #0c0909;">
+                                                        <td style="font-size: 14px; color: #130808; padding: 12px;"><h5>نوع جک ها</h5></td>
+                                                        <td style="font-size: 14px; color: #0c0a0a; padding: 12px;">{{ product.jack_type }}</td>
+                                                    </tr>
+                                                    
+                                                    {% endif %}
+                                                    {% if product.gearbox_type %}
+                                                    <tr style="border-bottom: 1px solid #0c0909;">
+                                                        <td style="font-size: 14px; color: #130808; padding: 12px;"><h5>نوع سیستم گیربکس</h5></td>
+                                                        <td style="font-size: 14px; color: #0c0a0a; padding: 12px;">{{ product.gearbox_type }}</td>
+                                                    </tr>
+                                                    
+                                                    {% endif %}
+                                                    {% if product.rotary_gearboxes %}
+                                                    <tr style="border-bottom: 1px solid #0c0909;">
+                                                        <td style="font-size: 14px; color: #130808; padding: 12px;"><h5>گیربکس های روتاری</h5></td>
+                                                        <td style="font-size: 14px; color: #0c0a0a; padding: 12px;">{{ product.rotary_gearboxes }}</td>
+                                                    </tr>
+                                                    
+                                                    {% endif %}
+                                                    {% if product.height_control_system %}
+                                                    <tr style="border-bottom: 1px solid #0c0909;">
+                                                        <td style="font-size: 14px; color: #130808; padding: 12px;"><h5>سیستم کنترل ارتفاع</h5></td>
+                                                        <td style="font-size: 14px; color: #0c0a0a; padding: 12px;">{{ product.height_control_system }}</td>
+                                                    </tr>
+                                                    
+                                                    {% endif %}
+                                                    {% if product.machine_maximum_error %}
+                                                    <tr style="border-bottom: 1px solid #0c0909;">
+                                                        <td style="font-size: 14px; color: #130808; padding: 12px;"><h5>حداکثر خطای ماشین</h5></td>
+                                                        <td style="font-size: 14px; color: #0c0a0a; padding: 12px;">{{ product.machine_maximum_error }}</td>
+                                                    </tr>
+                                                    
+                                                    {% endif %}
+                                                    {% if product.controller_maximum_error %}
+                                                    <tr style="border-bottom: 1px solid #0c0909;">
+                                                        <td style="font-size: 14px; color: #130808; padding: 12px;"><h5>حداکثر خطای سیستم کنترلر</h5></td>
+                                                        <td style="font-size: 14px; color: #0c0a0a; padding: 12px;">{{ product.controller_maximum_error }}</td>
+                                                    </tr>
+                                                    
+                                                    {% endif %}
+                                                    {% if product.cutting_milling_thickness_range %}
+                                                    <tr style="border-bottom: 1px solid #0c0909;">
+                                                        <td style="font-size: 14px; color: #130808; padding: 12px;"><h5>محدوده ضخامت برشکاری / فرزکاری</h5></td>
+                                                        <td style="font-size: 14px; color: #0c0a0a; padding: 12px;">{{ product.cutting_milling_thickness_range }}</td>
+                                                    </tr>
+                                                    
+                                                    {% endif %}
+                                                    {% if product.spindle_distance_between_axes %}
+                                                    <tr style="border-bottom: 1px solid #0c0909;">
+                                                        <td style="font-size: 14px; color: #130808; padding: 12px;"><h5>آکس بین اسپیندل ها</h5></td>
+                                                        <td style="font-size: 14px; color: #0c0a0a; padding: 12px;">{{ product.spindle_distance_between_axes }}</td>
+                                                    </tr>
+                                                    
+                                                    {% endif %}
+                                                    {% if product.maximum_rotary_part_opening_length %}
+                                                    <tr style="border-bottom: 1px solid #0c0909;">
+                                                        <td style="font-size: 14px; color: #130808; padding: 12px;"><h5>حداکثر طول باز شدن قسمت روتاری</h5></td>
+                                                        <td style="font-size: 14px; color: #0c0a0a; padding: 12px;">{{ product.maximum_rotary_part_opening_length }}</td>
+                                                    </tr>
+                                                    
+                                                    {% endif %}
+                                                    {% if product.maximum_disk_diameter %}
+                                                    <tr style="border-bottom: 1px solid #0c0909;">
+                                                        <td style="font-size: 14px; color: #130808; padding: 12px;"><h5> حداکثر قطر دیسک </h5></td>
+                                                        <td style="font-size: 14px; color: #0c0a0a; padding: 12px;">{{ product.maximum_disk_diameter }}</td>
+                                                    </tr>
+                                                    
+                                                    {% endif %}
+                                                    {% if product.plasma_installation_prerequisites %}
+                                                        <tr style="border-bottom: 1px solid #0c0909;">                                                      
+                                                            <td style="font-size: 14px; color: #130808; padding: 12px;"><h5>پیش نیاز نصب پلاسما</h5></td>
+                                                            <td style="font-size: 14px; color: #0c0a0a; padding: 12px;">{{ product.plasma_installation_prerequisites }}</td>
+                                                        </tr>
+                                                    {% endif %}
+
+                                                        {% if product.maximum_laser_power %}
+                                                        <tr style="border-bottom: 1px solid #0c0909;">                                                      
+                                                            <td style="font-size: 14px; color: #130808; padding: 12px;"><h5>حداکثر توان لیزر</h5></td>
+                                                            <td style="font-size: 14px; color: #0c0a0a; padding: 12px;">{{ product.maximum_laser_power }}</td>
+                                                        </tr>
+                                                    {% endif %}
+
+                                                        {% if product.laser_technology_type %}
+                                                        <tr style="border-bottom: 1px solid #0c0909;">
+                                                            <td style="font-size: 14px; color: #130808; padding: 12px;"><h5>نوع تکنولوژی لیزر</h5></td>
+                                                            <td style="font-size: 14px; color: #0c0a0a; padding: 12px;">{{ product.laser_technology_type }}</td>
+                                                        </tr>
+                                                        {% endif %}
+                                                        {% if product.machine_movement_accuracy %}
+                                                        <tr style="border-bottom: 1px solid #0c0909;">
+                                                            <td style="font-size: 14px; color: #130808; padding: 12px;"><h5>دقت حرکتی دستگاه</h5></td>
+                                                            <td style="font-size: 14px; color: #0c0a0a; padding: 12px;">{{ product.machine_movement_accuracy }}</td>
+                                                        </tr>
+                                                        {% endif %}
+                                                    
+                                                        {% if product.drilling_accuracy %}
+                                                        <tr style="border-bottom: 1px solid #0c0909;">
+                                                            <td style="font-size: 14px; color: #130808; padding: 12px;"><h5>دقت سوراخکاری دستگاه</h5></td>
+                                                            <td style="font-size: 14px; color: #0c0a0a; padding: 12px;">{{ product.drilling_accuracy }}</td>
+                                                        </tr>
+                                                        {% endif %}
+                                                    
+                                                        {% if product.cable_thickness_cable_length %}
+                                                        <tr style="border-bottom: 1px solid #0c0909;">
+                                                            <td style="font-size: 14px; color: #130808; padding: 12px;"><h5>ضخامت کابل / طول کابل</h5></td>
+                                                            <td style="font-size: 14px; color: #0c0a0a; padding: 12px;">{{ product.cable_thickness_cable_length }}</td>
+                                                        </tr>
+                                                        {% endif %}
+                                                    
+                                                        {% if product.water_pump_capacity %}
+                                                        <tr style="border-bottom: 1px solid #0c0909;">
+                                                            <td style="font-size: 14px; color: #130808; padding: 12px;"><h5>ظرفیت پمپ آب</h5></td>
+                                                            <td style="font-size: 14px; color: #0c0a0a; padding: 12px;">{{ product.water_pump_capacity }}</td>
+                                                        </tr>
+                                                        {% endif %}
+                                                    
+                                                        {% if product.water_collection_tank %}
+                                                        <tr style="border-bottom: 1px solid #0c0909;">
+                                                            <td style="font-size: 14px; color: #130808; padding: 12px;"><h5>حوضچه جمع آوری آب</h5></td>
+                                                            <td style="font-size: 14px; color: #0c0a0a; padding: 12px;">{{ product.water_collection_tank }}</td>
+                                                        </tr>
+                                                        {% endif %}
+                                                    
+                                                        {% if product.glass_separation_system_after_cutting %}
+                                                        <tr style="border-bottom: 1px solid #0c0909;">
+                                                            <td style="font-size: 14px; color: #130808; padding: 12px;"><h5>سیستم جداسازی شیشه پس از برش</h5></td>
+                                                            <td style="font-size: 14px; color: #0c0a0a; padding: 12px;">{{ product.glass_separation_system_after_cutting }}</td>
+                                                        </tr>
+                                                        {% endif %}
+                                                    
+                                                        {% if product.glass_easy_movement_system %}
+                                                        <tr style="border-bottom: 1px solid #0c0909;">
+                                                            <td style="font-size: 14px; color: #130808; padding: 12px;"><h5>سیستم حرکت آسان شیشه</h5></td>
+                                                            <td style="font-size: 14px; color: #0c0a0a; padding: 12px;">{{ product.glass_easy_movement_system }}</td>
+                                                        </tr>
+                                                        {% endif %}
+                                                    
+                                                        {% if product.pipe_boring_dimensions %}
+                                                        <tr style="border-bottom: 1px solid #0c0909;">
+                                                            <td style="font-size: 14px; color: #130808; padding: 12px;"><h5>ابعاد مفید لوله بر</h5></td>
+                                                            <td style="font-size: 14px; color: #0c0a0a; padding: 12px;">{{ product.pipe_boring_dimensions }}</td>
+                                                        </tr>
+                                                        {% endif %}
+                                                    
+                                                        {% if product.controller_type %}
+                                                        <tr style="border-bottom: 1px solid #0c0909;">
+                                                            <td style="font-size: 14px; color: #130808; padding: 12px;"><h5>نوع کنترلر</h5></td>
+                                                            <td style="font-size: 14px; color: #0c0a0a; padding: 12px;">{{ product.controller_type }}</td>
+                                                        </tr>
+                                                        {% endif %}
+                                                    
+                                                        {% if product.g_code_reading_capability %}
+                                                        <tr style="border-bottom: 1px solid #0c0909;">
+                                                            <td style="font-size: 14px; color: #130808; padding: 12px;"><h5>قابلیت خواندن G-code</h5></td>
+                                                            <td style="font-size: 14px; color: #0c0a0a; padding: 12px;">{{ product.g_code_reading_capability }}</td>
+                                                        </tr>
+                                                        {% endif %}
+                                                        {% if product.electrical_panel %}
+    <tr style="border-bottom: 1px solid #0c0909;">
+        <td style="font-size: 14px; color: #130808; padding: 12px;"><h5>تابلو برق</h5></td>
+        <td style="font-size: 14px; color: #0c0a0a; padding: 12px;">{{ product.electrical_panel }}</td>
+    </tr>
+    {% endif %}
+
+    {% if product.computer_system %}
+    <tr style="border-bottom: 1px solid #0c0909;">
+        <td style="font-size: 14px; color: #130808; padding: 12px;"><h5>سیستم کامپیوتری</h5></td>
+        <td style="font-size: 14px; color: #0c0a0a; padding: 12px;">{{ product.computer_system }}</td>
+    </tr>
+    {% endif %}
+
+    {% if product.uniform_spraying_material_reservoir %}
+    <tr style="border-bottom: 1px solid #0c0909;">
+        <td style="font-size: 14px; color: #130808; padding: 12px;"><h5>مخزن پاشش یکنواخت ماده ساینده</h5></td>
+        <td style="font-size: 14px; color: #0c0a0a; padding: 12px;">{{ product.uniform_spraying_material_reservoir }}</td>
+    </tr>
+    {% endif %}
+
+    {% if product.abrasive_tank %}
+    <tr style="border-bottom: 1px solid #0c0909;">
+        <td style="font-size: 14px; color: #130808; padding: 12px;"><h5>مخزن ماده ساینده</h5></td>
+        <td style="font-size: 14px; color: #0c0a0a; padding: 12px;">{{ product.abrasive_tank }}</td>
+    </tr>
+    {% endif %}
+
+    {% if product.abrasive_hopper %}
+    <tr style="border-bottom: 1px solid #0c0909;">
+        <td style="font-size: 14px; color: #130808; padding: 12px;"><h5>Abrasive hopper</h5></td>
+        <td style="font-size: 14px; color: #0c0a0a; padding: 12px;">{{ product.abrasive_hopper }}</td>
+    </tr>
+    {% endif %}
+
+    {% if product.waterjet_pump_power %}
+    <tr style="border-bottom: 1px solid #0c0909;">
+        <td style="font-size: 14px; color: #130808; padding: 12px;"><h5>توان پمپ واترجت</h5></td>
+        <td style="font-size: 14px; color: #0c0a0a; padding: 12px;">{{ product.waterjet_pump_power }}</td>
+    </tr>
+    {% endif %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    
+                                  
+                                    
+                                </div>
+                                <div class="tab-pane px-0 py-3" id="productCatalog">
+                                    <table class="table table-striped m-0">
+                                        <tbody>
+                                            {% if product.catalog1 or product.catalog2 or product.catalog3 %}
+                                            {% if product.catalog1 %}
+                                            
+                                            <tr>
+                                                <th class="border-top-0">
+                                                    فایل شماره 1:
+                                                </th>
+                                                <td class="border-top-0">
+                                                    <a href="{{product.catalog1.url}}">
+                                                        <i class="icons icon-doc text-color-dark text-4 text-bold"></i>
+                                                        برای دانلود فایل کلیک نمایید.
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            {% else %}
+                                            {% endif %}
+                                            {% if product.catalog2 %}
+                                            <tr>
+                                                <th class="border-top-0">
+                                                    فایل شماره 2:
+                                                </th>
+                                                <td class="border-top-0">
+                                                    <a href="{{product.catalog2.url}}">
+                                                        <i class="icons icon-doc text-color-dark text-4 text-bold"></i>
+                                                        برای دانلود فایل کلیک نمایید.
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            {% else %}
+                                            {% endif %}
+                                            {% if product.catalog3 %}
+                                            <tr>
+                                                <th class="border-top-0">
+                                                    فایل شماره 3:
+                                                </th>
+                                                <td class="border-top-0">
+                                                    <a href="{{product.catalog3.url}}">
+                                                        <i class="icons icon-doc text-color-dark text-4 text-bold"></i>
+                                                        برای دانلود فایل کلیک نمایید.
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            {% else %}
+                                            {% endif %}
+                                            {% else %}
+                                            <tr>
+                                                <th class="border-top-0">
+                                                    برای این محصول کاتالوگی ثبت نشده است...
+                                                </th>
+                                            </tr>
+                                            {% endif %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="tab-pane px-0 py-3" id="productReviews">
+                                    <ul class="comments">
+                                        {% for review in reviews %}
+                                        <li>
+                                            {% if review.is_approved == True %}
+                                            <div class="comment">
+                                                <div class="img-thumbnail border-0 p-0 d-none d-md-block">
+                                                    {% if review.user %}
+                                                    {% if review.user.profile.avatar %}
+                                                    <img class="avatar rounded-circle" alt=""
+                                                        src="{{review.user.profile.avatar.url}}">
+                                                    {% else %}
+                                                    <img class="avatar rounded-circle" alt=""
+                                                        src="{% static 'img/avatars/placeholder.png' %}">
+                                                    {% endif %}
+                                                    {% else %}
+                                                    <img class="avatar rounded-circle" alt=""
+                                                        src="{% static 'img/avatars/placeholder.png' %}">
+                                                    {% endif %}
+                                                </div>
+                                                <div class="comment-block">
+                                                    <div class="comment-arrow"></div>
+                                                    <span class="comment-by">
+                                                        <strong>{{review.name}}</strong>
+                                                        <span class="float-start">
+                                                            <div class="pb-0 clearfix">
+
+                                                                <div class="review-num">
+                                                                    امتیاز <span
+                                                                        class="rating-review">{{review.rate}}</span> از
+                                                                    5
+                                                                </div>
+                                                            </div>
+                                                        </span>
+                                                    </span>
+                                                    <p>{{review.review}}</p>
+                                                </div>
+                                            </div>
+                                            {% else %}
+                                            {% if review.user == request.user %}
+                                            <div class="comment">
+                                                <div class="img-thumbnail border-0 p-0 d-none d-md-block">
+                                                    {% if review.user %}
+                                                    {% if review.user.profile.avatar %}
+                                                    <img class="avatar rounded-circle" alt=""
+                                                        src="{{review.user.profile.avatar.url}}">
+                                                    {% else %}
+                                                    <img class="avatar rounded-circle" alt=""
+                                                        src="{% static 'img/avatars/placeholder.png' %}">
+                                                    {% endif %}
+                                                    {% else %}
+                                                    <img class="avatar rounded-circle" alt=""
+                                                        src="{% static 'img/avatars/placeholder.png' %}">
+                                                    {% endif %}
+                                                </div>
+                                                <div class="comment-block">
+                                                    <div class="comment-arrow"></div>
+                                                    <span class="comment-by">
+                                                        <strong>{{review.name}}</strong> <span class="text-danger">(نقد
+                                                            و بررسی شما پس از تایید بصورت عمومی منتشر
+                                                            خواهد شد)</span>
+                                                        <span class="float-start">
+                                                            <div class="pb-0 clearfix">
+
+                                                                <div class="review-num">
+                                                                    امتیاز <span
+                                                                        class="rating-review">{{review.rate}}</span> از
+                                                                    5
+                                                                </div>
+                                                            </div>
+                                                        </span>
+                                                    </span>
+                                                    <p>{{review.review}}</p>
+                                                </div>
+                                            </div>
+                                            {% else %}
+                                            {% endif %}
+                                            {% endif %}
+                                        </li>
+                                        {% endfor %}
+
+
+                                    </ul>
+
+                                    <hr class="solid my-5">
+                                    <h4>یک نقد و بررسی اضافه کنید</h4>
+                                    <div class="row">
+                                        <div class="col">
+
+                                            <form method="post" class="needs-validation">
+                                                {% csrf_token %}
+                                                <div class="row">
+                                                    <div class="form-group col pb-2">
+                                                        <label
+                                                            class="form-label required font-weight-bold text-dark">امتیاز</label>
+                                                        {% render_field form.rate class="form-control w-25" data-msg-required="لطفا امتیاز خود را وارد نمایید." data-rule-number="true" data-msg-number="لطفا یک عدد بین 0 تا 5 وارد نمایید." data-msg-min="امتیاز نمی‌تواند کمتر از 0 باشد." data-rule-min="0" data-rule-max="5" data-msg-max="امتیاز نمی‌تواند بیشتر از 5 باشد." required=required %}
+                                                    </div>
+                                                </div>
+                                                {% if request.user.is_authenticated %}
+                                                <div class="row">
+                                                    <div class="form-group col-lg-6">
+                                                        <label
+                                                            class="form-label required font-weight-bold text-dark">نام</label>
+                                                        {% if request.user.fullname %}
+
+                                                        {% render_field form.name class="form-control" data-msg-required="لطفا نام خود را وارد نمایید." required=required value=request.user.fullname disabled=disabled %}
+                                                        {% else %}
+                                                        {% render_field form.name class="form-control" data-msg-required="لطفا نام خود را وارد نمایید." required=required value="کاربر سایت" disabled=disabled %}
+                                                        {% endif %}
+                                                    </div>
+                                                    <div class="form-group col-lg-6">
+                                                        <label class="form-label font-weight-bold text-dark">آدرس
+                                                            ایمیل (اختیاری)</label>
+                                                        {% if request.user.email %}
+
+                                                        {% render_field form.email class="form-control" data-msg-email="لطفا آدرس ایمیل خود را به درستی وارد نمایید." value=request.user.email disabled=disabled %}
+                                                        {% else %}
+                                                        {% render_field form.email class="form-control" data-msg-email="لطفا آدرس ایمیل خود را به درستی وارد نمایید." value="-" disabled=disabled %}
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                                {% else %}
+                                                <div class="row">
+                                                    <div class="form-group col-lg-6">
+                                                        <label
+                                                            class="form-label required font-weight-bold text-dark">نام
+                                                            کامل</label>
+                                                        {% render_field form.name class="form-control" data-msg-required="لطفا نام خود را وارد نمایید." required=required %}
+                                                    </div>
+                                                    <div class="form-group col-lg-6">
+                                                        <label class="form-label font-weight-bold text-dark">آدرس
+                                                            ایمیل (اختیاری)</label>
+                                                        {% render_field form.email class="form-control" data-msg-email="لطفا آدرس ایمیل خود را به درستی وارد نمایید." %}
+                                                    </div>
+                                                </div>
+                                                {% endif %}
+                                                <div class="row">
+                                                    <div class="form-group col">
+                                                        <label
+                                                            class="form-label required font-weight-bold text-dark">نقد و
+                                                            بررسی</label>
+                                                        {% render_field form.review class="form-control" data-msg-required="لطفا نقد خود را وارد نمایید."  required=required %}
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="form-group col mb-0">
+                                                        <input type="submit" value="ارسال نقد و بررسی"
+                                                            class="btn btn-primary btn-modern"
+                                                            data-loading-text="در حال بارگذاری...">
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                {% if product.video %}
+                <div class="row">
+                    <div class="col-lg-10">
+                        <h4 class="my-3"> ویدئو پیشنهادی محصولات</h4>
+                        <div class="h_iframe-aparat_embed_frame"><span style="display: block;padding-top: 57%"></span><iframe src="https://www.aparat.com/video/video/embed/videohash/{{product.video}}/vt/frame"  allowFullScreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe></div>
+                    </div>
+                </div>
+                {% endif %}
+                <hr class="solid mb-5 mt-2">
+
+                <h4 class="mb-3">محصولات مشابه</h4>
+                <div class="products row">
+                    <div class="col">
+                        <div class="owl-carousel owl-theme show-nav-title nav-dark mb-0"
+                            data-plugin-options="{'loop': true, 'autoplay': true, 'autoplayTimeout': 3000, 'items': 4, 'nav': true, 'dots': false, 'margin': 20, 'autoplayHoverPause': true, 'autoHeight': true}">
+                            {% for pr in products_sim %}
+                            <div class="product mb-0">
+                                <div class="product-thumb-info border-0 mb-3">
+
+                                    <div class="product-thumb-info-badges-wrapper">
+                                        <span class="badge badge-ecommerce badge-success">جدید</span>
+
+                                    </div>
+                                    <a href="{% url 'shop:prod-shop-detail' product_id=pr.pk %}">
+                                        <div class="product-thumb-info-image">
+
+                                            {% if pr.image_cover %}
+                                            <img alt="" class="img-fluid" src="{{pr.image_cover.url}}">
+                                            {% else %}
+                                            <img alt="" class="img-fluid"
+                                                src="{% static 'img/products/placeholder.jpg' %}">
+                                            {% endif %}
+
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <a href="#"
+                                        class="text-decoration-none text-color-default text-color-hover-dark text-4"><i
+                                            class="far fa-heart"></i></a>
+                                    <div>
+                                        <span
+                                            class="d-block text-uppercase text-decoration-none text-color-default text-color-hover-primary line-height-1 text-0 mb-1">{{pr.category.title}}</span>
+                                        <h3
+                                            class="text-3-5 font-weight-medium font-alternative text-transform-none line-height-3 mb-0">
+                                            <a href="{% url 'shop:prod-shop-detail' product_id=pr.pk %}"
+                                                class="text-color-dark text-color-hover-primary">{{pr.title}}</a></h3>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-lg-3">
+                <aside class="sidebar">
+                    <form action="page-search-results.html" method="get">
+                        <div class="input-group mb-3 pb-1">
+                            <input class="form-control text-1" placeholder="جستجو ..." name="s" id="s" type="text">
+                            <button type="submit" class="btn btn-dark text-1 p-2"><i
+                                    class="fas fa-search m-2"></i></button>
+                        </div>
+                    </form>
+                    <h5 class="font-weight-semi-bold pt-3">دسته‌بندی‌ها</h5>
+                    <ul class="nav nav-list flex-column mb-5">
+                        {% for cat in all_cats  %}
+                        <li class="nav-item">
+                            <a class="nav-link active" href="{% url 'shop:prod-cat-list' cat_id=cat.pk %}">{{ cat.title }}</a>
+
+                        </li>
+                        {% endfor %}
+                        
+                    </ul>
+                    <h5 class="font-weight-semi-bold pt-5">برچسب‌ها</h5>
+                    <div class="mb-3 pb-1">
+                        {% for tag in product.tags.all %}
+                        <a href="{% url 'shop:prod-tag' tag_slug=tag.slug %}">
+                            <span class="badge badge-dark badge-sm rounded-pill text-uppercase px-2 py-1 me-1">
+                                {{ tag }}
+                            </span>
+                        </a>
+                        {% endfor %}
+
+                    </div>
+                    <div class="row mb-5">
+                        <div class="col">
+                            <h5 class="font-weight-semi-bold pt-5">محصولات با امتیاز بالا</h5>
+                            {% for pr in products_fav %}
+                            <div class="product row row-gutter-sm align-items-center mb-4">
+                                <div class="col-5 col-lg-5">
+                                    <div class="product-thumb-info border-0">
+                                        <a href="{% url 'shop:prod-shop-detail' product_id=pr.pk %}">
+                                            <div class="product-thumb-info-image">
+                                                {% if pr.image_cover %}
+                                                <img alt="" class="img-fluid" src="{{pr.image_cover.url}}">
+                                                {% else %}
+                                                <img alt="" class="img-fluid"
+                                                    src="{% static 'img/products/placeholder.jpg' %}">
+                                                {% endif %}
+                                                
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-7 col-lg-7 ms-md-0 ms-lg-0 ps-lg-1 pt-1">
+                                    <span
+                                        class="d-block text-uppercase text-decoration-none text-color-default text-color-hover-primary line-height-1 text-0 mb-2">{{pr.category.title}}</span>
+                                    <h3
+                                        class="text-3-5 font-weight-medium font-alternative text-transform-none line-height-3 mb-0">
+                                        <a href="{% url 'shop:prod-shop-detail' product_id=pr.pk %}"
+                                            class="text-color-dark text-color-hover-primary text-decoration-none">{{pr.title}}</a>
+                                    </h3>
+
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock main_content %}
+
+{% block end_body %}
+<script src="{% static 'vendor/bootstrap-star-rating/js/star-rating.min.js' %}"></script>
+<script src="{% static 'vendor/bootstrap-star-rating/themes/krajee-fas/theme.min.js' %}"></script>
+<script src="{% static 'vendor/elevatezoom/jquery.elevatezoom.min.js' %}"></script>
+<script src="{% static 'js/views/view.shop.js' %}"></script>
+<script src="{% static 'js/examples/examples.gallery.js' %}"></script>
+{% endblock end_body %}

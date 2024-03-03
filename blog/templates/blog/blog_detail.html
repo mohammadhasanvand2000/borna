@@ -1,0 +1,389 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load jalali_tags %}
+{% load widget_tweaks %}
+{% block main_content %}
+<div role="main" class="main">
+
+    <section class="page-header page-header-modern bg-color-light-scale-1 page-header-md">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 align-self-center p-static order-2 text-center mt-3">
+                    <h1 class="text-dark font-weight-bold text-8">{{post.title}}</h1>
+                    <span class="sub-title text-dark">گروه صنعت برنالبرز</span>
+                </div>
+                <div class="col-md-12 align-self-center order-1">
+                    <ul class="breadcrumb d-block text-center">
+                        <li><a href="#">خانه</a></li>
+                        <li class="active">وبلاگ</li>
+                        <li class="active">{{post.title}}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container py-4">
+
+        <div class="row">
+            <div class="col-lg-3 order-lg-2">
+                <aside class="sidebar">
+                    <form action="page-search-results.html" method="get">
+                        <div class="input-group mb-3 pb-1">
+                            <input class="form-control text-1" placeholder="جستجو ..." name="s" id="s" type="text">
+                            <button type="submit" class="btn btn-dark text-1 p-2"><i
+                                    class="fas fa-search m-2"></i></button>
+                        </div>
+                    </form>
+                    <h5 class="font-weight-semi-bold pt-4">دسته‌بندی‌ها</h5>
+                    <ul class="nav nav-list flex-column mb-5">
+                        {% for cat in all_cats  %}
+                        <li class="nav-item">
+                            <a class="nav-link active" href="{% url 'blog:blog-cat' blog_id=cat.pk %}">{{ cat.title }}</a>
+                            {% if cat.children.all.count >= 1 %}
+                            <ul>
+                                {% for scat in cat.children.all %}
+                                <li class="nav-item"><a class="nav-link" href="{% url 'blog:blog-cat' blog_id=scat.pk %}">{{ scat.title }}</a></li>
+                                {% endfor %}
+                            </ul>
+                            {% else %}
+                            {% endif %}
+
+                        </li>
+                        {% endfor %}
+                        
+                    </ul>
+                    <div class="tabs tabs-dark mb-4 pb-2">
+                        <ul class="nav nav-tabs">
+                            <li class="nav-item"><a class="nav-link show active text-1 font-weight-bold text-uppercase"
+                                    href="#popularPosts" data-bs-toggle="tab">مقالات برگزیده</a></li>
+                            <li class="nav-item"><a class="nav-link text-1 font-weight-bold text-uppercase"
+                                    href="#recentPosts" data-bs-toggle="tab">مقالات اخیر</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="popularPosts">
+                                <ul class="simple-post-list">
+                                    {% for post in posts_fav %}
+                                    <li>
+                                        <div class="post-image">
+                                            <div class="img-thumbnail img-thumbnail-no-borders d-block">
+                                                <a href="{% url 'blog:blog-detail' blog_id=post.pk %}">
+                                                    {% if post.image_icon %}
+                                                    <img src="{{post.image_icon.url}}" width="50" height="50" alt="">
+                                                    {% else %}
+                                                    <img src="{% static 'img/blog/square/placeholder.jpg' %}" width="50"
+                                                        height="50" alt="">
+                                                    {% endif %}
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="post-info">
+                                            <a href="{% url 'blog:blog-detail' blog_id=post.pk %}">{{post.title}}</a>
+                                            <div class="post-meta">
+                                                {{post.date_created|to_jalali:'%d/%m/%Y'}}
+                                            </div>
+                                        </div>
+                                    </li>
+                                    {% endfor %}
+
+                                </ul>
+                            </div>
+                            <div class="tab-pane" id="recentPosts">
+                                <ul class="simple-post-list">
+                                    {% for post in posts_latest %}
+                                    <li>
+                                        <div class="post-image">
+                                            <div class="img-thumbnail img-thumbnail-no-borders d-block">
+                                                <a href="{% url 'blog:blog-detail' blog_id=post.pk %}">
+                                                    {% if post.image_icon %}
+                                                    <img src="{{post.image_icon.url}}" width="50" height="50" alt="">
+                                                    {% else %}
+                                                    <img src="{% static 'img/blog/square/placeholder.jpg' %}" width="50"
+                                                        height="50" alt="">
+                                                    {% endif %}
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="post-info">
+                                            <a href="{% url 'blog:blog-detail' blog_id=post.pk %}">{{post.title}}</a>
+                                            <div class="post-meta">
+                                                {{post.date_created|to_jalali:'%d/%m/%Y'}}
+                                            </div>
+                                        </div>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                    <h5 class="font-weight-semi-bold pt-4 mb-2">برچسب‌ها</h5>
+                    <div class="mb-3 pb-1">
+                        {% for tag in post.tags.all %}
+                        <a href="{% url 'blog:blog-tag' tag_slug=tag.slug %}">
+                            <span class="badge badge-dark badge-sm rounded-pill text-uppercase px-2 py-1 me-1">
+                                {{ tag }}
+                            </span>
+                        </a>
+                        {% endfor %}
+                    </div>
+                </aside>
+            </div>
+            <div class="col-lg-9 order-lg-1">
+                <div class="blog-posts single-post">
+
+                    <article class="post post-large blog-single-post border-0 m-0 p-0">
+                        <div class="post-image ms-0">
+                            <a href="#">
+                                {% if post.image_icon %}
+                                <img src="{{post.image_wide.url}}"
+                                    class="img-fluid img-thumbnail img-thumbnail-no-borders rounded-0" alt="" />
+                                {% else %}
+                                <img src="{% static 'img/blog/wide/placeholder.jpg' %}"
+                                    class="img-fluid img-thumbnail img-thumbnail-no-borders rounded-0" alt="" />
+                                {% endif %}
+                            </a>
+                        </div>
+
+                        <div class="post-date ms-0">
+                            <span class="day">{{post.date_created|to_jalali:'%d'}}</span>
+                            <span class="month">{{post.date_created|to_jalali:'%m-%Y'}}</span>
+                        </div>
+
+                        <div class="post-content ms-0">
+
+                            <h2 class="font-weight-semi-bold"><a href="#">{{post.title}}</a></h2>
+
+                            <div class="post-meta">
+                                <span><i class="far fa-user"></i> توسط <a href="#">{{post.user.fullname}}</a> </span>
+                                <span><i class="far fa-folder"></i> <a href="#">{{post.category.title}}</a>
+                                </span>
+                                <span><i class="far fa-comments"></i> <a href="#">{{all_comments.count}}
+                                        دیدگاه</a></span>
+                            </div>
+
+                            <p>{{post.content|safe}}</p>
+
+                            <div id="comments" class="post-block mt-5 post-comments">
+                                <h4 class="mb-3">دیدگاه‌ها ({{all_comments.count}})</h4>
+
+                                <ul class="comments">
+                                    {% for comment in comments %}
+                                    <li>
+                                        {% if comment.is_approved == True %}
+                                        <div class="comment">
+                                            <div class="img-thumbnail img-thumbnail-no-borders d-none d-sm-block">
+                                                {% if comment.user %}
+                                                {% if comment.user.profile.avatar %}
+                                                <img class="avatar" alt="" src="{{comment.user.profile.avatar.url}}">
+                                                {% else %}
+                                                <img class="avatar" alt=""
+                                                    src="{% static 'img/avatars/placeholder.png' %}">
+                                                {% endif %}
+                                                {% else %}
+                                                <img class="avatar" alt=""
+                                                    src="{% static 'img/avatars/placeholder.png' %}">
+                                                {% endif %}
+                                            </div>
+                                            <div class="comment-block">
+                                                <div class="comment-arrow"></div>
+                                                <span class="comment-by">
+                                                    <strong>{{comment.name|default_if_none:'کاربر سایت'}}</strong>
+                                                    <span class="float-start">
+                                                        <span> <a href="?reply_to={{comment.pk}}#add-comment"><i
+                                                                    class="fas fa-reply"></i> پاسخ</a></span>
+                                                    </span>
+                                                </span>
+                                                <p>{{comment.comment}}</p>
+                                                <span
+                                                    class="date float-start">{{comment.date_created|to_jalali:'%H:%M - %Y/%m/%d'}}</span>
+                                            </div>
+                                        </div>
+                                        {% else %}
+                                        {% if comment.user == request.user %}
+                                        <div class="comment">
+                                            <div class="img-thumbnail img-thumbnail-no-borders d-none d-sm-block">
+                                                {% if comment.user %}
+                                                {% if comment.user.profile.avatar %}
+                                                <img class="avatar" alt="" src="{{comment.user.profile.avatar.url}}">
+                                                {% else %}
+                                                <img class="avatar" alt=""
+                                                    src="{% static 'img/avatars/placeholder.png' %}">
+                                                {% endif %}
+                                                {% else %}
+                                                <img class="avatar" alt=""
+                                                    src="{% static 'img/avatars/placeholder.png' %}">
+                                                {% endif %}
+                                            </div>
+                                            <div class="comment-block">
+                                                <div class="comment-arrow"></div>
+                                                <span class="comment-by">
+                                                    <strong>{{comment.name|default_if_none:'کاربر سایت'}}</strong> <span
+                                                        class="text-danger">(دیدگاه شما پس از تایید بصورت عمومی منتشر
+                                                        خواهد شد)</span>
+                                                    <span class="float-start">
+                                                        <span> <a href="?reply_to={{comment.pk}}#add-comment"><i
+                                                                    class="fas fa-reply"></i> پاسخ</a></span>
+                                                    </span>
+                                                </span>
+                                                <p>{{comment.comment}}</p>
+                                                <span
+                                                    class="date float-start">{{comment.date_created|to_jalali:'%H:%M - %Y/%m/%d'}}</span>
+                                            </div>
+                                        </div>
+                                        {% else %}
+                                        {% endif %}
+                                        {% endif %}
+
+                                        <ul class="comments reply">
+                                            {% if comment.replies.all.count == 0 %}
+
+                                            {% else %}
+                                            {% for reply in comment.replies.all %}
+                                            <li>
+                                                {% if reply.is_approved == True %}
+                                                <div class="comment">
+                                                    <div
+                                                        class="img-thumbnail img-thumbnail-no-borders d-none d-sm-block">
+                                                        {% if reply.user %}
+
+                                                        {% if reply.user.profile.avatar %}
+                                                        <img class="avatar" alt=""
+                                                            src="{{reply.user.profile.avatar.url}}">
+                                                        {% else %}
+                                                        <img class="avatar" alt=""
+                                                            src="{% static 'img/avatars/placeholder.png' %}">
+                                                        {% endif %}
+                                                        {% else %}
+                                                        <img class="avatar" alt=""
+                                                            src="{% static 'img/avatars/placeholder.png' %}">
+                                                        {% endif %}
+                                                    </div>
+                                                    <div class="comment-block">
+                                                        <div class="comment-arrow"></div>
+                                                        <span class="comment-by">
+                                                            <strong>{{reply.name}}</strong>
+                                                        </span>
+                                                        <p>{{reply.comment}}</p>
+                                                        <span
+                                                            class="date float-start">{{reply.date_created|to_jalali:'%H:%M - %Y/%m/%d'}}</span>
+                                                    </div>
+                                                </div>
+                                                {% else %}
+                                                {% if reply.user == request.user %}
+                                                <div class="comment">
+                                                    <div
+                                                        class="img-thumbnail img-thumbnail-no-borders d-none d-sm-block">
+                                                        {% if reply.user %}
+
+                                                        {% if reply.user.profile.avatar %}
+                                                        <img class="avatar" alt=""
+                                                            src="{{reply.user.profile.avatar.url}}">
+                                                        {% else %}
+                                                        <img class="avatar" alt=""
+                                                            src="{% static 'img/avatars/placeholder.png' %}">
+                                                        {% endif %}
+                                                        {% else %}
+                                                        <img class="avatar" alt=""
+                                                            src="{% static 'img/avatars/placeholder.png' %}">
+                                                        {% endif %}
+                                                    </div>
+                                                    <div class="comment-block">
+                                                        <div class="comment-arrow"></div>
+                                                        <span class="comment-by">
+                                                            <strong>{{reply.name|default_if_none:'کاربر سایت'}}</strong>
+                                                            <span class="text-danger">(دیدگاه شما پس از تایید بصورت
+                                                                عمومی منتشر خواهد شد)</span>
+                                                        </span>
+                                                        <p>{{reply.comment}}</p>
+                                                        <span
+                                                            class="date float-start">{{reply.date_created|to_jalali:'%H:%M - %Y/%m/%d'}}</span>
+                                                    </div>
+                                                </div>
+
+                                                {% else %}
+                                                {% endif %}
+                                                {% endif %}
+                                            </li>
+                                            {% endfor %}
+                                            {% endif %}
+                                        </ul>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+
+                            </div>
+
+                            <div class="post-block mt-5 post-leave-comment" id="add-comment">
+                                <h4 class="mb-3">دیدگاه خود را ثبت نمایید</h4>
+
+                                <form class="contact-form p-4 rounded bg-color-grey needs-validation" method="POST">
+                                    {% csrf_token %}
+                                    <div class="p-2">
+                                        {% if request.user.is_authenticated %}
+                                        <div class="row">
+                                            <div class="form-group col-lg-6">
+                                                <label class="form-label required font-weight-bold text-dark">نام
+                                                    کامل</label>
+                                                {% if request.user.fullname %}
+
+                                                {% render_field form.name class="form-control" data-msg-required="لطفا نام خود را وارد نمایید." required=required value=request.user.fullname disabled=disabled %}
+                                                {% else %}
+                                                {% render_field form.name class="form-control" data-msg-required="لطفا نام خود را وارد نمایید." required=required value="کاربر سایت" disabled=disabled %}
+                                                {% endif %}
+                                            </div>
+                                            <div class="form-group col-lg-6">
+                                                <label class="form-label font-weight-bold text-dark">آدرس
+                                                    ایمیل (اختیاری)</label>
+                                                {% if request.user.email %}
+
+                                                {% render_field form.email class="form-control" data-msg-email="لطفا آدرس ایمیل خود را به درستی وارد نمایید." value=request.user.email disabled=disabled %}
+                                                {% else %}
+                                                {% render_field form.email class="form-control" data-msg-email="لطفا آدرس ایمیل خود را به درستی وارد نمایید." value="-" disabled=disabled %}
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                        {% else %}
+                                        <div class="row">
+                                            <div class="form-group col-lg-6">
+                                                <label class="form-label required font-weight-bold text-dark">نام
+                                                    کامل</label>
+                                                {% render_field form.name class="form-control" data-msg-required="لطفا نام خود را وارد نمایید." required=required %}
+                                            </div>
+                                            <div class="form-group col-lg-6">
+                                                <label class="form-label font-weight-bold text-dark">آدرس
+                                                    ایمیل (اختیاری)</label>
+                                                {% render_field form.email class="form-control" data-msg-email="لطفا آدرس ایمیل خود را به درستی وارد نمایید." %}
+                                            </div>
+                                        </div>
+                                        {% endif %}
+                                        <div class="row">
+                                            <div class="form-group col">
+                                                <label
+                                                    class="form-label required font-weight-bold text-dark">دیدگاه</label>
+                                                {% render_field form.comment class="form-control" data-msg-required="لطفا دیدگاه خود را وارد نمایید."  required=required %}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col mb-0">
+                                                <input type="submit" value="ارسال دیدگاه"
+                                                    class="btn btn-primary btn-modern float-right"
+                                                    data-loading-text="در حال بارگذاری...">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+{% endblock main_content %}

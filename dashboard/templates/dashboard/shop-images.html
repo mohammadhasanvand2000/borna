@@ -1,0 +1,91 @@
+{% extends "base-dashboard.html" %}
+{% load static %}
+{% load widget_tweaks %}
+{% block header %}
+{{ form.media }}
+{% endblock header %}
+{% block main_content %}
+<div role="main" class="main">
+	<section id="elements" class="section section-height-2 border-0 mt-5 mb-0 pt-5">
+
+		<div class="container py-2">
+			<div class="row appear-animation" data-appear-animation="fadeInUpShorter" data-appear-animation-delay="400">
+				<div class="col-lg-12">
+					<h4 class="mb-3">افزودن/ویرایش تصاویر محصولات</h4>
+					<div class="card mb-4">
+						<div class="card-body">
+							<div class="row">
+								<div class="col">
+									<form class="contact-form form-with-icons needs-validation" method="POST" enctype="multipart/form-data">
+										{% csrf_token %}
+										<div class="contact-form-success alert alert-success d-none mt-4">
+											<strong>تایید!</strong> تصاویر مورد نظر با موفقیت ثبت شدند.
+										</div>
+
+										<div class="contact-form-error alert alert-danger d-none mt-4">
+											<strong>خطا!</strong>مشکلی در ثبت تصاویر وجود دارد. لطفا مجددا تلاش نمایید.
+											<span class="mail-error-message text-1 d-block"></span>
+										</div>
+										<div class="row">
+											<div class="form-group col-lg-6">
+												<label class="form-label mb-1 text-2">تصویر شماره 1</label>
+												<div class="position-relative">
+													<i
+														class="icons icon-picture text-color-primary text-3 position-absolute left-15 top-50pct transform3dy-n50"></i>
+														{% render_field form.pic1 class="d-block" %}
+												</div>
+											</div>
+											<div class="form-group col-lg-6">
+												<label class="form-label mb-1 text-2">تصویر شماره 2</label>
+												<div class="position-relative">
+													<i
+														class="icons icon-picture text-color-primary text-3 position-absolute left-15 top-50pct transform3dy-n50"></i>
+														{% render_field form.pic2 class="d-block" %}
+												</div>
+											</div>
+											<div class="form-group col-lg-6">
+												<label class="form-label mb-1 text-2">تصویر شماره 3</label>
+												<div class="position-relative">
+													<i
+														class="icons icon-picture text-color-primary text-3 position-absolute left-15 top-50pct transform3dy-n50"></i>
+														{% render_field form.pic3 class="d-block" %}
+												</div>
+											</div>
+											<div class="form-group col-lg-6">
+												<label class="form-label mb-1 text-2">تصویر شماره 4</label>
+												<div class="position-relative">
+													<i
+														class="icons icon-picture text-color-primary text-3 position-absolute left-15 top-50pct transform3dy-n50"></i>
+														{% render_field form.pic4 class="d-block" %}
+												</div>
+											</div>
+											<div class="form-group col-lg-6">
+												<label class="form-label mb-1 text-2">تصویر شماره 5</label>
+												<div class="position-relative">
+													<i
+														class="icons icon-picture text-color-primary text-3 position-absolute left-15 top-50pct transform3dy-n50"></i>
+														{% render_field form.pic5 class="d-block" %}
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="form-group col">
+												<input type="submit" value="اعمال تغییرات" class="btn btn-primary float-start"
+													data-loading-text="در حال بارگذاری...">
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</section>
+</div>
+{% endblock main_content %}
+{% block end_body %}
+
+{% endblock end_body %}

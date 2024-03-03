@@ -1,0 +1,178 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block main_content %}
+<div role="main" class="main shop pt-4">
+
+    <div class="container">
+
+        <div class="row py-2px-2">
+            <div class="col-lg-12">
+
+                {% comment %} <div class="masonry-loader masonry-loader-showing"> {% endcomment %}
+                    <div class="blog-posts">
+                        <div class="row products product-thumb-info-list appear-animation"
+                            data-appear-animation="fadeInUpShorter" data-appear-animation-delay="300">
+                            {% for pr in products %}
+                            <div class="col-sm-6 col-lg-4">
+                                <div class="product mb-0">
+                                    <div class="product-thumb-info border-0 mb-3">
+
+                                        <div class="product-thumb-info-badges-wrapper">
+                                            <span class="badge badge-ecommerce badge-success">جدید</span>
+
+                                        </div>
+                                        <a href="{% url 'shop:prod-shop-detail' product_id=pr.pk %}">
+                                            <div class="product-thumb-info-image">
+                                                {% if pr.image_cover %}
+                                                <img alt="" class="img-fluid" src="{{pr.image_cover.url}}">
+                                                {% else %}
+                                                <img alt="" class="img-fluid"
+                                                    src="{% static 'img/products/placeholder.jpg' %}">
+                                                {% endif %}
+
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <a href="#"
+                                                class="d-block text-uppercase text-decoration-none text-color-default text-color-hover-primary line-height-1 text-0 mb-2">{{pr.category.title}}</a>
+                                            <h3
+                                                class="text-3-5 font-weight-medium font-alternative text-transform-none line-height-3 mb-0">
+                                                <a href="{% url 'shop:prod-shop-detail' product_id=pr.pk %}"
+                                                    class="text-color-dark text-color-hover-primary">{{pr.title}}</a>
+                                            </h3>
+                                        </div>
+                                        <a href="#"
+                                        class="text-decoration-none text-color-default text-color-hover-dark text-4"><i
+                                        class="far fa-heart"></i></a>
+                                    </div>
+                                    <p class="text-justify mt-2 mb-2">{{pr.content|striptags|safe|slice:":150"}} ...</p>
+
+                                    <p class="price text-4 mb-3 shop-list-price">
+                                        <a href="{% url 'shop:prod-shop-detail' product_id=pr.pk %}">
+                                            بررسی جزییات بیشتر
+                                        </a>
+                                    </p>
+                                </div>
+                            </div>
+                            {% empty %}
+                            <h3 class="mt-5 text-center">تاکنون محصولی ثبت نشده است!</h3>
+                            {% endfor %}
+                            
+                        </div>
+                        {% if products.has_other_pages %}
+                        <div class="row mt-4">
+                            <div class="col">
+                                <ul class="pagination float-start">
+                                    {% if products.has_previous %}
+                                    <li class="page-item"><a class="page-link"
+                                            href="?page={{products.previous_page_number}}"><i
+                                                class="fas fa-angle-right"></i></a></li>
+                                    {% else %}
+                                    <li class="page-item"><a class="page-link disabled-el" href="#"><i
+                                                class="fas fa-angle-right"></i></a></li>
+                                    {% endif %}
+                                    {% for page_number in page_range %}
+                                    {% if page_number == products.number and page_number == paginator.ELLIPSIS %}
+                                    <li class="page-item active"><a class="page-link" href="#">{{page_number}}</a></li>
+                                    {% elif page_number == paginator.ELLIPSIS %}
+                                    <li class="page-item"><a class="page-link" href="#">{{page_number}}</a></li>
+                                    {% elif page_number == products.number %}
+                                    <li class="page-item active"><a class="page-link" href="#">{{page_number}}</a></li>
+                                    {% else %}
+                                    <li class="page-item"><a class="page-link"
+                                            href="?page={{page_number}}">{{page_number}}</a></li>
+                                    {% endif %}
+                                    {% endfor %}
+
+                                    {% if products.has_next %}
+                                    <li class="page-item"><a class="page-link"
+                                            href="?page={{products.next_page_number}}"><i
+                                                class="fas fa-angle-left"></i></a></li>
+                                    {% else %}
+                                    <li class="page-item"><a class="page-link disabled-el" href="#"><i
+                                                class="fas fa-angle-left"></i></a></li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        </div>
+                        {% else %}
+                        {% endif %}
+                    </div>
+                </div>
+                {% comment %} <div class="col-lg-3 d-none">
+                    <aside class="sidebar">
+                        <form action="page-search-results.html" method="get">
+                            <div class="input-group mb-3 pb-1">
+                                <input class="form-control text-1" placeholder="جستجو..." name="s" id="s" type="text">
+                                <button type="submit" class="btn btn-dark text-1 p-2"><i
+                                        class="fas fa-search m-2"></i></button>
+                            </div>
+                        </form>
+                        <h5 class="font-weight-semi-bold pt-3">دسته‌بندی‌ها</h5>
+                        <ul class="nav nav-list flex-column">
+                            <li class="nav-item"><a class="nav-link" href="#">صنعت</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">ابزار برش</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">چوب</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">فلز</a></li>
+
+                        </ul>
+                        <h5 class="font-weight-semi-bold pt-5">برچسب‌ها</h5>
+                        <div class="mb-3 pb-1">
+                            <a href="#"><span
+                                    class="badge badge-dark badge-sm rounded-pill text-uppercase px-2 py-1 me-1">طراحی</span></a>
+                            <a href="#"><span
+                                    class="badge badge-dark badge-sm rounded-pill text-uppercase px-2 py-1 me-1">ابزار
+                                    چوب</span></a>
+                            <a href="#"><span
+                                    class="badge badge-dark badge-sm rounded-pill text-uppercase px-2 py-1 me-1">ابزار
+                                    فلز</span></a>
+                            <a href="#"><span
+                                    class="badge badge-dark badge-sm rounded-pill text-uppercase px-2 py-1 me-1">صنعت</span></a>
+
+                        </div>
+                        <div class="row mb-5">
+                            <div class="col">
+                                <h5 class="font-weight-semi-bold pt-5">محصولات برگزیده</h5>
+                                {% for pr in products_fav %}
+                                <div class="product row row-gutter-sm align-items-center mb-4">
+                                    <div class="col-5 col-lg-5">
+                                        <div class="product-thumb-info border-0">
+                                            <a href="{% url 'shop:shop-detail' product_id=pr.pk %}">
+                                                <div class="product-thumb-info-image">
+                                                    <img alt="" class="img-fluid" src="{{pr.image_cover.url}}">
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-7 col-lg-7 ms-md-0 ms-lg-0 ps-lg-1 pt-1">
+                                        <a href="#"
+                                            class="d-block text-uppercase text-decoration-none text-color-default text-color-hover-primary line-height-1 text-0 mb-2">{{pr.category.title}}</a>
+                                        <h3
+                                            class="text-3-5 font-weight-medium font-alternative text-transform-none line-height-3 mb-0">
+                                            <a href="{% url 'shop:shop-detail' product_id=pr.pk %}"
+                                                class="text-color-dark text-color-hover-primary text-decoration-none">{{pr.title}}</a>
+                                        </h3>
+
+                                        <p class="price text-4 mb-0">
+                                            <span class="sale text-color-dark font-weight-semi-bold">{{pr.final_price}}
+                                                تومان</span>
+                                            {% if pr.discount > 0 %}
+                                            <span class="amount">{{pr.price}} تومان</span>
+                                            {% else %}
+                                            {% endif %}
+                                        </p>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </aside>
+                </div> {% endcomment %}
+            </div>
+        </div>
+
+    </div>
+    {% endblock main_content %}

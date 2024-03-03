@@ -1,0 +1,7 @@
+venv_wsl/*
+venv/*
+.vscode/*
+**/__pycache__
+.git/*
+.idea/*
+media/*

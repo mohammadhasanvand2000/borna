@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+{% block main_content %}
+<div role="main" class="main shop py-4">
+
+	<div class="container py-4">
+
+		<div class="row justify-content-center">
+			<div class="col-md-6 col-lg-5 mb-5 mb-lg-0">
+				<h2 class="font-weight-bold text-5 mb-0">ورود به حساب کاربری</h2>
+				<form id="frmSignIn" method="POST" class="needs-validation">
+					{% csrf_token %}
+					<div class="row">
+						<div class="form-group col">
+							<label class="form-label text-color-dark text-3">نام کاربری (شماره تماس)<span class="text-color-danger">*</span></label>
+							{% render_field form.username class="form-control form-control-lg text-4" required=required data-msg-digits="شماره تماس فقط می‌تواند شامل اعداد باشد." data-rule-digits="true" data-rule-minlength="11" data-rule-maxlength="11" data-msg-minlength="شماره تماس تنها می‌تواند شامل 11 رقم و شروع با 09 باشد." data-msg-maxlength="شماره تماس تنها می‌تواند شامل 11 رقم و شروع با 09 باشد." data-msg-required="لطفا نام کاربری (شماره تماس) خود را وارد نمایید..." %}
+							
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col">
+							<label class="form-label text-color-dark text-3">رمز ورود <span class="text-color-danger">*</span></label>
+							{% render_field form.password class="form-control form-control-lg text-4" type="password" value="" required=required data-msg-required="لطفا رمز ورود خود را وارد نمایید..." data-rule-minlength="5" data-msg-minlength="رمز ورود باید شامل حداقل 5 کاراکتر و ترکیبی از حروف و اعداد باشد." %}
+							
+						</div>
+					</div>
+					<div class="row justify-content-between">
+						<div class="form-group col-md-auto">
+							<div class="custom-control custom-checkbox">
+								<input type="checkbox" class="custom-control-input" id="rememberme">
+								<label class="form-label custom-control-label cur-pointer text-2" for="rememberme">مرا به خاطر بسپار</label>
+							</div>
+						</div>
+						<div class="form-group col-md-auto">
+							<a class="text-decoration-none text-color-dark text-color-hover-primary font-weight-semibold text-2" href="{% url 'home:forgot-password' %}">رمز ورود خود را فراموش کرده‌اید؟</a> یا 
+							<a class="text-decoration-none text-color-dark text-color-hover-primary font-weight-semibold text-2" href="{% url 'home:signup' %}">حساب کاربری ندارید؟</a>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col">
+							<button type="submit" class="btn btn-dark btn-modern w-100 text-uppercase rounded-0 font-weight-bold text-3 py-3" data-loading-text="Loading...">ورود به حساب کاربری</button>
+							
+						</div>
+					</div>
+				</form>
+			</div>
+			
+		</div>
+
+	</div>
+
+</div>
+{% endblock main_content %}

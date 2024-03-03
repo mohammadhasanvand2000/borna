@@ -1,0 +1,109 @@
+{% extends "base-dashboard.html" %}
+{% load static %}
+{% load widget_tweaks %}
+{% block header %}
+{{ form.media }}
+{% endblock header %}
+{% block main_content %}
+<div role="main" class="main">
+	<section id="elements" class="section section-height-2 border-0 mt-5 mb-0 pt-5">
+
+		<div class="container py-2">
+			<div class="row appear-animation" data-appear-animation="fadeInUpShorter" data-appear-animation-delay="400">
+				<div class="col-lg-12">
+					<h4 class="mb-3">محتوای اسلایدر</h4>
+					<div class="card mb-4">
+						<div class="card-body">
+							<div class="row">
+								<div class="col">
+									<form class="contact-form form-with-icons needs-validation" method="POST" enctype="multipart/form-data">
+										{% csrf_token %}
+										<div class="contact-form-success alert alert-success d-none mt-4">
+											<strong>تایید!</strong> فرم مورد نظر با موفقیت ثبت شد.
+										</div>
+
+										<div class="contact-form-error alert alert-danger d-none mt-4">
+											<strong>خطا!</strong>مشکلی در ثبت فرم وجود دارد. لطفا مجددا تلاش نمایید.
+											<span class="mail-error-message text-1 d-block"></span>
+										</div>
+
+										<div class="row">
+											<div class="form-group col-lg-6">
+												<label class="form-label mb-1 text-2">عنوان کوچک</label>
+												<div class="position-relative">
+													<i
+														class="icons icon-emotsmile text-color-primary text-3 position-absolute left-15 top-50pct transform3dy-n50"></i>
+													{% render_field form.small_title class="form-control text-3 h-auto py-2" data-msg-required="لطفا عنوان کوچک را وارد نمایید."%}
+												</div>
+											</div>
+											<div class="form-group col-lg-6">
+												<label class="form-label mb-1 text-2">عنوان بزرگ</label>
+												<div class="position-relative">
+													<i
+														class="icons icon-emotsmile text-color-primary text-3 position-absolute left-15 top-50pct transform3dy-n50"></i>
+													{% render_field form.big_title class="form-control text-3 h-auto py-2" data-msg-required="لطفا عنوان کوچک را وارد نمایید."%}
+												</div>
+											</div>
+											<div class="form-group col-lg-12">
+												<label class="form-label mb-1 text-2">توضیحات</label>
+												<div class="position-relative">
+													<i
+														class="icons icon-notebook text-color-primary text-3 position-absolute left-15 top-50pct transform3dy-n50"></i>
+													{% render_field form.description class="form-control text-3 h-auto py-2" data-msg-required="لطفا توضیحات اسلایدر را وارد نمایید." %}
+												</div>
+											</div>
+											<div class="form-group col-lg-6">
+												<label class="form-label mb-1 text-2">متن دکمه اسلایدر</label>
+												<div class="position-relative">
+													<i
+														class="icons icon-event text-color-primary text-3 position-absolute left-15 top-50pct transform3dy-n50"></i>
+													{% render_field form.cta_title class="form-control text-3 h-auto py-2" data-msg-required="لطفا عنوان دکمه اسلایدر را وارد نمایید." %}
+												</div>
+											</div>
+											<div class="form-group col-lg-6">
+												<label class="form-label mb-1 text-2">لینک دکمه اسلایدر</label>
+												<div class="position-relative">
+													<i
+														class="icons icon-link text-color-primary text-3 position-absolute left-15 top-50pct transform3dy-n50"></i>
+													{% render_field form.cta_link class="form-control text-3 h-auto py-2" data-msg-required="لطفا لینک دکمه اسلایدر را وارد نمایید." %}
+												</div>
+											</div>
+										</div>
+										
+										
+										<div class="row">
+											<div class="form-group col-lg-6">
+												<label class="form-label mb-1 text-2">تصویر اسلایدر</label>
+												<div class="position-relative">
+													<i
+														class="icons icon-doc text-color-primary text-3 position-absolute left-15 top-50pct transform3dy-n50"></i>
+														{% if is_edit %}
+														{% render_field form.image class="d-block" data-msg-required="لطفا تصویر اسلایدر را وارد نمایید." %}
+														{% else %}
+														{% render_field form.image class="d-block" data-msg-required="لطفا تصویر اسلایدر را وارد نمایید." required=required %}
+														{% endif %}
+												</div>
+											</div>
+											
+										</div>
+										<div class="row">
+											<div class="form-group col">
+												<input type="submit" value="اعمال تغییرات" class="btn btn-primary float-start"
+													data-loading-text="در حال بارگذاری...">
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</section>
+</div>
+{% endblock main_content %}
+{% block end_body %}
+
+{% endblock end_body %}
