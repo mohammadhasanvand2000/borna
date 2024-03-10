@@ -113,65 +113,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="container">
-		<div class="row">
-			<div class="col pb-4">
-				<div class="row mt-5 pb-4">
-					<div class="col">
-						<h4>محصولات و خدمات ما</h4>
-						<div>
-							{% for cat in categories %}
-								<h5 style="display: inline-block; margin-right: 10px;">
-									
-									<a href="?category_id={{ cat.id }}">{{ cat.title }}</a>
-								</h5>
-							{% endfor %}
-						</div>
-						
-						
-						<div class="owl-carousel owl-theme show-nav-title top-border mb-0"
-							data-plugin-options="{'responsive': {'0': {'items': 1}, '479': {'items': 1}, '768': {'items': 2}, '979': {'items': 3}, '1199': {'items': 4}}, 'items': 4, 'margin': 10, 'loop': true, 'nav': true, 'dots': false, 'autoplay':true, 'autoplayTimeout': 2500}">
-							{% for cat in categories %}
-							{% for p in procat  %}
-							<div class="product mb-0">
-								<div class="product-thumb-info border-0 mb-3">
-									<a href="{% url 'shop:prod-cat-list' cat_id=cat.pk %}">
-										<div class="product-thumb-info-image">
-											{% if p.image_cover.url %}
-											<img alt="" class="img-fluid" src="{{p.image_cover.url}}">
-											{% else %}
-											<img alt="" class="img-fluid"
-												src="{% static 'img/products/placeholder.jpg' %}">
-											{% endif %}
-
-										</div>
-									</a>
-								</div>
-								<div class="d-flex justify-content-between dir-rtl">
-									<div>
-										<h3
-											class="text-3-5 font-weight-medium font-alternative text-transform-none line-height-3 mb-0">
-											<a href="{% url 'shop:prod-cat-list' cat_id=cat.pk %}"
-												class="text-color-dark text-color-hover-primary">{{ p.title }}</a>
-										</h3>
-									</div>
-								</div>
-								<p class="text-justify mt-2 mb-2 ps-2">{{cat.description|striptags|safe|slice:":60"}} ...</p>
-
-								<p class="price text-4 mb-3 shop-list-price">
-									<a href="{% url 'shop:prod-cat-list' cat_id=cat.pk %}">
-										بررسی جزییات بیشتر
-									</a>
-								</p>
-							</div>
-							{% endfor %}
-							{% endfor %}
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+	
 
 	<section class="parallax section section-text-light section-parallax section-center my-0" data-plugin-parallax
 		data-plugin-options="{'speed': 1.5, 'parallaxHeight': '200%'}"
@@ -267,29 +209,54 @@
 				<div class="owl-carousel owl-theme carousel-center-active-item"
 					data-plugin-options="{'responsive': {'0': {'items': 1}, '476': {'items': 1}, '768': {'items': 5}, '992': {'items': 7}, '1200': {'items': 7}}, 'autoplay': true, 'autoplayTimeout': 3000, 'dots': false}">
 					<div>
-						<img class="img-fluid" src="{% static 'img/logos/lg01.png' %}" alt="">
+						<img class="img-fluid" src="{% static 'img/kaveh.jpg' %}" alt="">
 					</div>
 					<div>
-						<img class="img-fluid" src="{% static 'img/logos/lg02.png' %}" alt="">
+						<img src="{% static 'img/arvand.jpg' %}" alt="arvand">
+
 					</div>
 					<div>
-						<img class="img-fluid" src="{% static 'img/logos/lg03.png' %}" alt="">
+						<img class="img-fluid" src="{% static 'img/defa.png' %}" alt="">
 					</div>
 					<div>
-						<img class="img-fluid" src="{% static 'img/logos/lg04.png' %}" alt="">
+						<img src="{% static 'img/shekmir.png' %}" alt="shekmir">
 					</div>
 					<div>
-						<img class="img-fluid" src="{% static 'img/logos/lg05.png' %}" alt="">
+						<img src="{% static 'img/ira.jpg' %}" alt="Ira">
+
 					</div>
 					<div>
-						<img class="img-fluid" src="{% static 'img/logos/lg06.png' %}" alt="">
+						<img class="img-fluid" src="{% static 'img/saipa.png' %}" alt="">
 					</div>
 					<div>
-						<img class="img-fluid" src="{% static 'img/logos/lg07.png' %}" alt="">
+						<img class="img-fluid" src="{% static 'img/havafaza.png' %}" alt="havafaza">
+					</div>
+					
+					<div>
+						<img class="img-fluid" src="{% static 'img/masnoat.png' %}" alt="">
+					</div>
+					
+					<div>
+						<img class="img-fluid" src="{% static 'img/shirin.png' %}" alt="">
 					</div>
 					<div>
-						<img class="img-fluid" src="{% static 'img/logos/lg08.png' %}" alt="">
+						<img class="img-fluid" src="{% static 'img/mapna.jpg' %}" alt="">
 					</div>
+					
+					
+					
+					
+					<div>
+						<img class="mt-5" src="{% static 'img/safa.png' %}" alt="safa">
+
+					</div>
+					
+					<div>
+						<img class="mt-5" src="{% static 'img/arian.png' %}" alt="arian">
+
+					</div>
+					
+					
 				</div>
 			</div>
 		</div>

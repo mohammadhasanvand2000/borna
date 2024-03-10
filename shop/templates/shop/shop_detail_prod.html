@@ -97,21 +97,21 @@
                             <ul class="nav nav-tabs justify-content-start">
                                 <li class="nav-item"><a
                                         class="nav-link active font-weight-bold text-3 text-uppercase py-2 px-3"
-                                        href="#productDescription" data-bs-toggle="tab">توضیحات</a></li>
+                                        style="color: #970f21; "  href="#productDescription" data-bs-toggle="tab">توضیحات</a></li>
                                 
-                                <li class="nav-item"><a
+                                <li style="color: #92ad16;"  class="nav-item"><a
                                         class="nav-link font-weight-bold text-3 text-uppercase py-2 px-3"
-                                        href="#productCatalog" data-bs-toggle="tab">کاتالوگ محصولات</a></li>
+                                        style="color: #970f21;"  href="#productCatalog" data-bs-toggle="tab">کاتالوگ محصولات</a></li>
                                 <li class="nav-item"><a
                                         class="nav-link nav-link-reviews font-weight-bold text-3 text-uppercase py-2 px-3"
-                                        href="#productReviews" data-bs-toggle="tab">نقد و بررسی
+                                        style="color: #970f21;"     href="#productReviews" data-bs-toggle="tab">نقد و بررسی
                                         ({{all_reviews.count}})</a></li>
                             </ul>
                             <div class="tab-content p-0">
                                 <div class="tab-pane px-0 py-3 active" id="productDescription">
-                                    <p>{{product.content|safe}}</p>
+                                   <h5 style="color: #020202;"  > <p style="color: #020202;" >{{product.content|safe}}</p></h5>
                                     <div dir="rtl" class="u-s-m-b-15">
-                                        <div style="color: black; border: 1px solid #000000;" class="pd-table gl-scroll">
+                                        <div style="color: black; border:4px solid #000000;" class="pd-table gl-scroll">
                                             <table style="width: 100%; border-collapse: collapse;">
                                                 <tbody>
                                                     <tr  style="border-bottom: 1px solid #0c0b0b;">

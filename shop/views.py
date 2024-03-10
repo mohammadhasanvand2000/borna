@@ -14,7 +14,7 @@ from zeep import Client
 from django.contrib.sites.shortcuts import get_current_site
 from django.contrib.auth import authenticate, login
 from django.conf import settings
-
+from .models import CategoryProd
 
 class ShopListCatView(View):
     def get(self, requset, cat_id):
@@ -105,10 +105,10 @@ from . import models
 
 class ProdShopListCatView(View):
     def get(self, request, cat_id):
-        # گرفتن دسته بندی مورد نظر
+        
         category = models.CategoryProd.objects.get(pk=cat_id)
-
-        # فیلتر کردن محصولات مرتبط با دسته بندی مورد نظر
+        catname=category.title
+        
         related_products = models.ProductProd.objects.filter(category=category).order_by("-date_created")
 
         # تقسیم صفحه بندی
@@ -116,11 +116,13 @@ class ProdShopListCatView(View):
         page_number = request.GET.get("page", 1)
         product_obj = paginator.get_page(page_number)
         page_range = paginator.get_elided_page_range(number=page_number, on_each_side=2, on_ends=1)
-
+        procat = models.ProductProd.objects.filter(category_id=cat_id)
         # گرفتن محصولات محبوب
         products_fav = models.ProductProd.objects.all().order_by("-date_created")[:3]
-
+        print(procat)
         context = {
+            "catname":catname,
+            "procat":procat,
             "products": product_obj,
             "products_fav": products_fav,
             "page_range": page_range,
@@ -218,8 +220,13 @@ class ProdShopListView(View):
         )
 
         products_fav = models.Product.objects.all().order_by("-date_created")[:3]
+        category=CategoryProd.objects.all()
+        print(
+            
 
+        )
         context = {
+            "category":category,
             "products": product_obj,
             "products_fav": products_fav,
             "page_range": page_range,
